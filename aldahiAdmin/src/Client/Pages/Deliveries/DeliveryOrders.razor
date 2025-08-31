@@ -1,0 +1,172 @@
+﻿@attribute [Authorize(Policy = Permissions.DeliveryOrders.View)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<DeliveryOrders> _localizer
+            @inject Microsoft.Extensions.Localization.IStringLocalizer<TablePager> localizer
+
+@using FirstCall.Application.Features.Orders.Queries.GetAll
+@using FirstCall.Shared.Constants.Clients
+@using FirstCall.Shared.Constants.Orders
+
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudExpansionPanel Text=@_localizer["SearchAdvanced"] Class="mb-2">
+    <MudGrid>
+        <MudItem xs="12" sm="12" md="12">
+            <MudCard Elevation="4">
+                <MudCardContent>
+                    <MudGrid>
+                        <MudItem xs="12" md="4">
+                                <MudTextField For="@(() => ClientName)" @bind-Value="ClientName" Label="@_localizer["ClientName"]" Variant="Variant.Outlined" />
+                        </MudItem>
+                        <MudItem xs="12" md="4">
+                            <MudDatePicker Label="@_localizer["StartDate"]" @bind-Date="StartDate"  DisableToolbar="true" AutoClose="true" Elevation="12" Variant="Variant.Outlined" />
+
+                        </MudItem>
+
+                        <MudItem xs="12" md="4">
+                            <MudDatePicker Label="@_localizer["EndDate"]" @bind-Date="EndDate"  DisableToolbar="true" AutoClose="true" Elevation="12" Variant="Variant.Outlined" />
+
+                        </MudItem>
+                        <MudItem xs="12" md="4">
+                                <MudTextField For="@(() => StartPrice)" @bind-Value="StartPrice" Label="@_localizer["StartPrice"]" Variant="Variant.Outlined" />
+                        </MudItem>
+                         <MudItem xs="12" md="4">
+                                <MudTextField For="@(() => EndPrice)" @bind-Value="EndPrice" Label="@_localizer["EndPrice"]" Variant="Variant.Outlined" />
+                        </MudItem>
+                        <MudCardActions Class="d-flex justify-end flex-grow-1 gap-4 mr-2">
+
+                            <MudButton DisableElevation Variant="Variant.Filled" OnClick="(() => SearchAdvance())" ButtonType="ButtonType.Submit" Color="Color.Success">@_localizer["Search"]</MudButton>
+
+                        </MudCardActions>
+                    </MudGrid>
+
+
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+
+</MudExpansionPanel>
+    <MudTable Elevation="25" ServerData="@(new Func<TableState, Task<TableData<GetAllDeliveryOrdersResponse>>>(ServerReload))" Hover="true" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" @ref="_table">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateDeliveryOrders)
+                {
+                    <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => RedirectToAddEdit(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
+                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                    @if (_canExportDeliveryOrders)
+                    {
+                        <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
+                    }
+                }
+                else
+                {
+                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                    @if (_canExportDeliveryOrders)
+                    {
+                        <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
+                    }
+                }
+            </div>
+            <MudToolBarSpacer />
+            @if (_canSearchDeliveryOrders)
+            {
+                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="@_localizer["Search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+            }
+        </ToolBarContent>
+
+        <HeaderContent>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllDeliveryOrdersResponse, object>(x => x.OrderNumber)">@_localizer["OrderNumber"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllDeliveryOrdersResponse, object>(x => x.OrderDate)">@_localizer["CreatedDate"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllDeliveryOrdersResponse, object>(x=>x.ClientName)">@_localizer["ClientName"]</MudTableSortLabel></MudTh>
+
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllDeliveryOrdersResponse, object>(x=>x.TotalPrice)">@_localizer["TotalPrice"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllDeliveryOrdersResponse, object>(x=>x.Status)">@_localizer["Status"]</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
+        </HeaderContent>
+
+        <RowTemplate>
+
+   
+            <MudTd DataLabel="OrderNumber" Style="width:150px;color:blue;">
+                <MudLink Href="@($"/DetailsOrder/{context.Id}")" HighlightedText="@_searchString">@context.OrderNumber</MudLink>
+            </MudTd>
+            <MudTd DataLabel="DeliveryOrderDate">
+                <MudHighlighter Text="@context.OrderDate?.ToShortDateString()" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="ClientName" Style="color:blue;">
+            <MudHighlighter Text="@context.ClientName" HighlightedText="@_searchString" />
+
+            </MudTd>
+      
+
+            <MudTd DataLabel="TotalPrice">
+                <MudHighlighter Text="@context.TotalPrice.ToString()" HighlightedText="@_searchString" />
+            </MudTd>
+
+            
+            <MudTd DataLabel="Weight">
+                <MudHighlighter Text="@_localizer[context.Status]" HighlightedText="@_searchString" />
+            </MudTd>
+
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                @if (_canEditDeliveryOrders || _canDeleteDeliveryOrders)
+                {
+                    @if (_canEditDeliveryOrders && (Status == OrderStatusEnum.Pending.ToString() ))
+                    {
+                        <MudTooltip Text="@_localizer["Edit"]">
+                            <MudIconButton Icon="@Icons.Filled.Edit" @onclick="@(() => RedirectToAddEdit(@context.Id))" Color="Color.Primary" Variant="Variant.Filled" Size="Size.Small" />
+                        </MudTooltip>
+                    }
+                    @if (_canDeleteDeliveryOrders)
+                    {
+
+                        <MudTooltip Text="@_localizer["Delete"]">
+
+                            <MudIconButton Icon="@Icons.Filled.Delete" @onclick="@(() => Delete(@context.Id))" Color="Color.Secondary" Variant="Variant.Filled" Size="Size.Small" Style="margin: 1px" />
+                        </MudTooltip>
+                    }
+    
+                         @if (Status == OrderStatusEnum.Pending.ToString())
+                    {
+                     
+                        <MudTooltip Text="@_localizer["Details"]">
+                            <MudIconButton Icon="@Icons.Filled.Info"  @onclick="@(() => Details(@context.Id))" Color="Color.Primary" Variant="Variant.Filled" Size="Size.Small" Style="margin: 7px" />
+                        </MudTooltip>
+                    }
+                }
+                else
+                {
+                    <MudButton Variant="Variant.Filled"
+                       DisableElevation="true"
+                       StartIcon="@Icons.Material.Filled.DoNotTouch"
+                       IconColor="Color.Secondary"
+                       Size="Size.Small"
+                       Color="Color.Surface">
+                        @_localizer["No Allowed Actions"]
+                    </MudButton>
+                }
+            </MudTd>
+        </RowTemplate>
+        <FooterContent>
+            <MudSwitch @bind-Checked="@_dense" Color="Color.Secondary" Style="margin-left: 5px;">@_localizer["Dense"]</MudSwitch>
+            <MudSwitch @bind-Checked="@_striped" Color="Color.Tertiary" Style="margin-left: 5px;">@_localizer["Striped"]</MudSwitch>
+            <MudSwitch @bind-Checked="@_bordered" Color="Color.Warning" Style="margin-left: 5px;">@_localizer["Bordered"]</MudSwitch>
+        </FooterContent>
+        <PagerContent>
+
+            <MudTablePager PageSizeOptions="new int[] { 100, 200, 300, 500, 1000}" RowsPerPageString="@localizer["RowsPerPageString"]" InfoFormat="@localizer["InfoFormat"]" />
+        </PagerContent>
+    </MudTable>
+}

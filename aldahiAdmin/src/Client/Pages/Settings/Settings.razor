@@ -1,0 +1,19 @@
+﻿@page "/settings"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Settings> localizer
+
+<MudText Typo="Typo.h6" Class="mb-6" Color="Color.Primary">@localizer["Web Settings"] </MudText>  
+
+<MudTabs Elevation="25" Color="Color.Transparent" Rounded="true" PanelClass="mt-6">
+    <MudTabPanel  Text="@localizer["Languages"]"  BadgeDot=true BadgeColor=Color.Secondary>
+        <Languages />
+    </MudTabPanel>
+    <MudTabPanel Text="@localizer["Countries"]" BadgeDot=true BadgeColor=Color.Success>
+       <Countries />
+    </MudTabPanel>
+    @*<MudTabPanel Text="@localizer["Units"]" BadgeDot=true BadgeColor=Color.Info >
+       <Units />
+    </MudTabPanel>
+    <MudTabPanel Text="@localizer["Currencies"]" BadgeDot=true BadgeColor=Color.Warning >
+       <Currencies />
+    </MudTabPanel>*@
+</MudTabs>

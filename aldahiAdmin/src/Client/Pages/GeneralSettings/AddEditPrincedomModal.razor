@@ -1,0 +1,67 @@
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditPrincedomModal> _localizer
+
+<EditForm Model="@AddEditPrincedomModel" OnValidSubmit="SaveAsync" dir="@direction">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (AddEditPrincedomModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["Add Princedom"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["Update Princedom"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                @if (AddEditPrincedomModel.Id != 0)
+                {
+                    <MudItem xs="12" md="6">
+                        <MudTextField Disabled For="@(() => AddEditPrincedomModel.Id)" @bind-Value="AddEditPrincedomModel.Id" Label="@_localizer["Id"]" />
+                    </MudItem>
+                }
+				
+                @*<MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => AddEditPrincedomModel.Name)" @bind-Value="AddEditPrincedomModel.Name" Label="@_localizer["Name"]" />
+                </MudItem>*@
+                @*<MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPrincedomModel.Description)" @bind-Value="AddEditPrincedomModel.Description" Label="@_localizer["Description"]" />
+                </MudItem>*@
+                <MudItem xs="12" md="6">
+                <MudTextField T="string" For="@(()=>AddEditPrincedomModel.ar_title)" @bind-Value="AddEditPrincedomModel.ar_title" Label="@_localizer["ar_title"]" />
+                 </MudItem> 
+                <MudItem xs="12" md="6">
+                <MudTextField T="string" For="@(()=>AddEditPrincedomModel.en_title)" @bind-Value="AddEditPrincedomModel.en_title" Label="@_localizer["en_title"]" />
+                 </MudItem> 
+@*                <MudItem xs="12" md="6">
+                <MudTextField T="string" For="@(()=>AddEditPrincedomModel.Name)" @bind-Value="AddEditPrincedomModel.Code" Label="@_localizer["Code"]" />
+                 </MudItem> *@
+
+				 @*<MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditPrincedomModel.Tax)" @bind-Value="AddEditPrincedomModel.Tax" Label="@_localizer["Tax"]" />
+                </MudItem>
+				*@
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+            @if (AddEditPrincedomModel.Id != 0)
+            {
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@_localizer["Update"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary"></LoadingButton>
+            }
+            else
+            {
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@_localizer["Save"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success"></LoadingButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

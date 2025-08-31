@@ -1,0 +1,167 @@
+@using System.Globalization
+@using FirstCall.Application.Features.OrderProducts.Commands.AddEdit
+@attribute [Authorize(Policy = Permissions.DeliveryOrders.View)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<DeliveryOrders> _localizer
+
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+    td{
+        padding:1px !important;
+    }
+    .mud-table-dense * .mud-table-row .mud-table-cell{
+            padding-inline-end: 0px !important;
+    }
+
+    .mud-input-control > .mud-input-control-input-container > div.mud-input.mud-input-text{
+        margin-top: -7px !important;
+    }
+ /*   .mud-table-sort-label{
+       font-size:smaller !important;
+   } */
+</style>
+
+@*<HeroTitle Title="@_localizer["Order Details"]" />
+*@@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+
+
+    <MudTable Hover="true" Elevation="25" Items="Charges" ReadOnly="!_canCreateLeaseCharges" Loading="!_loaded" Dense="true" Bordered="@_bordered" Striped="@_striped" Filter="new Func<AddEditDeliveryOrderProductCommand, bool>(Search)" T="AddEditDeliveryOrderProductCommand" RowEditCommit="@(async(e) => await ItemHasBeenCommitted(e))" @bind-LeaseCharge="_LeaseCharge">
+      
+ <ColGroup>
+     <col style="width: 45%;">
+        <col style="width: 15%;">
+        <col style="width: 15%;">
+        <col style="width: 15%;">
+        <col style="width: 10%;">
+    </ColGroup>
+    <HeaderContent>
+            <MudTh Style="text-align:center;color: black;font-weight: bold;"><MudTableSortLabel SortBy="new Func<AddEditDeliveryOrderProductCommand, object>(x => x.ProductId)">@_localizer["ProductNameAr"]</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:center;color: black;font-weight: bold;"><MudTableSortLabel SortBy="new Func<AddEditDeliveryOrderProductCommand, object>(x => x.Quantity)">@_localizer["Quantity"]</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:center;color: black;font-weight: bold;"><MudTableSortLabel SortBy="new Func<AddEditDeliveryOrderProductCommand, object>(x => x.UnitPrice)">@_localizer["UnitPrice"]</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:center;color: black;font-weight: bold;"><MudTableSortLabel SortBy="new Func<AddEditDeliveryOrderProductCommand, object>(x => x.TotalPrice)">@_localizer["TotalPrice"]</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:center;color: black;font-weight: bold;">@_localizer["Actions"]</MudTh>
+    </HeaderContent>
+  
+    <RowTemplate>
+
+
+
+            <MudTd DataLabel="Fee" Style="position: absolute; width: 41.5%;">
+                <MudSelect @bind-Value="@context.ProductId" Direction="Direction.Bottom" ToStringFunc="ProductToString" T="int"  AnchorOrigin="Origin.BottomCenter" Variant="Variant.Text">
+                    @foreach (var value in _Products)
+                    {
+                        <MudSelectItem T="int" Value="@value.Id"> @($"{value.NameAr} - {value.ProductCategory.NameAr} - {value.Kind.NameAr} - {value.Code}")</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudTd>
+            
+            <MudTd DataLabel="Cost" Style="text-align:center;color: green;font-weight: bold;">
+                <MudHighlighter Text="@context.Quantity.ToString()" HighlightedText="@_searchString" Style="text-align:center;color: green;font-weight: bold;" />
+            </MudTd>
+
+  
+
+            <MudTd DataLabel="NameService" Style="text-align:center;color: green;font-weight: bold;">
+                <MudHighlighter Text="@context.UnitPrice.ToString()" HighlightedText="@_searchString" Style="text-align:center;color: green;font-weight: bold;" />
+            </MudTd>
+
+
+
+            <MudTd DataLabel="NameService" Style="text-align:center;color: green;font-weight: bold;">
+                <MudHighlighter Text="@context.TotalPrice.ToString()" HighlightedText="@_searchString" Style="text-align:center;color: green;font-weight: bold;" />
+            </MudTd>
+
+
+        @*<MudTd DataLabel="Tax">@context.Tax</MudTd>*@
+        <MudTd DataLabel="Actions" Style="text-align:center;">
+
+            @if (_canCreateLeaseCharges)
+            {
+                   <MudTooltip Text="@_localizer["Delete"]">
+                <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Size="Size.Small" Color="Color.Error" @onclick="@(() => Delete(context))" />
+                 </MudTooltip>
+            }
+            else
+            {
+                <MudButton Variant="Variant.Filled"
+                       DisableElevation="true"
+                       StartIcon="@Icons.Material.Filled.DoNotTouch"
+                       IconColor="Color.Secondary"
+                       Size="Size.Small"
+                       Color="Color.Surface">
+                    @_localizer["No Allowed Actions"]
+                </MudButton>
+            }
+        </MudTd>
+    </RowTemplate>
+    <RowEditingTemplate>
+
+
+
+
+            <MudTd DataLabel="Fee" Style="position: absolute; width: 41.5%;">
+                <MudSelect @bind-Value="@context.ProductId" Direction="Direction.Bottom" ToStringFunc="ProductToString" T="int" AnchorOrigin="Origin.BottomCenter" Variant="Variant.Text">
+                    @foreach (var value in _Products)
+                    {
+                        <MudSelectItem T="int" Value="@value.Id"> @($"{value.NameAr} - {value.ProductCategory.NameAr}- {value.Kind.NameAr} - {value.Code}")</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudTd>
+       
+              <MudTd DataLabel="CountryFee">
+                <MudTextField @bind-Value="@context.Quantity" Format="F2" Culture="@CultureInfo.InvariantCulture" Style="text-align:center;color: green;font-weight: bold;" For="(()=>context.Quantity)" />
+            </MudTd>
+
+
+            <MudTd DataLabel="ServiceFee">
+                <MudTextField @bind-Value="@context.UnitPrice"  Style="text-align:center;color: green;font-weight: bold;" For="(()=>context.UnitPrice)" />
+        </MudTd>
+
+          
+
+             <MudTd DataLabel="ServiceFee">
+                <MudTextField ReadOnly T="decimal" Value="@((context.Quantity * context.UnitPrice))" Style="text-align:center;color: green;font-weight: bold;" />
+            </MudTd>
+
+            <MudTd DataLabel="Actions" >
+
+            @if (_canCreateLeaseCharges)
+            {
+                <MudTooltip Text="@_localizer["Delete"]">
+                <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Size="Size.Small" Color="Color.Error" @onclick="@(() => Delete(context))" />
+                 </MudTooltip>
+            }
+            else
+            {
+                <MudButton Variant="Variant.Filled"
+                       DisableElevation="true"
+                       StartIcon="@Icons.Material.Filled.DoNotTouch"
+                       IconColor="Color.Secondary"
+                       Size="Size.Small"
+                       Color="Color.Surface">
+                    @_localizer["No Allowed Actions"]
+                </MudButton>
+            }
+        </MudTd>
+    </RowEditingTemplate>
+
+    <FooterContent>
+        <MudTd colspan="2">
+                <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">
+                   @_localizer["Add Another Product"]
+                </MudButton>
+        </MudTd>
+        <MudTd colspan="2" style="font-size: 15px;">
+            <strong> @_localizer["Total"] :  @Charges.Sum(x=> x.TotalPrice).ToString("N2") </strong>
+        </MudTd>
+    </FooterContent>
+</MudTable>
+
+}

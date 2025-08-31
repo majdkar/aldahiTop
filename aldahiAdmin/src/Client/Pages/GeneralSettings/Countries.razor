@@ -1,0 +1,138 @@
+﻿@page "/general-settings/countries"
+@attribute [Authorize(Policy = Permissions.Countries.View)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Countries> _localizer
+@using FirstCall.Application.Features.Countries.Queries.GetAll;
+@using FirstCall.Application.Features.Nations.Queries.GetAll
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<HeroTitle Title="@_localizer["Countries"]" Description="@_localizer["Manage Countries."]" />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Hover="true" Elevation="25" Items="_countryList" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" Filter="new Func<GetAllCountriesResponse, bool>(Search)" @bind-country="_country">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateCountries)
+                {
+                    <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Create"]</MudButton>
+                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="GetCountriesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                    @if (_canExportCountries)
+                    {
+                        <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
+                    }
+                }
+                else
+                {
+                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="GetCountriesAsync" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@_localizer["Reload"]</MudButton>
+                    @if (_canExportCountries)
+                    {
+                        <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">@_localizer["Export"]</MudButton>
+                    }
+                }
+            </div>
+            <MudToolBarSpacer />
+            @if (_canSearchCountries)
+            {
+                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="@_localizer["Search for Nations"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+            }
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllNationsResponse, object>(x => x.Id)">@_localizer["Id"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllCountriesResponse, object>(x => x.NameAr)">@_localizer["NameAr"]</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<GetAllCountriesResponse, object>(x => x.NameEn)">@_localizer["NameEn"]</MudTableSortLabel></MudTh>
+            @* <MudTh><MudTableSortLabel SortBy="new Func<GetAllCountriesResponse, object>(x => x.Code)">@_localizer["Code"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<GetAllCountriesResponse, object>(x => x.PhoneCode)">@_localizer["PhoneCode"]</MudTableSortLabel></MudTh>
+        *@            <MudTh Style="text-align:right">@_localizer["Actions"]</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Id">@context.Id</MudTd>
+            <MudTd DataLabel="Name">
+                <MudHighlighter Text="@context.NameAr" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Name">
+                <MudHighlighter Text="@context.NameEn" HighlightedText="@_searchString" />
+            </MudTd>
+            @* <MudTd DataLabel="Name">
+        <MudHighlighter Text="@context.Code" HighlightedText="@_searchString" />
+        </MudTd>
+        <MudTd DataLabel="Name">
+        <MudHighlighter Text="@context.PhoneCode" HighlightedText="@_searchString" />
+        </MudTd>*@
+
+            @*<MudTd DataLabel="Tax">@context.Tax</MudTd>*@
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                @if (_canEditCountries || _canDeleteCountries)
+                {
+                    @if (_canEditCountries)
+                    {
+                        <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" @onclick="@(() => InvokeModal(@context.Id))">@_localizer["Edit"]</MudButton>
+
+                    }
+                    @if (_canDeleteCountries)
+                    {
+                        <MudButton Variant="Variant.Filled" Color="Color.Error" Size="Size.Small" @onclick="@(() => Delete(@context.Id))">@_localizer["Delete"]</MudButton>
+
+                    }
+
+
+
+                }
+                else
+                {
+                    <MudButton Variant="Variant.Filled"
+                       DisableElevation="true"
+                       StartIcon="@Icons.Material.Filled.DoNotTouch"
+                       IconColor="Color.Secondary"
+                       Size="Size.Small"
+                       Color="Color.Surface">
+                        @_localizer["No Allowed Actions"]
+                    </MudButton>
+                }
+
+
+            </MudTd>
+            @* <MudTd DataLabel="Actions" Style="text-align: right">
+        @if (_canEditCountries || _canDeleteCountries)
+        {
+        <MudMenu Label="@_localizer["Actions"]" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+        @if (_canEditCountries)
+        {
+        <MudMenuItem @onclick="@(() => InvokeModal(@context.Id))">@_localizer["Edit"]</MudMenuItem>
+        }
+        @if (_canDeleteCountries)
+        {
+        <MudMenuItem @onclick="@(() => Delete(@context.Id))">@_localizer["Delete"]</MudMenuItem>
+        }
+        </MudMenu>
+        }
+        else
+        {
+        <MudButton Variant="Variant.Filled"
+        DisableElevation="true"
+        StartIcon="@Icons.Material.Filled.DoNotTouch"
+        IconColor="Color.Secondary"
+        Size="Size.Small"
+        Color="Color.Surface">
+        @_localizer["No Allowed Actions"]
+        </MudButton>
+        }
+        </MudTd>*@
+        </RowTemplate>
+        <FooterContent>
+            <MudSwitch @bind-Checked="@_dense" Color="Color.Secondary" Style="margin-left: 5px;">@_localizer["Dense"]</MudSwitch>
+            <MudSwitch @bind-Checked="@_striped" Color="Color.Tertiary" Style="margin-left: 5px;">@_localizer["Striped"]</MudSwitch>
+            <MudSwitch @bind-Checked="@_bordered" Color="Color.Warning" Style="margin-left: 5px;">@_localizer["Bordered"]</MudSwitch>
+        </FooterContent>
+        <PagerContent>
+            <TablePager />
+        </PagerContent>
+    </MudTable>
+}

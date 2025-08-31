@@ -1,0 +1,67 @@
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditNationModal> _localizer
+
+<EditForm Model="@AddEditNationModel" OnValidSubmit="SaveAsync" dir="@direction">
+    <FluentValidationValidator @ref="_fluentValidationValidator" />
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (AddEditNationModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["Add Nation"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["Update Nation"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                @if (AddEditNationModel.Id != 0)
+                {
+                    <MudItem xs="12" md="6">
+                        <MudTextField Disabled For="@(() => AddEditNationModel.Id)" @bind-Value="AddEditNationModel.Id" Label="@_localizer["Id"]" />
+                    </MudItem>
+                }
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(()=>AddEditNationModel.ArabicName)" @bind-Value="AddEditNationModel.ArabicName" Label="@_localizer["ArabicName"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => AddEditNationModel.Name)" @bind-Value="AddEditNationModel.Name" Label="@_localizer["Name"]" />
+                </MudItem>
+                @*<MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditNationModel.Description)" @bind-Value="AddEditNationModel.Description" Label="@_localizer["Description"]" />
+                </MudItem>*@
+                
+                @*<MudItem xs="12" md="6">
+                <MudTextField T="string" For="@(()=>AddEditNationModel.Name)" @bind-Value="AddEditNationModel.Code" Label="@_localizer["Code"]" />
+                 </MudItem> 
+                <MudItem xs="12" md="6">
+                <MudTextField T="string" For="@(()=>AddEditNationModel.Name)" @bind-Value="AddEditNationModel.PhoneCode" Label="@_localizer["PhoneCode"]" />
+                 </MudItem> *@
+
+				 @*<MudItem xs="12" md="6">
+                    <MudTextField For="@(() => AddEditNationModel.Tax)" @bind-Value="AddEditNationModel.Tax" Label="@_localizer["Tax"]" />
+                </MudItem>
+				*@
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+            @if (AddEditNationModel.Id != 0)
+            {
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@_localizer["Update"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary"></LoadingButton>
+            }
+            else
+            {
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@_localizer["Save"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success"></LoadingButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

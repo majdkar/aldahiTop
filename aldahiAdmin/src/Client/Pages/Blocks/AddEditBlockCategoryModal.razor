@@ -1,0 +1,66 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Blocks> _localizer
+
+<EditForm Model="@BlockCategoryModel" OnValidSubmit="SaveAsync" dir="@direction">
+    <FluentValidationValidator />
+
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (BlockCategoryModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @_localizer["AddBlockCategory"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @_localizer["UpdateBlockCategory"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => BlockCategoryModel.Name)" @bind-Value="BlockCategoryModel.Name" Label="@_localizer["Arabic Name"]" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => BlockCategoryModel.EnglishName)" @bind-Value="BlockCategoryModel.EnglishName" Label="@_localizer["English Name"]" />
+                </MudItem>
+
+
+
+
+                <MudItem xs="12" md="12">
+                    <MudSelect For="@(() => BlockCategoryModel.BlockType)" @bind-Value="BlockCategoryModel.BlockType" T="string" Label="@_localizer["BlockType"]" AnchorOrigin="Origin.BottomCenter">
+                        <MudSelectItem T="string">N/A</MudSelectItem>
+                        @foreach (string blocktype in BlockTypes)
+                        {
+                            <MudSelectItem T="string" Value="@blocktype">@blocktype</MudSelectItem>
+                        }
+                    </MudSelect>
+
+                </MudItem>
+
+
+                <MudItem xs="12" md="12">
+                    <MudCheckBox For="@(() => BlockCategoryModel.IsActive)" @bind-Checked="BlockCategoryModel.IsActive" Label="@_localizer["IsActive"]" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Button" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+            @if (BlockCategoryModel.Id != 0)
+            {
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@_localizer["Update"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary"></LoadingButton>
+            }
+            else
+            {
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@_localizer["Save"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success"></LoadingButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

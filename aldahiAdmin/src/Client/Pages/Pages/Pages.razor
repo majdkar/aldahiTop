@@ -1,0 +1,95 @@
+﻿@page "/pages"
+
+@using FirstCall.Shared.ViewModels.Pages;
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Pages> localizer
+<style>
+.mud-dialog-container{
+        overflow: scroll;
+    }
+</style>
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+<style>
+    .mud-dialog-container {
+        overflow: scroll;
+    }
+    .tox-tinymce {
+        max-height:250px;
+    }
+</style>
+
+<MudItem xs="12" md="12">
+    <MudText Typo="Typo.h6" Color="Color.Primary">@localizer["ViewPages"] </MudText>
+</MudItem>
+
+<MudTable Class="my-4" Elevation="4" ServerData="@(new Func<TableState, Task<TableData<PageViewModel>>>(ServerReload))"
+          Hover="true" @ref="_table" Breakpoint="Breakpoint.Sm" Loading="@loaded" LoadingProgressColor="Color.Primary"
+          OnRowClick="RowClickEvent" T="PageViewModel">
+
+    <ToolBarContent>
+        <div class="justify-center mud-text-align-center">
+            @if (_canCreatePages)
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" @onclick="@(() => InvokeAddEditModal(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@localizer["New"] </MudButton>
+            }
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@localizer["Reload"] </MudButton>
+        </div>
+        <MudSpacer />
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder=@localizer["Search"] Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+
+    <HeaderContent>
+           <MudTh><MudTableSortLabel T="PageViewModel" SortLabel="RecordOrder"><strong>@localizer["RecordOrder"]</strong> </MudTableSortLabel></MudTh>
+       
+       
+         <MudTh><MudTableSortLabel T="PageViewModel" SortLabel="Name"><strong>@localizer["Name"]</strong> </MudTableSortLabel></MudTh>
+          <MudTh><MudTableSortLabel T="PageViewModel" SortLabel="EnglishName"><strong>@localizer["EnglishName"]</strong> </MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel T="PageViewModel" SortLabel="Type"><strong>@localizer["Type"] </strong></MudTableSortLabel></MudTh>
+      
+     
+        <MudTd DataLabel="IsActive"><strong>@localizer["IsActive"]</strong> </MudTd>
+        <MudTh Style="text-align:right"><strong>@localizer["Actions"]</strong> </MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+          
+          <MudTd DataLabel="RecordOrder">
+            <MudHighlighter Text="@context.RecordOrder.ToString()" />
+        </MudTd>
+       
+            <MudTd DataLabel="Name">
+            <MudHighlighter Text="@context.Name" HighlightedText="@searchString" />
+        </MudTd>
+         <MudTd DataLabel="EnglishName">
+            <MudHighlighter Text="@context.EnglishName" HighlightedText="@searchString" />
+        </MudTd>
+        <MudTd DataLabel="Description">
+            <MudHighlighter Text="@context.Type" HighlightedText="@searchString" />
+        </MudTd>
+    
+      
+        <MudTd DataLabel="Active?">
+            <MudCheckBox Checked="@context.IsActive" T="bool" CheckedChanged="@(s => ChangeActive(s, context))" Disabled @onclick:stopPropagation  Color="Color.Secondary"></MudCheckBox>
+            </MudTd>
+
+        <MudTd DataLabel="Actions" Style="text-align: right">
+            <MudButton Variant="Variant.Filled"  Color="Color.Info" Size="Size.Small" @onclick="@(() => InvokeAddEditModal(@context.Id))">@localizer["Edit"]</MudButton>
+            @if (_canDeletePages)
+            {
+                <MudButton Variant="Variant.Filled" Color="Color.Error" Size="Size.Small" @onclick="@(() => SoftDeletePage(@context.Id))">@localizer["Delete"]</MudButton>
+            }
+            <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" @onclick="@(() => InvokeAddEditPagePhotos(@context.Id))">@localizer["Album"]</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" @onclick="@(() => InvokeAddEditPageAttachements(@context.Id))">@localizer["Attachements"]</MudButton>
+        </MudTd>
+    </RowTemplate>
+
+@*     <PagerContent>
+        <TablePager />
+    </PagerContent> *@
+
+</MudTable>
+
+

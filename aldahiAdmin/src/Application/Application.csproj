@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>FirstCall.Application</RootNamespace>
+    <AssemblyName>FirstCall.Application</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Features\Coupons\AddEdit\**" />
+    <Compile Remove="Features\Coupons\Delete\**" />
+    <Compile Remove="Features\Newsletters\**" />
+    <Compile Remove="Requests\Coupons\**" />
+    <Compile Remove="Resources\Features\Drivers\**" />
+    <Compile Remove="Resources\Features\Notifications\**" />
+    <Compile Remove="Specifications\Coupons\**" />
+    <EmbeddedResource Remove="Features\Coupons\AddEdit\**" />
+    <EmbeddedResource Remove="Features\Coupons\Delete\**" />
+    <EmbeddedResource Remove="Features\Newsletters\**" />
+    <EmbeddedResource Remove="Requests\Coupons\**" />
+    <EmbeddedResource Remove="Resources\Features\Drivers\**" />
+    <EmbeddedResource Remove="Resources\Features\Notifications\**" />
+    <EmbeddedResource Remove="Specifications\Coupons\**" />
+    <None Remove="Features\Coupons\AddEdit\**" />
+    <None Remove="Features\Coupons\Delete\**" />
+    <None Remove="Features\Newsletters\**" />
+    <None Remove="Requests\Coupons\**" />
+    <None Remove="Resources\Features\Drivers\**" />
+    <None Remove="Resources\Features\Notifications\**" />
+    <None Remove="Specifications\Coupons\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="ClosedXML" Version="0.105.0" />
+    <PackageReference Include="FluentValidation" Version="11.9.2" />
+    <PackageReference Include="LazyCache" Version="2.4.0" />
+    <PackageReference Include="MailKit" Version="4.7.1.1" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.32" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.8" />
+    <PackageReference Include="MimeKit" Version="4.7.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="OpenAI" Version="2.3.0" />
+    <PackageReference Include="QuestPDF" Version="2025.7.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.4.5" />
+    <PackageReference Include="Telegram.Bot" Version="22.6.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Features\SupplierCompanies\Queries\Export\ExportSupplierCompaniesQueryHandler.ar.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Features\SupplierCompanies\Queries\Export\ExportSupplierCompaniesQueryHandler.en.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\Products\Commands\AddEdit\" />
+  </ItemGroup>
+
+</Project>

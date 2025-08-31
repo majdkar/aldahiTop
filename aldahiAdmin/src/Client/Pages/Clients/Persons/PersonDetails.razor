@@ -1,0 +1,26 @@
+﻿@page "/person-details/{Id:int}"
+@using FirstCall.Shared.Constants.Clients
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditPerson> _localizer
+
+<HeroTitle Title="@PersonModel.FullName" />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTabs Elevation="25" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
+        <MudTabPanel Text=@_localizer["Client Details"]>
+            <PersonClientBasicInfo Model="PersonModel" />
+        </MudTabPanel>
+@*         <MudTabPanel Text=@_localizer["My Orders"]>
+            <StudentMyFinalOrdinaryOrders ClientType="@ClientTypesEnum.Person.ToString()" ClientId="PersonModel.ClientId" />
+        </MudTabPanel> *@
+       @*  <MudTabPanel Text=@_localizer["RFQ"]>
+            <PriceOffers ClientId="PersonModel.ClientId" />
+        </MudTabPanel>
+        <MudTabPanel Text=@_localizer["Urgent Orders"]>
+            <UrgentOrders ClientId="PersonModel.ClientId" />
+        </MudTabPanel> *@
+    </MudTabs>
+}

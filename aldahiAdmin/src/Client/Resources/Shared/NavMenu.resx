@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Aboutus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AcademyRequests" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Academys" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AcademysManagement Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Products Kinds" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Account11" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Activities" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Activity Types" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AddMenuCategories" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AddMenuCategories1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Administrator" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AgeCategorytbls" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Audit Trails" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BlockCategoriesList" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Blocks" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BlocksList" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Brands" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Car Categories" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Car Reservation Orders" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Carmodels" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Cars Reservations Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Catalog Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ChampionshipsClassifications" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Chat" xml:space="preserve">
+    <value />
+  </data>
+  <data name="client" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Clients and Companies Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Clients Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ClubRequests" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Clubs" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ClubsManagement Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ClubTypes" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CodeCars" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Colors" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Communication" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Companies" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CompanyProfile Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Contacts" xml:space="preserve">
+    <value />
+  </data>
+  <data name="contactus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Countries" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Currencies" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Delivery Orders" xml:space="preserve">
+    <value />
+  </data>
+  <data name="delivery-orders" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DeliveryPrices" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Document Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Document Store" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Document Types" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Drivers" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EventCategories" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value />
+  </data>
+  <data name="EventsList" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FAQs" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Features" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GeneralSettings Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Individuals" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Mail" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Manage Drivers." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Manufacture Type" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MenuCategories" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Menus" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Nations" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Orders Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ordinary Orders" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Owners" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OwnersManagement Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Pages" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Passports" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PlayerClassifications" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Players" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PlayersManagement Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Princedoms" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ProductBrands" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ProductCategories" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value />
+  </data>
+  <data name="provider" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ProviderServices" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Quick Start Guide" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RequestStatuss" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resources" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Sexs" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Sizes" xml:space="preserve">
+    <value />
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Suggestions" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Supplier Companies" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Supplier Companies List" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Supplier Companies Requests" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Swagger" xml:space="preserve">
+    <value />
+  </data>
+  <data name="transfer" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Units" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Videos" xml:space="preserve">
+    <value />
+  </data>
+  <data name="WebSite Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BonusPoints" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Coupons" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ProductInstantPricing" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Cars" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Our Projects" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Blocks Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Menus Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Pages Management" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Manage subscription requests" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Subscripers" xml:space="preserve">
+    <value />
+  </data>
+  <data name="subscription requests" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Categoryies" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Subscribers" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Product Categories" xml:space="preserve">
+    <value>Product Categories</value>
+  </data>
+  <data name="Products Categoryies" xml:space="preserve">
+    <value>Products Categoryies</value>
+  </data>
+</root>

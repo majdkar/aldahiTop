@@ -1,0 +1,561 @@
+﻿@page "/menu-details/{id?}/{CategoryId:int?}"
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Menus> localizer
+
+
+<MudGrid>
+    <MudItem xs="12" sm="8" md="9">
+        <EditForm Model="@MenuModel" OnValidSubmit="SaveAsync">
+            <FluentValidationValidator />
+            <MudCard Elevation="4">
+                <MudCardHeader>
+                    <CardHeaderAvatar>
+                        <MudAvatar Color="Color.Secondary">
+                            @if (MenuModel.Id == 0)
+                            {
+                                <MudIcon Icon="@Icons.Outlined.Add" />
+                            }
+                            else
+                            {
+                                <MudIcon Icon="@Icons.Outlined.PublishedWithChanges" />
+                            }
+                        </MudAvatar>
+                    </CardHeaderAvatar>
+                    <CardHeaderContent>
+                        @if (MenuModel.Id == 0)
+                        {
+                            <MudText Typo="Typo.body1">@localizer["AddMenu"]</MudText>
+                        }
+                        else
+                        {
+                            <MudText Typo="Typo.body1">@localizer["UpdateMenu"]</MudText>
+                        }
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+
+
+                    <MudGrid>
+
+
+                        <MudItem xs="12" md="6">
+                            <MudTextField For="@(() => MenuModel.Name)" @bind-Value="MenuModel.Name" Label="@localizer["Arabic Name"]" Variant="Variant.Outlined" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField For="@(() => MenuModel.EnglishName)" @bind-Value="MenuModel.EnglishName" Label="@localizer["English Name"]" Variant="Variant.Outlined" />
+                        </MudItem>
+
+
+
+                        <MudItem xs="12" md="12">
+                            <div class="fa-object-group">
+                                <label class="fa-alipay">@localizer["Arabic Description"]</label>
+
+                                <Editor Id="editorAr" Field="() => MenuModel.Description1" @bind-Value="MenuModel.Description1" Inline=false
+                                        Conf="@editorAr.tinymc" ScriptSrc="/tinymce/tinymce.min.js" ClassName="tinymce-wrapper" />
+
+                            </div>
+                        </MudItem>
+
+
+                        <MudItem xs="12" md="12">
+                            <div class="fa-object-group">
+                                <label class="fa-alipay">@localizer["English Description"]</label>
+                                <Editor Id="editorEn" Field="() => MenuModel.EnglishDescription1" @bind-Value="MenuModel.EnglishDescription1" Inline=false
+                                        Conf="@editorEn.tinymc" ScriptSrc="/tinymce/tinymce.min.js" ClassName="tinymce-wrapper" />
+
+                            </div>
+                        </MudItem>
+
+
+                        <MudItem xs="12" md="12">
+                            <div class="fa-object-group">
+                                <label class="fa-alipay">@localizer["Arabic Description 2"]</label>
+
+                                <Editor Id="editorAr2" Field="() => MenuModel.Description2" @bind-Value="MenuModel.Description2" Inline=false
+                                        Conf="@editorAr2.tinymc" ScriptSrc="/tinymce/tinymce.min.js" ClassName="tinymce-wrapper" />
+
+                            </div>
+                        </MudItem>
+
+
+                        <MudItem xs="12" md="12">
+                            <div class="fa-object-group">
+                                <label class="fa-alipay">@localizer["English Description 2"]</label>
+                                <Editor Id="editorEn2" Field="() => MenuModel.EnglishDescription2" @bind-Value="MenuModel.EnglishDescription2" Inline=false
+                                        Conf="@editorEn2.tinymc" ScriptSrc="/tinymce/tinymce.min.js" ClassName="tinymce-wrapper" />
+
+                            </div>
+                        </MudItem>
+
+
+                        <MudItem xs="12" md="12">
+                            <div class="fa-object-group">
+                                <label class="fa-alipay">@localizer["Arabic Description 3"]</label>
+
+                                <Editor Id="editorAr3" Field="() => MenuModel.Description3" @bind-Value="MenuModel.Description3" Inline=false
+                                        Conf="@editorAr3.tinymc" ScriptSrc="/tinymce/tinymce.min.js" ClassName="tinymce-wrapper" />
+
+                            </div>
+                        </MudItem>
+
+
+                        <MudItem xs="12" md="12">
+                            <div class="fa-object-group">
+                                <label class="fa-alipay">@localizer["English Description 3"]</label>
+                                <Editor Id="editorEn3" Field="() => MenuModel.EnglishDescription3" @bind-Value="MenuModel.EnglishDescription3" Inline=false
+                                        Conf="@editorEn3.tinymc" ScriptSrc="/tinymce/tinymce.min.js" ClassName="tinymce-wrapper" />
+
+                            </div>
+                        </MudItem>
+
+
+                        <MudItem xs="12" md="12">
+                            <div class="fa-object-group">
+                                <label class="fa-alipay">@localizer["Arabic Description 4"]</label>
+
+                                <Editor Id="editorAr4" Field="() => MenuModel.Description4" @bind-Value="MenuModel.Description4" Inline=false
+                                        Conf="@editorAr4.tinymc" ScriptSrc="/tinymce/tinymce.min.js" ClassName="tinymce-wrapper" />
+
+                            </div>
+                        </MudItem>
+
+
+                        <MudItem xs="12" md="12">
+                            <div class="fa-object-group">
+                                <label class="fa-alipay">@localizer["English Description 4"]</label>
+                                <Editor Id="editorEn4" Field="() => MenuModel.EnglishDescription4" @bind-Value="MenuModel.EnglishDescription4" Inline=false
+                                        Conf="@editorEn4.tinymc" ScriptSrc="/tinymce/tinymce.min.js" ClassName="tinymce-wrapper" />
+
+                            </div>
+                        </MudItem>
+
+
+                        <MudItem xs="12" md="12">
+                            <MudCard>
+                                <MudCardContent>
+                                    <MudText>@localizer["Show In"]</MudText>
+
+                                </MudCardContent>
+                                <MudCardActions>
+                                    <MudItem xs="12" md="4">
+                                        <MudCheckBox For="@(() => MenuModel.IsHome)" @bind-Checked="MenuModel.IsHome" Label="@localizer["IsHome"]" />
+                                    </MudItem>
+                                    <MudItem xs="12" md="4">
+                                        <MudCheckBox For="@(() => MenuModel.IsFooter)" @bind-Checked="MenuModel.IsFooter" Label="@localizer["IsFooter"]" />
+                                    </MudItem>
+                                    <MudItem xs="12" md="4">
+                                        <MudCheckBox For="@(() => MenuModel.IsHomeFooter)" @bind-Checked="MenuModel.IsHomeFooter" Label="@localizer["IsHomeFooter"]" />
+                                    </MudItem>
+
+                                </MudCardActions>
+                            </MudCard>
+
+                        </MudItem>
+
+
+
+
+
+
+
+                        @if (_canEditMenu)
+                        {
+                            <MudItem xs="12" md="3">
+                                <MudSelect For="@(() => MenuModel.Type)" @bind-Value="MenuModel.Type" T="string" Label="@localizer["Type"]" AnchorOrigin="Origin.BottomCenter">
+                                    <MudSelectItem T="string">N/A</MudSelectItem>
+                                    @foreach (string menutype in MenuTypes)
+                                    {
+                                        <MudSelectItem T="string" Value="@menutype">@menutype</MudSelectItem>
+                                    }
+                                </MudSelect>
+
+                            </MudItem>
+                        }
+
+
+                        @if (_canEditMenu)
+                        {
+                            <MudItem xs="12" md="3">
+                                <MudTextField For="@(() => MenuModel.PageUrl)" @bind-Value="MenuModel.PageUrl" Label="@localizer["PageUrl"]" Variant="Variant.Text" />
+                            </MudItem>
+                        }
+                        else
+                        {
+                            <MudItem xs="12" md="3">
+                                <MudTextField For="@(() => MenuModel.PageUrl)" Disabled="true" @bind-Value="MenuModel.PageUrl" Label="@localizer["PageUrl"]" Variant="Variant.Text" />
+                            </MudItem>
+                        }
+                          <MudItem xs="12" md="3">
+                                <MudTextField For="@(() => MenuModel.Url)" @bind-Value="MenuModel.Url" Label="@localizer["Url"]" Variant="Variant.Text" />
+                            </MudItem>
+                        @if (_canEditMenu)
+                        {
+                            <MudItem xs="12" md="3">
+                                @if (categories != null)
+                                {
+                                    <MudSelect @bind-Value="MenuModel.CategoryId" T="int" Label="@localizer["selectCategory"]" AnchorOrigin="Origin.BottomCenter">
+                                        @foreach (var category in categories)
+                                        {
+                                            <MudSelectItem T="int" Value="@category.Id">
+                                                @if (System.Globalization.CultureInfo.CurrentCulture.Name == "en-US")
+                                                {
+                                                    @category.EnglishName
+                                                }
+                                                else
+                                                {
+                                                    @category.Name
+
+                                                }
+                                            </MudSelectItem>
+                                        }
+
+                                    </MudSelect>
+                                }
+                            </MudItem>
+
+                            @if (_canEditMenu)
+                            {
+                                <MudItem xs="12" md="3">
+                                    @if (_menus != null)
+                                    {
+                                        <MudSelect @bind-Value="parentId" T="int" Label="@localizer["ParentName"]" AnchorOrigin="Origin.BottomCenter">
+                                            <MudSelectItem T="int" Value="0">N/A</MudSelectItem>
+                                            @foreach (var menu in _menus)
+                                            {
+                                                <MudSelectItem T="int" Value="@menu.Id">
+
+                                                    @if (System.Globalization.CultureInfo.CurrentCulture.Name == "en-US")
+                                                    {
+                                                        @menu.EnglishName
+                                                    }
+                                                    else
+                                                    {
+                                                        @menu.Name
+
+                                                    }
+
+                                                </MudSelectItem>
+                                            }
+                                        </MudSelect>
+                                    }
+                                </MudItem>
+                            }
+                            <MudItem xs="12" md="3">
+                                <MudNumericField For="@(() => MenuModel.LevelOrder)" @bind-Value="MenuModel.LevelOrder" Label="@localizer["LevelOrder"]" Variant="Variant.Text" Min="0" />
+                            </MudItem>
+
+                            <MudItem xs="12" md="3">
+                                <MudCheckBox For="@(() => MenuModel.IsActive)" @bind-Checked="MenuModel.IsActive" Label="@localizer["IsActive"]" />
+                            </MudItem>
+
+                        }
+
+
+                    </MudGrid>
+                </MudCardContent>
+                <MudCardActions Class="d-flex justify-end flex-grow-1 gap-4 mr-2">
+                    <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Button" Class="mr-2" OnClick="Cancel">@localizer["Cancel"]</MudButton>
+                    @if (MenuModel.LevelOrder >= 0)
+                    {
+                        if (MenuModel.Id != 0)
+                        {
+                            <LoadingButton IsProcessing="@isProcessing" ButtonText="@localizer["Update"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success"></LoadingButton>
+                        }
+                        else
+                        {
+                            <LoadingButton IsProcessing="@isProcessing" ButtonText="@localizer["Save"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success"></LoadingButton>
+                        }
+
+                    }
+                    else
+                    {
+                        if (MenuModel.Id != 0)
+                        {
+                            <LoadingButton IsProcessing="@isProcessing" ButtonText="@localizer["Update"]" Disabled="true" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success"></LoadingButton>
+                        }
+                        else
+                        {
+                            <LoadingButton IsProcessing="@isProcessing" ButtonText="@localizer["Save"]" Disabled="true" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success"></LoadingButton>
+                        }
+
+                    }
+                </MudCardActions>
+            </MudCard>
+        </EditForm>
+    </MudItem>
+
+
+
+    <MudItem xs="12" md="3">
+        <MudCard Elevation="4" Class="mb-5">
+            <MudCardHeader>
+                <CardHeaderAvatar>
+                    <MudAvatar Color="Color.Secondary">
+                        <MudIcon Icon="@Icons.Outlined.InsertPhoto" />
+                    </MudAvatar>
+                </CardHeaderAvatar>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@localizer["UploadImage"]</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudItem>
+                @if (!string.IsNullOrEmpty(MenuModel.Image1))
+                {
+                    <MudCardMedia Align="center" Class="ml-2 mr-2 rounded-lg" Image="@MenuModel.Image1" Height="250" />
+                }
+                else
+                {
+                    <MudCardMedia Align="center" Class="ml-2 mr-2 rounded-lg" Image="@noImageUrl" Height="250" />
+
+                }
+            </MudItem>
+
+            <MudCardActions>
+                <InputFile id="imageInput" OnChange="SelectImage" hidden />
+                <MudIconButton id="imageInputButton"
+                               HtmlTag="label"
+                               Variant="Variant.Text"
+                               Color="Color.Primary"
+                               Size="Size.Small"
+                               for="imageInput"
+                               Icon="@Icons.Outlined.Add">
+                    @localizer["UploadImage"]
+                </MudIconButton>
+                <MudIconButton Icon="@Icons.Filled.DeleteOutline" Color="Color.Error" OnClick="DeleteImage" Disabled="@disableDeleteImageButton" />
+            </MudCardActions>
+
+
+        </MudCard>
+
+
+        @*------------------------------------image 2------------*@
+
+        <MudCard Elevation="4" Class="mb-5">
+            <MudCardHeader>
+                <CardHeaderAvatar>
+                    <MudAvatar Color="Color.Secondary">
+                        <MudIcon Icon="@Icons.Outlined.InsertPhoto" />
+                    </MudAvatar>
+                </CardHeaderAvatar>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@localizer["UploadImage 2"]</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudItem>
+                @if (!string.IsNullOrEmpty(MenuModel.Image2))
+                {
+                    <MudCardMedia Align="center" Class="ml-2 mr-2 rounded-lg" Image="@MenuModel.Image2" Height="250" />
+                }
+                else
+                {
+                    <MudCardMedia Align="center" Class="ml-2 mr-2 rounded-lg" Image="@noImageUrl" Height="250" />
+
+                }
+            </MudItem>
+
+            <MudCardActions>
+                <InputFile id="imageInput2" OnChange="SelectImage2" hidden />
+                <MudIconButton id="imageInputButton"
+                               HtmlTag="label"
+                               Variant="Variant.Text"
+                               Color="Color.Primary"
+                               Size="Size.Small"
+                               for="imageInput2"
+                               Icon="@Icons.Outlined.Add">
+                    @localizer["UploadImage"]
+                </MudIconButton>
+                <MudIconButton Icon="@Icons.Filled.DeleteOutline" Color="Color.Error" OnClick="DeleteImage2" Disabled="@disableDeleteImageButton2" />
+            </MudCardActions>
+
+
+        </MudCard>
+
+
+
+        @*---------------------------------------------image 3 ----------------------------*@
+
+        <MudCard Elevation="4" Class="mb-5">
+            <MudCardHeader>
+                <CardHeaderAvatar>
+                    <MudAvatar Color="Color.Secondary">
+                        <MudIcon Icon="@Icons.Outlined.InsertPhoto" />
+                    </MudAvatar>
+                </CardHeaderAvatar>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@localizer["UploadImage 3"]</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudItem>
+                @if (!string.IsNullOrEmpty(MenuModel.Image3))
+                {
+                    <MudCardMedia Align="center" Class="ml-2 mr-2 rounded-lg" Image="@MenuModel.Image3" Height="250" />
+                }
+                else
+                {
+                    <MudCardMedia Align="center" Class="ml-2 mr-2 rounded-lg" Image="@noImageUrl" Height="250" />
+
+                }
+            </MudItem>
+
+            <MudCardActions>
+                <InputFile id="imageInput3" OnChange="SelectImage3" hidden />
+                <MudIconButton id="imageInputButton"
+                               HtmlTag="label"
+                               Variant="Variant.Text"
+                               Color="Color.Primary"
+                               Size="Size.Small"
+                               for="imageInput3"
+                               Icon="@Icons.Outlined.Add">
+                    @localizer["UploadImage"]
+                </MudIconButton>
+                <MudIconButton Icon="@Icons.Filled.DeleteOutline" Color="Color.Error" OnClick="DeleteImage3" Disabled="@disableDeleteImageButton3" />
+            </MudCardActions>
+
+
+        </MudCard>
+
+
+        @*---------------------------image 4------------*@
+
+        <MudCard Elevation="4" Class="mb-5">
+            <MudCardHeader>
+                <CardHeaderAvatar>
+                    <MudAvatar Color="Color.Secondary">
+                        <MudIcon Icon="@Icons.Outlined.InsertPhoto" />
+                    </MudAvatar>
+                </CardHeaderAvatar>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@localizer["UploadImage 4"]</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudItem>
+                @if (!string.IsNullOrEmpty(MenuModel.Image4))
+                {
+                    <MudCardMedia Align="center" Class="ml-2 mr-2 rounded-lg" Image="@MenuModel.Image4" Height="250" />
+                }
+                else
+                {
+                    <MudCardMedia Align="center" Class="ml-2 mr-2 rounded-lg" Image="@noImageUrl" Height="250" />
+
+                }
+            </MudItem>
+
+            <MudCardActions>
+                <InputFile id="imageInput4" OnChange="SelectImage4" hidden />
+                <MudIconButton id="imageInputButton"
+                               HtmlTag="label"
+                               Variant="Variant.Text"
+                               Color="Color.Primary"
+                               Size="Size.Small"
+                               for="imageInput4"
+                               Icon="@Icons.Outlined.Add">
+                    @localizer["UploadImage"]
+                </MudIconButton>
+                <MudIconButton Icon="@Icons.Filled.DeleteOutline" Color="Color.Error" OnClick="DeleteImage4" Disabled="@disableDeleteImageButton4" />
+            </MudCardActions>
+
+
+        </MudCard>
+
+
+
+        <MudCard Elevation="4" Class="mb-5">
+            <MudCardHeader>
+                <CardHeaderAvatar>
+                    <MudAvatar Color="Color.Secondary">
+                        <MudIcon Icon="@Icons.Material.Filled.Attachment" />
+                    </MudAvatar>
+                </CardHeaderAvatar>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@localizer["File Arabic"]</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <div class="d-flex justify-center mb-2">
+                @if (!string.IsNullOrEmpty(MenuModel.File))
+                {
+                    <MudButton Link=@(MenuModel.File) Align="center" Class="ml-2 mr-2" Target="_blank" StartIcon="@Icons.Material.Filled.FileDownload" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Primary">@localizer["DownloadAttachment"]</MudButton>
+                }
+                else
+                {
+                    <MudButton Variant="Variant.Filled" Align="center" FullWidth=true Class="ml-2 mr-2" Disabled StartIcon="@Icons.Material.Filled.FileDownload" Size="Size.Small" Color="Color.Default">@localizer["NoAttachment"]</MudButton>
+                }
+            </div>
+            @if (_files != null)
+            {
+                <MudList id="FilesList">
+                    @foreach (var file in _files)
+                    {
+                        <MudListItem Icon="@Icons.Filled.AttachFile" @key="@file">
+                            @file.Name
+                        </MudListItem>
+                    }
+                </MudList>
+            }
+            <MudCardActions>
+                <InputFile id="fileInput" OnChange="SelectFile" hidden />
+                <MudIconButton id="fileInputButton"
+                               HtmlTag="label"
+                               Variant="Variant.Text"
+                               Color="Color.Primary"
+                               Size="Size.Small"
+                               Icon="@Icons.Material.Filled.UploadFile"
+                               for="fileInput">
+                    @localizer["UploadFile"]
+                </MudIconButton>
+                <MudIconButton Icon="@Icons.Filled.DeleteOutline" Color="Color.Error" OnClick="DeleteFile" Disabled="@disableDeleteFileButton" />
+            </MudCardActions>
+        </MudCard>
+
+
+
+        <MudCard Elevation="4" Class="mb-5">
+            <MudCardHeader>
+                <CardHeaderAvatar>
+                    <MudAvatar Color="Color.Secondary">
+                        <MudIcon Icon="@Icons.Material.Filled.Attachment" />
+                    </MudAvatar>
+                </CardHeaderAvatar>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@localizer["File English"]</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <div class="d-flex justify-center mb-2">
+                @if (!string.IsNullOrEmpty(MenuModel.FileEnglish))
+                {
+                    <MudButton Link=@(MenuModel.FileEnglish) Align="center" Class="ml-2 mr-2" Target="_blank" StartIcon="@Icons.Material.Filled.FileDownload" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Primary">@localizer["DownloadAttachment"]</MudButton>
+                }
+                else
+                {
+                    <MudButton Variant="Variant.Filled" Align="center" FullWidth=true Class="ml-2 mr-2" Disabled StartIcon="@Icons.Material.Filled.FileDownload" Size="Size.Small" Color="Color.Default">@localizer["NoAttachment"]</MudButton>
+                }
+            </div>
+            @if (_files != null)
+            {
+                <MudList id="FilesList">
+                    @foreach (var file in _files1)
+                    {
+                        <MudListItem Icon="@Icons.Filled.AttachFile" @key="@file">
+                            @file.Name
+                        </MudListItem>
+                    }
+                </MudList>
+            }
+            <MudCardActions>
+                <InputFile id="fileInput1" OnChange="SelectFile1" hidden />
+                <MudIconButton id="fileInputButton1"
+                               HtmlTag="label"
+                               Variant="Variant.Text"
+                               Color="Color.Primary"
+                               Size="Size.Small"
+                               Icon="@Icons.Material.Filled.UploadFile"
+                               for="fileInput1">
+                    @localizer["UploadFile"]
+                </MudIconButton>
+                <MudIconButton Icon="@Icons.Filled.DeleteOutline" Color="Color.Error" OnClick="DeleteFile1" Disabled="@disableDeleteFileButton1" />
+            </MudCardActions>
+        </MudCard>
+
+    </MudItem>
+</MudGrid>
+

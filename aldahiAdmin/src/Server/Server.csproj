@@ -1,0 +1,153 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>FirstCall.Server</RootNamespace>
+    <AssemblyName>FirstCall.Server</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DocumentationFile>FirstCall.Server.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <UserSecretsId>aa8b7360-671b-4ab2-99b0-7df28629ef3d</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\v1\Coupons\**" />
+    <Compile Remove="Controllers\v1\Newsletters\**" />
+    <Compile Remove="Files\Images\ProfilePictures\**" />
+    <Content Remove="Controllers\v1\Coupons\**" />
+    <Content Remove="Controllers\v1\Newsletters\**" />
+    <Content Remove="Files\Images\ProfilePictures\**" />
+    <EmbeddedResource Remove="Controllers\v1\Coupons\**" />
+    <EmbeddedResource Remove="Controllers\v1\Newsletters\**" />
+    <EmbeddedResource Remove="Files\Images\ProfilePictures\**" />
+    <None Remove="Controllers\v1\Coupons\**" />
+    <None Remove="Controllers\v1\Newsletters\**" />
+    <None Remove="Files\Images\ProfilePictures\**" />
+  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Files\Documents\dummy.txt" />
+		<None Remove="Files\dummy.txt" />
+		<None Remove="Files\Images\Cards\card-bg-citizen.png" />
+		<None Remove="Files\Images\Cards\dummy.txt" />
+		<None Remove="Files\UploadFiles\BrandsFiles\dummy.txt" />
+		<None Remove="Files\UploadFiles\ProductFiles\dummy.txt" />
+		<None Remove="Files\UploadFiles\BlocksFiles\dummy.txt" />
+		<None Remove="Files\UploadFiles\dummy.txt" />
+		<None Remove="Files\UploadFiles\EventsFiles\dummy.txt" />
+		<None Remove="Files\UploadFiles\MenusFiles\dummy.txt" />
+		<None Remove="Files\UploadFiles\PagesFiles\dummy.txt" />
+		<None Remove="Files\UploadFiles\SharedFiles\dummy.txt" />
+		<None Remove="Files\UploadFiles\ProductsFiles\dummy.txt" />
+		<None Remove="Files\UploadFiles\BrandsFiles\dummy.txt" />
+		<None Remove="Files\UploadFiles\WebSiteFiles\dummy.txt" />
+		<None Remove="file\dummy.txt" />
+		<None Remove="Logs\dummy.txt" />
+	</ItemGroup>
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="appsettings.Development.json" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="Files\Documents\dummy.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Files\dummy.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Files\Images\Cards\card-bg-citizen.jpg">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Include="Files\UploadFiles\BrandsFiles\dummy.txt">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Files\UploadFiles\ProductFiles\dummy.txt">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Files\UploadFiles\dummy.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Files\UploadFiles\ArticlesFiles\dummy.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Files\UploadFiles\EventsFiles\dummy.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Files\UploadFiles\BlocksFiles\dummy.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Files\UploadFiles\PagesFiles\dummy.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Files\UploadFiles\MenusFiles\dummy.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Files\UploadFiles\SharedFiles\dummy.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Files\UploadFiles\WebSiteFiles\dummy.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="file\dummy.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+		<PackageReference Include="Hangfire" Version="1.8.14" />
+		<PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
+		<PackageReference Include="MediatR" Version="9.0.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />
+		<PackageReference Include="Serilog.Extensions.Hosting" Version="4.1.2" />
+		<PackageReference Include="Serilog.Formatting.Compact" Version="1.1.0" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+		<PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+		<PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Application\Application.csproj" />
+		<ProjectReference Include="..\Infrastructure.Shared\Infrastructure.Shared.csproj" />
+		<ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+		<ProjectReference Include="..\Shared\Shared.csproj" />
+		<ProjectReference Include="..\Client\Client.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Files\UploadFiles\BlocksFiles\" />
+		<Folder Include="Files\UploadFiles\EventsFiles\" />
+		<Folder Include="Files\UploadFiles\MenusFiles\" />
+		<Folder Include="Files\UploadFiles\ArticlesFiles\" />
+		<Folder Include="Files\UploadFiles\WebSiteFiles\" />
+		<Folder Include="Files\UploadFiles\BrandsFiles\" />
+		<Folder Include="Files\UploadFiles\ProductFiles\" />
+
+		<Folder Include="Files\UploadFiles\SharedFiles\" />
+		<Folder Include="Files\UploadFiles\PagesFiles\" />
+		<Folder Include="Logs\" />
+		<Folder Include="Services\Events\" />
+		<Folder Include="Services\Menus\" />
+		<Folder Include="Services\Pages\" />
+		<Folder Include="Services\Settings\Languages\" />
+		<Folder Include="Logs\" />
+	</ItemGroup>
+
+
+</Project>

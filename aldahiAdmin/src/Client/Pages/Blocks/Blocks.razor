@@ -1,0 +1,83 @@
+﻿@page "/blocks/{CategoryId:int}"
+@using FirstCall.Shared.ViewModels.Blocks
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Blocks> localizer
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+
+    .mud-dialog-container {
+        overflow: scroll;
+    }
+
+    .tox-tinymce {
+        max-height: 250px;
+    }
+</style>
+@*<MudItem xs="12" md="12">
+    <MudText Typo="Typo.h6" Color="Color.Primary">@localizer["BlocksDescription"] </MudText>
+    @if (categories != null)
+    {
+        <MudSelect Style=" margin-top: 10px;" @bind-Value="CategoryId" SelectedValuesChanged="@(PageChanged)" T="string" Label="@localizer["selectCategory"]" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+            <MudSelectItem T="string" Value="0.ToString()">All</MudSelectItem>
+            @foreach (var category in categories)
+            {
+                <MudSelectItem T="string" Value="@category.Id.ToString()">@category.Name</MudSelectItem>
+            }
+        </MudSelect>
+    }
+</MudItem>*@
+
+
+<HeroTitle Title="@_blockCategory?.Name" />
+<MudTable Class="my-4" Elevation="4" ServerData="@(new Func<TableState, Task<TableData<BlockViewModel>>>(ServerReload))"
+          Hover="true" @ref="_table" Breakpoint="Breakpoint.Sm" Loading="@loaded" LoadingProgressColor="Color.Primary"
+          OnRowClick="RowClickEvent" T="BlockViewModel">
+
+    <ToolBarContent>
+        <div class="justify-center mud-text-align-center">
+            <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" @onclick="@(() => InvokeAddEditBlock(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@localizer["New"] </MudButton>
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@localizer["Reload"] </MudButton>
+        </div>
+        <MudSpacer />
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder=@localizer["Search"] Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+
+    <HeaderContent>
+        <MudTh><MudTableSortLabel T="BlockViewModel" SortLabel="RecordOrder">@localizer["RecordOrder"] </MudTableSortLabel></MudTh>
+
+        <MudTh><MudTableSortLabel T="BlockViewModel" SortLabel="Name">@localizer["Name"] </MudTableSortLabel></MudTh>
+        <MudTd DataLabel="IsVisible">@localizer["IsVisible"] </MudTd>
+        <MudTd DataLabel="IsActive">@localizer["IsActive"] </MudTd>
+        <MudTh Style="text-align:right">@localizer["Actions"] </MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+        <MudTd DataLabel="RecordOrder">
+            <MudHighlighter Text="@context.RecordOrder.ToString()" />
+        </MudTd>
+        <MudTd DataLabel="Name">
+            <MudHighlighter Text="@context.Name" HighlightedText="@searchString" />
+        </MudTd>
+
+        <MudTd DataLabel="Visible?"><MudCheckBox Disabled="true" @bind-Checked="@context.IsVisible" Color="Color.Secondary"></MudCheckBox></MudTd>
+        <MudTd DataLabel="Active?"><MudCheckBox Disabled="true" @bind-Checked="@context.IsActive" Color="Color.Secondary"></MudCheckBox></MudTd>
+        <MudTd DataLabel="Actions" Style="text-align: right">
+            <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" @onclick="@(() => InvokeAddEditBlock(@context.Id))">@localizer["Edit"]</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Error" Size="Size.Small" @onclick="@(() => SoftDeleteBlock(@context.Id))">@localizer["Delete"]</MudButton>
+          @*  @if (!showAlbum)
+            {*@
+                <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" @onclick="@(() => InvokeAddEditBlockPhotos(@context.Id))">@localizer["Album"]</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" @onclick="@(() => InvokeAddEditBlockAttachements(@context.Id))">@localizer["Attachements"]</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" @onclick="@(() => InvokeAddEditBlockVideos(@context.Id))">@localizer["Videos"]</MudButton>
+            @*}*@
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <TablePager />
+    </PagerContent>
+
+</MudTable>
+
+

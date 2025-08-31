@@ -1,0 +1,60 @@
+﻿@page "/menu-categories"
+@using FirstCall.Shared.ViewModels.Menus
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Menus> localizer
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+
+</style>
+
+<MudText Typo="Typo.h6" Color="Color.Primary">@localizer["MenuCategoriesDescription"] </MudText>
+
+
+<MudTable Class="my-4" Elevation="4" ServerData="@(new Func<TableState, Task<TableData<MenuCategoryViewModel>>>(ServerReload))"
+          Hover="true" @ref="_table" Breakpoint="Breakpoint.Sm" Loading="@loaded" LoadingProgressColor="Color.Primary" HorizontalScrollbar="false"
+          OnRowClick="RowClickEvent" T="MenuCategoryViewModel">
+
+    <ToolBarContent>
+        <div class="justify-center mud-text-align-center">
+            @if (_canCreateWebSiteManagement)
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" @onclick="@(() => InvokeAddEditModal(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@localizer["New"] </MudButton>
+            }
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">@localizer["Reload"] </MudButton>
+        </div>
+        <MudSpacer />
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder=@localizer["Search"] Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+
+    <HeaderContent>
+        <MudTh><MudTableSortLabel T="MenuCategoryViewModel" SortLabel="Name"><strong>@localizer["Name"]</strong> </MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel T="MenuCategoryViewModel" SortLabel="EnglishName"><strong>@localizer["EnglishName"]</strong> </MudTableSortLabel></MudTh>
+        <MudTd DataLabel="IsActive"><strong>@localizer["IsActive"]</strong> </MudTd>
+        <MudTd DataLabel="IsVisible User"><strong>@localizer["IsVisible User"]</strong> </MudTd>
+
+        <MudTh Style="text-align:right"><strong>@localizer["Actions"]</strong> </MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+        <MudTd DataLabel="Name">
+            <MudHighlighter Text="@context.Name" HighlightedText="@searchString" />
+        </MudTd>
+        <MudTd DataLabel="EnglishName">
+            <MudHighlighter Text="@context.EnglishName" HighlightedText="@searchString" />
+        </MudTd>
+        <MudTd DataLabel="Active?"><MudCheckBox Disabled="true" @bind-Checked="@context.IsActive" Color="Color.Secondary"></MudCheckBox></MudTd>
+        <MudTd DataLabel="IsVisible User?"><MudCheckBox Disabled="true" @bind-Checked="@context.IsVisableUser" Color="Color.Secondary"></MudCheckBox></MudTd>
+
+        <MudTd DataLabel="Actions" Style="text-align: right">
+            <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" @onclick="@(() => InvokeAddEditModal(@context.Id))">@localizer["Edit"]</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Small" @onclick="@(() =>  _navigationManager.NavigateTo($"/menus/{@context.Id}"))">@localizer["ViewMenus"]</MudButton>
+            @if (_canCreateWebSiteManagement)
+            {
+                <MudButton Variant="Variant.Filled" Color="Color.Error" Size="Size.Small" @onclick="@(() => SoftDeleteBlock(@context.Id))">@localizer["Delete"]</MudButton>
+            }
+        </MudTd>
+    </RowTemplate>
+</MudTable>
+

@@ -1,0 +1,46 @@
+﻿@using FirstCall.Shared.ViewModels.Settings.Languages
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Settings> localizer
+
+
+<MudTable Items="@elements" Hover="true" @ref="_table" ServerData="@(new Func<TableState, Task<TableData<LanguageViewModel>>>(ServerReload))"
+          CanCancelEdit="true" @bind-SelectedItem="selectedItem" SortLabel="Sort By" CommitEditTooltip="Save"
+          CancelEditTooltip="Cancel" RowEditPreview="BackupItem" Loading=@loaded OnCommitEditClick="@(() => Save(selectedItem))"
+          RowEditCancel="ResetItemToOriginalValues" MultiSelection="false">
+
+    <ToolBarContent>
+        <div class="justify-center mud-text-align-center">
+            <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Secondary" @onclick="@(() => InvokeAddEditModalAsync(0))" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface" Size="Size.Small">@localizer["New"] </MudButton>
+        </div>
+        <MudSpacer />
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder=@localizer["Search"] Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+
+    <HeaderContent>
+        <MudTd DataLabel="Name"><strong>@localizer["Name"]</strong> </MudTd>
+        <MudTd DataLabel="Language Code"><strong>@localizer["LanguageCode"]</strong> </MudTd>
+        <MudTd DataLabel="Active?"><strong>@localizer["IsActive"]</strong> </MudTd>
+    </HeaderContent>
+
+    <RowTemplate>
+        <MudTd DataLabel="Name">
+            <MudHighlighter Text="@context.Name" HighlightedText="@searchString" />
+        </MudTd>
+         <MudTd DataLabel="Language Code">
+            <MudHighlighter Text="@context.LanguageCode" HighlightedText="@searchString" />
+        </MudTd>
+        <MudTd DataLabel="Active?"><MudCheckBox @bind-Checked="@context.IsActive" Disabled=true></MudCheckBox></MudTd>
+    </RowTemplate>
+
+    <RowEditingTemplate>
+        <MudTd DataLabel="Name">
+            <MudTextField @bind-Value="@context.Name" Required RequiredError="You must enter name" />
+        </MudTd>
+        <MudTd DataLabel="Language Code">
+            <MudTextField @bind-Value="@context.LanguageCode" Required RequiredError="You must enter language code" />
+        </MudTd>
+        <MudTd DataLabel="Active?">
+            <MudCheckBox @bind-Checked="@context.IsActive"></MudCheckBox>
+        </MudTd>
+    </RowEditingTemplate>
+
+</MudTable>

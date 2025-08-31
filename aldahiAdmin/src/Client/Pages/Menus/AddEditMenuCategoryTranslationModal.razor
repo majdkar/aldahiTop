@@ -1,0 +1,63 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Menus> localizer
+
+<EditForm Model="@MenuCategoryTranslationModel" OnValidSubmit="SaveAsync">
+   <FluentValidationValidator />
+
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (MenuCategoryTranslationModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @localizer["AddTranslation"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @localizer["UpdateTransalation"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+            
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => MenuCategoryTranslationModel.Name)" @bind-Value="MenuCategoryTranslationModel.Name" Label="@localizer["Name"]" />
+                </MudItem>
+
+
+
+                <MudItem xs="12" md="6">
+                    <LanguageSelector Language="@MenuCategoryTranslationModel.Language" @ref="languageSelector"></LanguageSelector>
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => MenuCategoryTranslationModel.Slug)" @bind-Value="MenuCategoryTranslationModel.Slug" Label="@localizer["Slug"]" />
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudCheckBox For="@(() => MenuCategoryTranslationModel.IsActive)" @bind-Checked="MenuCategoryTranslationModel.IsActive" Label="@localizer["IsActive"]" />
+                </MudItem>
+                                                        <MudItem xs="12" md="12">
+                            <Editor Conf="@Constants.editorConf" JsConfSrc="tinyMceConf" ApiKey=@Constants.TinyMceApiKey Field=@(() =>  MenuCategoryTranslationModel.Description) @bind-Value=" MenuCategoryTranslationModel.Description" />
+                        </MudItem>
+
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Button" OnClick="Cancel">@localizer["Cancel"]</MudButton>
+            @if (MenuCategoryTranslationModel.Id != 0)
+            {
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@localizer["Update"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary"></LoadingButton>
+            }
+            else
+            {
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@localizer["Save"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success"></LoadingButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

@@ -1,0 +1,52 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Settings> localizer
+
+<EditForm Model="@LanguageModel" OnValidSubmit="SaveAsync">
+  <FluentValidationValidator />
+   
+   <MudDialog>
+        <TitleContent>
+            @{
+                if (LanguageModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @localizer["AddLanguage"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                       @localizer["UpdateLanguage"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" md="12">
+                    <MudTextField For="@(() => LanguageModel.Name)" @bind-Value="LanguageModel.Name" Label="@localizer["Name"]" />
+                </MudItem>
+
+                <MudItem xs="12" md="12">
+                    <MudTextField For="@(() => LanguageModel.LanguageCode)" @bind-Value="LanguageModel.LanguageCode" Label="@localizer["LanguageCode"]" />
+                </MudItem>
+
+                <MudItem xs="12" md="12">
+                    <MudCheckBox For="@(() => LanguageModel.IsActive)" @bind-Checked="LanguageModel.IsActive" Label="@localizer["IsActive"]" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Button" OnClick="Cancel">@localizer["Cancel"]</MudButton>
+            @if (LanguageModel.Id != 0)
+            {
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@localizer["Update"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary"></LoadingButton>
+            }
+            else
+            {
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@localizer["Save"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success"></LoadingButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

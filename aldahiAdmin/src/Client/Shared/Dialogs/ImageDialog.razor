@@ -1,0 +1,49 @@
+﻿@namespace FirstCall.Client.Shared.Dialogs
+@inject Microsoft.Extensions.Localization.IStringLocalizer<DeleteConfirmation> localizer
+@if (_rightToLeft)
+{
+    <MudDialog Style="direction:rtl" >
+        <TitleContent>
+            <MudText Typo="Typo.h6">
+                <MudIcon Icon="@Icons.Material.Filled.PhotoAlbum" Class="mr-3 mb-n1" />
+            </MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudAvatar Image="@ImagePath" Square="false" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="Cancel">@localizer["Close"]</MudButton>
+        </DialogActions>
+    </MudDialog>
+}
+else
+{
+    <MudDialog Style="direction:ltr">
+        <TitleContent>
+            <MudText Typo="Typo.h6">
+                <MudIcon Icon="@Icons.Material.Filled.PhotoAlbum" Class="mr-3 mb-n1" />
+            </MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudAvatar Image="@ImagePath" Square="false" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="Cancel">@localizer["Close"]</MudButton>
+        </DialogActions>
+    </MudDialog>
+}
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    private bool _rightToLeft = true;
+    private string direction;
+    protected override async Task OnInitializedAsync()
+    {
+
+
+        _rightToLeft = await _clientPreferenceManager.IsRTL();
+        if (_rightToLeft) direction = "rtl"; else direction = "ltr";
+    }
+    [Parameter] public string ImagePath { get; set; }
+
+    void Cancel() => MudDialog.Cancel();
+}

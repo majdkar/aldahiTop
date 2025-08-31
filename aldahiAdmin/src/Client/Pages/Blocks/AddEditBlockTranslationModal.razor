@@ -1,0 +1,60 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Blocks> localizer
+
+<EditForm Model="@BlockTranslationModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator />
+
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (BlockTranslationModel.Id == 0)
+                    {
+                <MudText Typo="Typo.h6">
+                    <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                    @localizer["AddTranslation"]
+                </MudText>
+                }
+                    else
+                    {
+                <MudText Typo="Typo.h6">
+                    <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                    @localizer["UpdateTransalation"]
+                </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => BlockTranslationModel.Name)" @bind-Value="BlockTranslationModel.Name" Label="@localizer["Name"]" />
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <LanguageSelector Language="@BlockTranslationModel.Language" @ref="languageSelector"></LanguageSelector>
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => BlockTranslationModel.Slug)" @bind-Value="BlockTranslationModel.Slug" Label="@localizer["Slug"]" />
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudCheckBox For="@(() => BlockTranslationModel.IsActive)" @bind-Checked="BlockTranslationModel.IsActive" Label="@localizer["IsActive"]" />
+                </MudItem>
+                                <MudItem xs="12" md="12" style="height:40%">
+                    <Editor Conf="@Constants.editorConf" JsConfSrc="tinyMceConf" ApiKey=@Constants.TinyMceApiKey Field=@(() => BlockTranslationModel.Description) @bind-Value="BlockTranslationModel.Description" />
+                </MudItem>
+
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Button" OnClick="Cancel">@localizer["Cancel"]</MudButton>
+            @if (BlockTranslationModel.Id != 0)
+                    {
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@localizer["Update"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary"></LoadingButton>
+            }
+                    else
+                    {
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@localizer["Save"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success"></LoadingButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

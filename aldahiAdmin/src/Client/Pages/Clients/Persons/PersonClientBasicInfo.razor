@@ -1,0 +1,71 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditPerson> _localizer
+@using FirstCall.Shared.Constants.Clients
+
+<MudCard Elevation="4">
+    @if(Model is not null)
+    {
+    <MudCardContent>
+        <MudGrid>
+            <MudItem xs="12" md="4">
+                <strong>@_localizer["Full Name"] : </strong> @Model.FullName
+            </MudItem>
+
+
+            <MudItem xs="12" md="4">
+                <strong>@_localizer["Country"] : </strong> @(IsArabic ? Model.Country?.NameAr : Model.Country?.NameEn)
+            </MudItem>
+            <MudItem xs="12" md="4">
+                <strong>@_localizer["City"] : </strong> @(Model.CityName)
+            </MudItem>
+
+   
+            
+      
+
+            <MudItem xs="12" md="4">
+                    <strong>@_localizer["Mobile"] : </strong> @Model.Phone
+            </MudItem>
+ 
+    
+            
+
+         
+              <MudItem xs="12" md="4">
+                <strong>@_localizer["Email"] : </strong> @Model.Email
+            </MudItem>
+
+            <MudItem xs="12" md="4">
+                <strong>@_localizer["Address"] : </strong> @Model.Address
+            </MudItem>
+
+
+
+            <MudItem xs="12" md="12">
+                <strong>@_localizer["AdditionalInfo"] : </strong> @Model.AdditionalInfo
+            </MudItem>
+
+            @if(Model.PersomImageUrl is not null)
+            {
+                 <MudItem xs="6" md="4">
+                        <MudText Typo="Typo.body1">@_localizer["Upload Personal Image"]</MudText>
+
+                    <MudCardMedia Align="center" Class="ml-2 mr-2 rounded-lg" Image="@(Model.PersomImageUrl.Replace('\\','/'))" Height="150" />
+                    <MudButton Variant="MudBlazor.Variant.Text"
+                               Color="Color.Info"
+                               StartIcon="@Icons.Material.Filled.RemoveRedEye"
+                               Size="Size.Small"
+                               Href="@(Model.PersomImageUrl)" Target="_blank">
+                        @_localizer["View"]
+                    </MudButton>
+                </MudItem>
+                    }
+
+
+     
+        </MudGrid>
+   </MudCardContent>
+    }
+</MudCard>
+
+
+

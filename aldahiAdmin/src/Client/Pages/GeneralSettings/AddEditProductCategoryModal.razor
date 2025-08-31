@@ -1,0 +1,245 @@
+﻿@using FirstCall.Shared.Constants.Products;
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditProductCategoryModal> _localizer
+<style>
+    .mud-dialog {
+        overflow: auto;
+    }
+</style>
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <EditForm Model="@AddEditProductCategoryModel" OnValidSubmit="SaveAsync" Style="overflow:auto">
+        <FluentValidationValidator @ref="_fluentValidationValidator" />
+        <MudDialog >
+            <TitleContent>
+                @{
+                    if (AddEditProductCategoryModel.Id == 0)
+                    {
+                        <MudText Typo="Typo.h6">
+                            <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                            @_localizer["Add ProductCategory"]
+                        </MudText>
+                    }
+                    else
+                    {
+                        <MudText Typo="Typo.h6">
+                            <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                            @_localizer["Update ProductCategory"]
+                        </MudText>
+                    }
+                }
+            </TitleContent>
+            <DialogContent>
+
+                <MudGrid>
+                    <MudItem xs="12" md="6">
+                        <MudTextField For="@(() => AddEditProductCategoryModel.NameEn)" @bind-Value="AddEditProductCategoryModel.NameEn" Label="@_localizer["NameEn"]" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudTextField For="@(() => AddEditProductCategoryModel.NameAr)" @bind-Value="AddEditProductCategoryModel.NameAr" Label="@_localizer["NameAr"]" />
+                    </MudItem>
+                    <MudItem xs="12" md="6">
+                        <MudSelect @bind-Value="@AddEditProductCategoryModel.Type" T="string" Label="@_localizer["Type"]" AnchorOrigin="Origin.BottomCenter" ReadOnly>
+                            @foreach (var value in ProductTypes.Values)
+                            {
+                                <MudSelectItem T="string" Value="@value.Key">@_localizer[@value.Value]</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    @*<MudItem xs="12" md="6">
+                        @if (_ProductCategories is not null)
+                        {
+                            <MudSelect T=int? @bind-Value="AddEditProductCategoryModel.ParentCategoryId" For="@(() => AddEditProductCategoryModel.ParentCategoryId)" Label="@_localizer["Parent Category"]" AnchorOrigin="Origin.BottomCenter">
+                                @foreach (var category in _ProductCategories)
+                                {
+                                    <MudSelectItem T=int? Value="@category.Id">@category.NameAr</MudSelectItem>
+                                }
+                            </MudSelect>
+                        }
+                    </MudItem>*@
+                     <MudItem xs="12" md="4">
+                        <MudAutocomplete T="int" Label="@_localizer["Parent Category"]" MaxItems="100"
+                                     Value="@AddEditProductCategoryModel.ParentCategoryId"
+                                     ValueChanged="OnParentChanged" ResetValueOnEmptyText="true"
+                                     SearchFunc="@SearchCategories"
+                                     ToStringFunc="@(i=>_ProductCategories.FirstOrDefault(b=>b.Id == i)?.NameAr ?? string.Empty)" OffsetY="true" Variant="Variant.Outlined" />
+                     </MudItem>
+         
+                    <MudItem xs="12" md="6">
+                        <MudTextField For="@(() => AddEditProductCategoryModel.Order)" @bind-Value="AddEditProductCategoryModel.Order" Label="@_localizer["Record Order"]" />
+                    </MudItem>
+                    @* <MudItem xs="12" md="6">
+
+                <MudProductd Elevation="4" Class="mb-5">
+                <MudProductdHeader>
+                <ProductdHeaderAvatar>
+                <MudAvatar Color="Color.Secondary">
+                <MudIcon Icon="@Icons.Outlined.InsertPhoto" />
+                </MudAvatar>
+                </ProductdHeaderAvatar>
+                <ProductdHeaderContent>
+                <MudText Typo="Typo.body1">@_localizer["Upload Product Category Image"]</MudText>
+                </ProductdHeaderContent>
+                </MudProductdHeader>
+                @if (!string.IsNullOrEmpty(AddEditProductCategoryModel.ImageDataURL))
+                {
+                <MudProductdMedia Align="center" Class="ml-2 mr-2 rounded-lg" Image="@(AddEditProductCategoryModel.ImageDataURL.Replace('\\','/'))" Height="150" />
+                }
+                <MudProductdActions>
+                <InputFile id="imageInput1" OnChange="UploadFiles" hidden />
+                <div>
+                <MudButton HtmlTag="label"
+                Variant="Variant.Text"
+                Color="Color.Primary"
+                Size="Size.Small"
+                StartIcon="@Icons.Filled.CloudUpload"
+                for="imageInput1">
+                @_localizer["Upload"]
+                </MudButton>
+                @if (!string.IsNullOrEmpty(AddEditProductCategoryModel.ImageDataURL))
+                {
+                <MudButton Variant="Variant.Text"
+                Color="Color.Info"
+                StartIcon="@Icons.Filled.RemoveRedEye"
+                Size="Size.Small"
+                Link="@(AddEditProductCategoryModel.ImageDataURL)" Target="_blank">
+                @_localizer["View"]
+                </MudButton>
+                <MudButton Variant="Variant.Text"
+                Color="Color.Error"
+                StartIcon="@Icons.Filled.Delete"
+                Size="Size.Small"
+                OnClick="DeleteAsync">
+                @_localizer["Delete"]
+                </MudButton>
+                }
+                </div>
+                </MudProductdActions>
+                </MudProductd>
+                </MudItem>*@
+
+                  @* <MudItem xs="12" md="6">
+                        <MudItem>
+                            <MudAvatar Image="@(AddEditProductCategoryModel.ImageDataURL)" Square="true" Style="height:200px; width: 600px; max-height: 100%"> </MudAvatar>
+                        </MudItem>
+                        <MudItem>
+                            <InputFile id="fileInput" hidden OnChange="UploadFiles" />
+                            <div>
+                                <MudButton HtmlTag="label"
+                                       Variant="Variant.Text"
+                                       Color="Color.Primary"
+                                       Size="Size.Small"
+                                       StartIcon="@Icons.Filled.CloudUpload"
+                                       for="fileInput">
+                                    @_localizer["Upload"]
+                                </MudButton>
+                                @if (!string.IsNullOrEmpty(AddEditProductCategoryModel.ImageDataURL))
+                                {
+                                    <MudButton Variant="Variant.Text"
+                                       Color="Color.Info"
+                                       StartIcon="@Icons.Filled.RemoveRedEye"
+                                       Size="Size.Small"
+                                       Link="@(AddEditProductCategoryModel.ImageDataURL)" Target="_blank">
+                                        @_localizer["View"]
+                                    </MudButton>
+                                    <MudButton Variant="Variant.Text"
+                                       Color="Color.Error"
+                                       StartIcon="@Icons.Filled.Delete"
+                                       Size="Size.Small"
+                                       OnClick="DeleteAsync">
+                                        @_localizer["Delete"]
+                                    </MudButton>
+                                }
+                            </div>
+                        </MudItem>
+                    </MudItem>*@
+                    <MudItem xs="12" md="6">
+                        @*upload image*@
+                        <MudCard Elevation="4" Class="mb-5">
+                            <MudCardHeader>
+                                <CardHeaderAvatar>
+                                    <MudAvatar Color="Color.Secondary">
+                                        <MudIcon Icon="@Icons.Outlined.InsertPhoto" />
+                                    </MudAvatar>
+                                </CardHeaderAvatar>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.body1">@_localizer["Upload Product Category Image"]</MudText>
+                                </CardHeaderContent>
+                            </MudCardHeader>
+                            @if (!string.IsNullOrEmpty(AddEditProductCategoryModel.ImageDataURL))
+                            {
+                                <MudCardMedia Align="center" Class="ml-2 mr-2 rounded-lg" Image="@(AddEditProductCategoryModel.ImageDataURL.Replace('\\','/'))" Height="150" />
+                            }
+                            <MudCardActions>
+                                <InputFile id="imageInput1" OnChange="UploadFiles" hidden />
+                                <div>
+                                    <MudButton HtmlTag="label"
+                                           Variant="Variant.Text"
+                                           Color="Color.Primary"
+                                           Size="Size.Small"
+                                           StartIcon="@Icons.Filled.CloudUpload"
+                                               for="imageInput1">
+                                        @_localizer["Upload"]
+                                    </MudButton>
+                                    @if (!string.IsNullOrEmpty(AddEditProductCategoryModel.ImageDataURL))
+                                    {
+                                        <MudButton Variant="Variant.Text"
+                                           Color="Color.Info"
+                                           StartIcon="@Icons.Filled.RemoveRedEye"
+                                           Size="Size.Small"
+                                           Link="@(AddEditProductCategoryModel.ImageDataURL)" Target="_blank">
+                                            @_localizer["View"]
+                                        </MudButton>
+                                        <MudButton Variant="Variant.Text"
+                                           Color="Color.Error"
+                                           StartIcon="@Icons.Filled.Delete"
+                                           Size="Size.Small"
+                                           OnClick="DeleteAsync">
+                                            @_localizer["Delete"]
+                                        </MudButton>
+                                    }
+                                </div>
+                            </MudCardActions>
+                        </MudCard>
+
+                    </MudItem>
+                </MudGrid>
+            </DialogContent>
+            <DialogActions>
+                <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">@_localizer["Cancel"]</MudButton>
+                @if (AddEditProductCategoryModel.Id != 0)
+                {
+                    <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Secondary">
+                         @if (_processing)
+                        {
+                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                            <MudText Class="ms-2">@_localizer["Processing"]</MudText>
+                        }
+                        else
+                        {
+                            @_localizer["Update"]
+                        }
+                    </MudButton>
+                }
+                else
+                {
+                    <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">
+                         @if (_processing)
+                        {
+                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                            <MudText Class="ms-2">@_localizer["Processing"]</MudText>
+                        }
+                        else
+                        {
+                            @_localizer["Save"]
+                        }
+                    </MudButton>
+                }
+            </DialogActions>
+        </MudDialog>
+    </EditForm>
+
+}

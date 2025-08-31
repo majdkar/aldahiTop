@@ -1,0 +1,112 @@
+﻿@page "/block-video-details/{id?}"
+@using FirstCall.Shared.ViewModels.Blocks
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Blocks> localizer
+
+@*<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>*@
+
+<MudText Typo="Typo.h6" Color="Color.Primary">@localizer["BlockVideos"] </MudText>
+                    <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Button" Color="Color.Primary" OnClick="BlocksAsync">@localizer["ViewBlocks"]</MudButton>
+
+
+@*<div class="container border">
+    <h3>Users</h3>
+    <hr />
+    <button @onclick="AddValue" class="btn btn-primary">Add User</button>
+
+    @for (int i = 0; i < values.Count; i++)
+    {
+        int index = i;
+        <div>
+            <input type="text" @onchange="(e) => UpdateValue(index, e.Value.ToString())" value="@values[i]" class="form-control" />
+            <button @onclick="() => RemoveValue(index)" class="btn btn-outline-danger">Remove</button>
+        </div>
+    }
+    <hr />
+    <div>
+        <button @onclick="HandleSubmit" class="btn btn-success">Submit</button>
+    </div>
+    <hr />
+    @for (int j = 0; j < values.Count; j++)
+    {
+        <p>@values[j]</p>
+    }
+</div>*@
+
+<MudGrid>
+     <MudItem xs="12" sm="12" md="12">
+     <MudCard >
+                        <MudCardHeader>
+                        </MudCardHeader>
+                        <MudCardContent >
+                        <MudGrid>
+                            <MudItem xs="10" sm="10" md="10" lg="12">
+                                <MudGrid>
+                        <MudItem xs="12" md="12" lg="12">
+                                            <MudTextField For="@(() => blockVideoInsertModel.Url)" @bind-Value="blockVideoInsertModel.Url" Label="@localizer["Url"]" Variant="Variant.Outlined" />
+                                        </MudItem>
+                                       
+
+                                    </MudGrid>
+                                </MudItem>
+                            </MudGrid>
+
+                        </MudCardContent>
+                        <MudCardActions Class="d-flex justify-end flex-grow-1 gap-4 mr-2">
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@localizer["Save"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" @onclick="HandleSubmit" Color="Color.Success"></LoadingButton>
+
+                        </MudCardActions>
+                    </MudCard>
+
+</MudItem>
+    @if (BlockVideoUpdateModelList.Count() == 0)
+    {
+        <MudItem xs="12" sm="12" md="12">
+            <MudButton Variant="Variant.Filled" Align="center" FullWidth=true Class="ml-2 mr-2" Disabled StartIcon="@Icons.Material.Filled.FileDownload" Size="Size.Small" Color="Color.Default">@localizer["NoVideos"]</MudButton>
+        </MudItem>
+
+    }
+    else
+    {
+        <MudItem xs="12" sm="12" md="12">
+        <MudTable Hover="true" Elevation="25" Items="BlockVideoUpdateModelList" @bind-property="BlockVideoUpdateModelList">
+        <ToolBarContent>
+            <MudToolBarSpacer />
+        </ToolBarContent>
+        <HeaderContent>
+                    <MudTh>@localizer["VideoUrl"]</MudTh>
+                    <MudTh Style="text-align: center">@localizer["Actions"]</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Url">@context.Url</MudTd>
+
+                    <MudTd DataLabel="Actions" Style="text-align: center">
+                    <MudTooltip Text="@localizer["Delete"]">
+
+                        <MudIconButton Icon="@Icons.Filled.Delete" OnClick="@(()=>DeleteFile(context))" Color="Color.Secondary" Variant="Variant.Filled" Size="Size.Small"  />
+                    </MudTooltip>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+    </MudItem>
+        @*foreach (var fileForPreview in BlockVideoUpdateModelList)
+        {
+            <MudItem xs="12" sm="12" md="12">
+
+                <MudText Typo="Typo.h6" Color="Color.Primary">@(fileForPreview.Url.Count() >= 14 ? fileForPreview.Url.Substring(0, 14) : fileForPreview.Url) </MudText>
+
+                
+                <MudIconButton Icon="@Icons.Filled.DeleteOutline" Color="Color.Error" OnClick="@(()=>DeleteFile(fileForPreview))" />
+
+            </MudItem>
+
+        }*@
+
+    }
+   
+
+
+</MudGrid>

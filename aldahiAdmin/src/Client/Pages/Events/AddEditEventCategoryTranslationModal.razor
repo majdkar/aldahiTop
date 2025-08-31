@@ -1,0 +1,60 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Events> localizer
+
+<EditForm Model="@EventCategoryTranslationModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator />
+
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (EventCategoryTranslationModel.Id == 0)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        @localizer["AddTranslation"]
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        @localizer["UpdateTransalation"]
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => EventCategoryTranslationModel.Name)" @bind-Value="EventCategoryTranslationModel.Name" Label="@localizer["Name"]" />
+                </MudItem>
+
+
+                <MudItem xs="12" md="6">
+                    <LanguageSelector Language="@EventCategoryTranslationModel.Language" @ref="languageSelector"></LanguageSelector>
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => EventCategoryTranslationModel.Slug)" @bind-Value="EventCategoryTranslationModel.Slug" Label="@localizer["Slug"]" />
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudCheckBox For="@(() => EventCategoryTranslationModel.IsActive)" @bind-Checked="EventCategoryTranslationModel.IsActive" Label="@localizer["IsActive"]" />
+                </MudItem>
+                 <MudItem xs="12" md="12">
+                    <Editor Conf="@Constants.editorConf" JsConfSrc="tinyMceConf"  Field=@(() => EventCategoryTranslationModel.Description) @bind-Value="EventCategoryTranslationModel.Description" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Button" OnClick="Cancel">@localizer["Cancel"]</MudButton>
+            @if (EventCategoryTranslationModel.Id != 0)
+            {
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@localizer["Update"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary"></LoadingButton>
+            }
+            else
+            {
+                <LoadingButton IsProcessing="@isProcessing" ButtonText="@localizer["Save"]" DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success"></LoadingButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

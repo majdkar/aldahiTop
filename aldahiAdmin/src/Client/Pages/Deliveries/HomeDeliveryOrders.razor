@@ -1,0 +1,26 @@
+﻿@page "/HomeDeliveryOrders"
+@using FirstCall.Shared.Constants.Clients
+@using FirstCall.Shared.Constants.Orders
+@inject Microsoft.Extensions.Localization.IStringLocalizer<HomeDeliveryOrders> _localizer
+
+
+<HeroTitle Title="@_localizer["DeliveryOrders"]" />
+
+<MudTabs Elevation="25" Color="Color.Transparent" Rounded="true" PanelClass="mt-6" @ref="tabs">
+    <MudTabPanel Text=@_localizer["Pending DeliveryOrders"] BadgeDot=true BadgeColor=Color.Secondary>
+        <DeliveryOrders Status=@OrderStatusEnum.Pending.ToString()  />
+    </MudTabPanel>
+    <MudTabPanel Text=@_localizer["Completed DeliveryOrders"] BadgeDot=true BadgeColor=Color.Secondary>
+        <DeliveryOrders Status=@OrderStatusEnum.Completed.ToString() />
+    </MudTabPanel>
+
+     @* <MudTabPanel Text=@_localizer["Refuse DeliveryOrders"] BadgeDot=true BadgeColor=Color.Secondary>
+        <DeliveryOrders Status=@OrderStatusEnum.Canceled.ToString() />
+    </MudTabPanel>*@
+
+   @* <MudTabPanel Text=@_localizer["Closed DeliveryOrders"] BadgeDot=true BadgeColor=Color.Secondary>
+        <DeliveryOrders Status=@OrderStatusEnum.Closed.ToString() />
+    </MudTabPanel>*@
+
+     
+</MudTabs>

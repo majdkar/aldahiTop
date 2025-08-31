@@ -1,0 +1,72 @@
+﻿@page "/DetailsOrder/{OrderId:int}"
+@using FirstCall.Shared.Constants.Clients
+@using FirstCall.Shared.Constants.Orders
+@inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditDeliveryOrder> _localizer
+
+
+
+<MudExpansionPanels MultiExpansion="true">
+        <MudExpansionPanel Text=@_localizer["Product Details"] Class="mt-6" Style="background-color:lavender">
+
+   <MudGrid>
+            <MudItem xs="12" sm="12" md="12">
+                <EditForm Model="@AddEditDeliveryOrderModel" OnValidSubmit="SaveAsync">
+                    <FluentValidationValidator @ref="_fluentValidationValidator" />
+                    <MudCard Elevation="4">
+                        <MudCardHeader>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudGrid>
+                                <MudItem xs="12" sm="12" md="12">
+                                    <MudGrid>
+
+
+                                       <MudItem xs="12" md="12">
+                                        <MudCard Elevation="4">
+                                          
+                                       <MudCardContent>
+                                                    <MudGrid>
+                                        <MudItem xs="12" md="6">
+                                            <MudText Style="text-align:center">@_localizer["OrderNumber"] : @AddEditDeliveryOrderModel.OrderNumber </MudText>
+                                        </MudItem>
+                                    
+                               
+
+                                        </MudGrid>
+                                                </MudCardContent>
+                                            </MudCard>
+
+                                        </MudItem>
+
+                                             
+
+
+                                    </MudGrid>
+                                </MudItem>
+                            </MudGrid>
+                        </MudCardContent>
+                    </MudCard>
+                </EditForm>
+            </MudItem>
+        </MudGrid>
+        </MudExpansionPanel>
+    
+</MudExpansionPanels>
+
+
+
+<br />
+
+ <MudItem xs="12" sm="12" md="12">
+            <MudCard Elevation="4" Class="m-4">
+                <MudCardActions Class="d-flex justify-end flex-grow-1 gap-4 mr-2">
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => _navigationManager.NavigateTo("/HomeDeliveryOrders"))">@_localizer["Cancel"]</MudButton>
+
+               </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+
+
+
+

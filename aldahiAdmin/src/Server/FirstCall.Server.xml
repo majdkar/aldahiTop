@@ -1,0 +1,1051 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FirstCall.Server</name>
+    </assembly>
+    <members>
+        <member name="T:FirstCall.Server.Controllers.BaseApiController`1">
+            <summary>
+            Abstract BaseApi Controller Class
+            </summary>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Communication.ChatsController.GetChatHistoryAsync(System.String)">
+            <summary>
+            Get user wise chat history
+            </summary>
+            <param name="contactId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Communication.ChatsController.GetChatUsersAsync">
+            <summary>
+            get available users
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Communication.ChatsController.SaveMessageAsync(FirstCall.Application.Models.Chat.ChatHistory{FirstCall.Domain.Interfaces.Chat.IChatUser})">
+            <summary>
+            Save Chat Message
+            </summary>
+            <param name="message"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.AccountController.UpdateProfile(FirstCall.Application.Requests.Identity.UpdateProfileRequest)">
+            <summary>
+            Update Profile
+            </summary>
+            <param name="model"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.AccountController.UpdateProfileByAdmin(FirstCall.Application.Requests.Identity.UpdateProfileByAdminRequest)">
+            <summary>
+            Update Profile By Admin
+            </summary>
+            <param name="model"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.AccountController.ResetPasswordAndEmail(FirstCall.Application.Requests.Identity.ResetPasswordAndEmailRequest)">
+            <summary>
+            Reset Password And Email
+            </summary>
+            <param name="model"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.AccountController.ChangePassword(FirstCall.Application.Requests.Identity.ChangePasswordRequest)">
+            <summary>
+            Change Password
+            </summary>
+            <param name="model"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.AccountController.ChangePasswordByAdmin(FirstCall.Application.Requests.Identity.ChangePasswordByAdminRequest)">
+            <summary>
+            Change Password By Admin
+            </summary>
+            <param name="model"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.AccountController.GetProfilePictureAsync(System.String)">
+            <summary>
+            Get Profile picture by Id
+            </summary>
+            <param name="userId"></param>
+            <returns>Status 200 OK </returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.AccountController.UpdateProfilePictureAsync(FirstCall.Application.Requests.Identity.UpdateProfilePictureRequest)">
+            <summary>
+            Update Profile Picture
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.TokenController.Get(FirstCall.Application.Requests.Identity.TokenRequest)">
+            <summary>
+            Get Token (Email, Password)
+            </summary>
+            <param name="model"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.TokenController.Refresh(FirstCall.Application.Requests.Identity.RefreshTokenRequest)">
+            <summary>
+            Refresh Token
+            </summary>
+            <param name="model"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.UserController.GetAll">
+            <summary>
+            Get User Details
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.UserController.GetById(System.String)">
+            <summary>
+            Get User By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.UserController.GetRolesAsync(System.String)">
+            <summary>
+            Get User Roles By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.UserController.UpdateRolesAsync(FirstCall.Application.Requests.Identity.UpdateUserRolesRequest)">
+            <summary>
+            Update Roles for User
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.UserController.RegisterAsync(FirstCall.Application.Requests.Identity.RegisterRequest)">
+            <summary>
+            Register a User
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.UserController.ConfirmEmailAsync(System.String,System.String)">
+            <summary>
+            Confirm Email
+            </summary>
+            <param name="userId"></param>
+            <param name="code"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.UserController.ToggleUserStatusAsync(FirstCall.Application.Requests.Identity.ToggleUserStatusRequest)">
+            <summary>
+            Toggle User Status (Activate and Deactivate)
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.UserController.ForgotPasswordAsync(FirstCall.Application.Requests.Identity.ForgotPasswordRequest)">
+            <summary>
+            Forgot Password
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.UserController.ResetPasswordAsync(FirstCall.Application.Requests.Identity.ResetPasswordRequest)">
+            <summary>
+            Reset Password
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Identity.UserController.Export(System.String)">
+            <summary>
+            Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.RoleClaimController.GetAll">
+            <summary>
+            Get All Role Claims(e.g. Product Create Permission)
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.RoleClaimController.GetAllByRoleId(System.String)">
+            <summary>
+            Get All Role Claims By Id
+            </summary>
+            <param name="roleId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.RoleClaimController.Post(FirstCall.Application.Requests.Identity.RoleClaimRequest)">
+            <summary>
+            Add a Role Claim
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK </returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.RoleClaimController.Delete(System.Int32)">
+            <summary>
+            Delete a Role Claim
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.RoleController.GetAll">
+            <summary>
+            Get All Roles (basic, admin etc.)
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.RoleController.Post(FirstCall.Application.Requests.Identity.RoleRequest)">
+            <summary>
+            Add a Role
+            </summary>
+            <param name="request"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.RoleController.Delete(System.String)">
+            <summary>
+            Delete a Role
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.RoleController.GetPermissionsByRoleId(System.String)">
+            <summary>
+            Get Permissions By Role Id
+            </summary>
+            <param name="roleId"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.RoleController.Update(FirstCall.Application.Requests.Identity.PermissionRequest)">
+            <summary>
+            Edit a Role Claim
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.AuditsController.GetUserTrailsAsync">
+            <summary>
+            Get Current User Audit Trails
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.AuditsController.ExportExcel(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Search Audit Trails and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <param name="searchInOldValues"></param>
+            <param name="searchInNewValues"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="T:FirstCall.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4">
+            <summary>
+            Abstract Extended Attributes Controller Class
+            </summary>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.GetAll">
+            <summary>
+            Get All Entity Extended Attributes
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.GetAllByEntityId(`1)">
+            <summary>
+            Get All Entity Extended Attributes by entity id
+            </summary>
+            <param name="entityId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.GetById(`0)">
+            <summary>
+            Get Entity Extended Attribute By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.Post(FirstCall.Application.Features.ExtendedAttributes.Commands.AddEdit.AddEditExtendedAttributeCommand{`0,`1,`2,`3})">
+            <summary>
+            Create/Update a Entity Extended Attribute
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.Delete(`0)">
+            <summary>
+            Delete a Entity Extended Attribute
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.ExtendedAttributes.Base.ExtendedAttributesController`4.Export(System.String,`1,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Search Entity Extended Attribute and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <param name="entityId"></param>
+            <param name="includeEntity"></param>
+            <param name="onlyCurrentGroup"></param>
+            <param name="currentGroup"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.Misc.DocumentsController.GetAll(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get All Documents
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.Misc.DocumentsController.GetById(System.Int32)">
+            <summary>
+            Get Document By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.Misc.DocumentsController.Post(FirstCall.Application.Features.Documents.Commands.AddEdit.AddEditDocumentCommand)">
+            <summary>
+            Add/Edit Document
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.Misc.DocumentsController.Delete(System.Int32)">
+            <summary>
+            Delete a Document
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.Misc.DocumentTypesController.GetAll">
+            <summary>
+            Get All Document Types
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.Misc.DocumentTypesController.GetById(System.Int32)">
+            <summary>
+            Get Document Type By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.Misc.DocumentTypesController.Post(FirstCall.Application.Features.DocumentTypes.Commands.AddEdit.AddEditDocumentTypeCommand)">
+            <summary>
+            Create/Update a Document Type
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.Misc.DocumentTypesController.Delete(System.Int32)">
+            <summary>
+            Delete a Document Type
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.Misc.DocumentTypesController.Export(System.String)">
+            <summary>
+            Search Document Types and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.Utilities.PreferencesController.ChangeLanguageAsync(System.String)">
+            <summary>
+            Change Language Preference
+            </summary>
+            <param name="languageCode"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.PersonsManagement.PersonsController.GetAllPaged(System.String,System.String,System.String,System.Int32,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Persons Paged Result
+            </summary>
+            <param name="personName"></param>
+            <param name="email"></param>
+            <param name="phoneNumber"></param>
+            <param name="pageNumber"></param>
+            <param name="countryId"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.PersonsManagement.PersonsController.GetAllPagedSearcAdvanced(System.String,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Boolean,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Persons Paged Result
+            </summary>
+            <param name="personName"></param>
+            <param name="email"></param>
+            <param name="phoneNumber"></param>
+            <param name="pageNumber"></param>
+            <param name="countryId"></param>
+            <param name="cityName"></param>
+            <param name="additionalInfo"></param>
+            <param name="address"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <param name="FilterActive"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.PersonsManagement.PersonsController.Block(System.Int32)">
+            <summary>
+            Delete a Account Person Client
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.PersonsManagement.PersonsController.GetByClientId(System.Int32)">
+            <summary>
+            Get Person By ClientId
+            </summary>
+            <param name="clientId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.PersonsManagement.PersonsController.GetAll">
+            <summary>
+            Get All Persons
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.PersonsManagement.PersonsController.GetById(System.Int32,System.Boolean)">
+            <summary>
+            Get Person By Id
+            </summary>
+            <param name="id"></param>
+            <param name="FilterActive"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.PersonsManagement.PersonsController.Post(FirstCall.Application.Features.Clients.Persons.Commands.AddEdit.AddEditPersonCommand)">
+            <summary>
+            Add/Edit a Person
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.PersonsManagement.PersonsController.Delete(System.Int32)">
+            <summary>
+            Delete a Person
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.PersonsManagement.PersonsController.Export(System.String)">
+            <summary>
+            Search Persons and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.DashboardController.GetDataAsync">
+            <summary>
+            Get Dashboard Data
+            </summary>
+            <returns>Status 200 OK </returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrderProductsController.GetAll(System.Int32,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All DeliveryOrderProducts
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrderProductsController.GetDeliveryOrderProductById(System.Int32)">
+            <summary>
+            Get a DeliveryOrder By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrderProductsController.Post(FirstCall.Application.Features.OrderProducts.Commands.AddEdit.AddEditDeliveryOrderProductCommand)">
+            <summary>
+            Add/Edit a DeliveryOrderProduct
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrderProductsController.Delete(System.Int32)">
+            <summary>
+            Delete a DeliveryOrderProduct
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrdersController.GetAll(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All DeliveryOrders
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrdersController.GetById(System.Int32)">
+            <summary>
+            Get a DeliveryOrder By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrdersController.GetPagedByClient(System.Int32,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get Paged Delivery Orders By  Client Id
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrdersController.Post(FirstCall.Application.Features.Orders.Commands.AddEdit.AddEditDeliveryOrderCommand)">
+            <summary>
+            Create/Update a DeliveryOrder
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrdersController.Delete(System.Int32)">
+            <summary>
+            Delete a DeliveryOrder
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrdersController.Refuse(System.Int32)">
+            <summary>
+            Refuse a DeliveryOrder
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrdersController.AccceptOrderRequest(System.Int32)">
+            <summary>
+            Acccept Order Request For Close
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrdersController.Export(System.String)">
+            <summary>
+            Search DeliveryOrders and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.BrandsController.GetAllPaged(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Brands
+            </summary>
+            
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.BrandsController.GetAll">
+            <summary>
+            Get All Brands
+            </summary>
+            
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.BrandsController.GetById(System.Int32)">
+            <summary>
+            Get a Brand By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.BrandsController.Post(FirstCall.Application.Features.Brands.Commands.AddEdit.AddEditBrandCommand)">
+            <summary>
+            Create/Update a Brand
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.BrandsController.Delete(System.Int32)">
+            <summary>
+            Delete a Brand
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.BrandsController.Export(System.String)">
+            <summary>
+            Search Brands and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.BrandsController.GetbrandImageAsync(System.Int32)">
+            <summary>
+            Get a brand Image by Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.ContactUSController.Post(FirstCall.Application.Features.ContactUs.Commands.AddEdit.SendContactUsCommand)">
+            <summary>
+            Send Form Contact US
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.CountriesController.GetAll">
+            <summary>
+            Get All Countriess
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.CountriesController.GetById(System.Int32)">
+            <summary>
+            Get a Country By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.CountriesController.Post(FirstCall.Application.Features.Countries.Commands.AddEdit.AddEditCountryCommand)">
+            <summary>
+            Create/Update a Country
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.CountriesController.Delete(System.Int32)">
+            <summary>
+            Delete a Country
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.CountriesController.Export(System.String)">
+            <summary>
+            Search Countries and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.GroupsController.GetAllPaged(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Groups
+            </summary>
+            
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.GroupsController.GetAll">
+            <summary>
+            Get All Groups
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.GroupsController.GetById(System.Int32)">
+            <summary>
+            Get a Group By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.GroupsController.Post(FirstCall.Application.Features.Groups.Commands.AddEdit.AddEditGroupCommand)">
+            <summary>
+            Create/Update a Color
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.GroupsController.Delete(System.Int32)">
+            <summary>
+            Delete a Group
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.KindsController.GetAllPaged(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Kinds
+            </summary>
+            
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.KindsController.GetAll">
+            <summary>
+            Get All Kinds
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.KindsController.GetById(System.Int32)">
+            <summary>
+            Get a Kind By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.KindsController.Post(FirstCall.Application.Features.Kinds.Commands.AddEdit.AddEditKindCommand)">
+            <summary>
+            Create/Update a Color
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.KindsController.Delete(System.Int32)">
+            <summary>
+            Delete a Kind
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.NationsController.GetAll">
+            <summary>
+            Get All Nations
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.NationsController.GetById(System.Int32)">
+            <summary>
+            Get a Nation By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.NationsController.Post(FirstCall.Application.Features.Nations.Commands.AddEdit.AddEditNationCommand)">
+            <summary>
+            Create/Update a Nation
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.NationsController.Delete(System.Int32)">
+            <summary>
+            Delete a Nation
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.NationsController.Export(System.String)">
+            <summary>
+            Search Nations and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.PrincedomsController.GetAll">
+            <summary>
+            Get All Princedoms
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.PrincedomsController.GetById(System.Int32)">
+            <summary>
+            Get a Princedom By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.PrincedomsController.Post(FirstCall.Application.Features.Princedoms.Commands.AddEdit.AddEditPrincedomCommand)">
+            <summary>
+            Create/Update a Princedom
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.PrincedomsController.Delete(System.Int32)">
+            <summary>
+            Delete a Princedom
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.PrincedomsController.Export(System.String)">
+            <summary>
+            Search Princedoms and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.ProductCategoriesController.GetAllPaged(System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All ProductCategories By type (B2B - B2C)
+            </summary>
+            <param name="type"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.ProductCategoriesController.GetAllByParentCategory(System.Int32)">
+            <summary>
+            Get All ProductCategories By ParentCategory
+            </summary>
+            <param name="categoryId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.ProductCategoriesController.GetAll">
+            <summary>
+            Get All Categories
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.ProductCategoriesController.GetAll(System.String)">
+            <summary>
+            Get All Categories By type (B2B - B2C)
+            </summary>
+             <param name="type"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.ProductCategoriesController.GetAllParentCategories(System.String)">
+            <summary>
+            Get All Parent Categories By type (B2B - B2C)
+            </summary>
+             <param name="type"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.ProductCategoriesController.GetProductCategoryImageAsync(System.Int32)">
+            <summary>
+            Get a ProductCategory Image by Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.ProductCategoriesController.Post(FirstCall.Application.Features.ProductCategories.Commands.AddEdit.AddEditProductCategoryCommand)">
+            <summary>
+            Add/Edit a ProductCategory
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.ProductCategoriesController.Delete(System.Int32)">
+            <summary>
+            Delete a ProductCategory
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.ProductCategoriesController.Export(System.String)">
+            <summary>
+            Search ProductCategories and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.SeasonsController.GetAllPaged(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Seasons
+            </summary>
+            
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.SeasonsController.GetAll">
+            <summary>
+            Get All Seasons
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.SeasonsController.GetById(System.Int32)">
+            <summary>
+            Get a Season By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.SeasonsController.Post(FirstCall.Application.Features.Seasons.Commands.AddEdit.AddEditSeasonCommand)">
+            <summary>
+            Create/Update a Color
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.SeasonsController.Delete(System.Int32)">
+            <summary>
+            Delete a Season
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.StocksController.GetAllPaged(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Stocks
+            </summary>
+            
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.StocksController.GetAll">
+            <summary>
+            Get All Stocks
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.StocksController.GetById(System.Int32)">
+            <summary>
+            Get a Stock By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.StocksController.Post(FirstCall.Application.Features.Stocks.Commands.AddEdit.AddEditStockCommand)">
+            <summary>
+            Create/Update a Color
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.StocksController.Delete(System.Int32)">
+            <summary>
+            Delete a Stock
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.WarehousessController.GetAllPaged(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Warehousess
+            </summary>
+            
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.WarehousessController.GetAll">
+            <summary>
+            Get All Warehousess
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.WarehousessController.GetById(System.Int32)">
+            <summary>
+            Get a Warehouses By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 Ok</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.WarehousessController.Post(FirstCall.Application.Features.Warehousess.Commands.AddEdit.AddEditWarehousesCommand)">
+            <summary>
+            Create/Update a Color
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.GeneralSettings.WarehousessController.Delete(System.Int32)">
+            <summary>
+            Delete a Warehouses
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.ProductComponents.ProductComponentsController.GetAll">
+            <summary>
+            Get All ProductComponents
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.ProductComponents.ProductComponentsController.GetAllPagedByProductId(System.Int32,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Paged ProductComponents
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <param name="ProductId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.ProductComponents.ProductComponentsController.GetAllPaged(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Paged ProductComponents
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.ProductComponents.ProductComponentsController.GetById(System.Int32)">
+            <summary>
+            Get ProductComponent By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.ProductComponents.ProductComponentsController.Post(FirstCall.Application.Features.ProductComponents.Commands.AddEdit.AddEditCompanyProductComponentCommand)">
+            <summary>
+            Add/Edit a ProductComponent for company profile
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.ProductComponents.ProductComponentsController.Delete(System.Int32)">
+            <summary>
+            Delete a ProductComponent
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetAll">
+            <summary>
+            Get All Products
+            </summary>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetAllPaged(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Paged Products
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetAllPagedByCategoryId(System.Int32,System.Int32,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Paged Products By CategoryId
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <param name="categoryId"></param>
+            <param name="subcategoryId"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetAllPagedSearchProduct(System.String,System.Decimal,System.Decimal,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Paged Search Products
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <param name="productname"></param>
+            <param name="fromprice"></param> 
+            <param name="toprice"></param>        
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetById(System.Int32)">
+            <summary>
+            Get Product By Id
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.Post(FirstCall.Application.Features.Products.Commands.AddEdit.AddEditCompanyProductCommand)">
+            <summary>
+            Add/Edit a Product for company profile
+            </summary>
+            <param name="command"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.Delete(System.Int32)">
+            <summary>
+            Delete a Product
+            </summary>
+            <param name="id"></param>
+            <returns>Status 200 OK response</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.Export(System.String)">
+            <summary>
+            Search Products and Export to Excel
+            </summary>
+            <param name="searchString"></param>
+            <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Api.Controllers.FileUploadController.CheckFileExtension(Microsoft.AspNetCore.Http.IFormFile,FirstCall.Shared.Enums.UploadType)">
+            The file extension must be jpg/bmp/png for images and txt/docx/pdf for files
+        </member>
+        <member name="M:FirstCall.Api.Controllers.FileUploadController.CheckFileSize(Microsoft.AspNetCore.Http.IFormFile)">
+            Check the file size, it must be less than 10 mb
+        </member>
+    </members>
+</doc>
