@@ -121,7 +121,7 @@ namespace FirstCall.Client.Pages.Deliveries
             if (string.IsNullOrEmpty(value))
                 return _Products.Select(x => x.Id);
 
-            return _Products.Where(x => x.NameAr.Contains(value, StringComparison.InvariantCultureIgnoreCase) || x.NameEn.Contains(value, StringComparison.InvariantCultureIgnoreCase))
+            return _Products.Where(x => x.Code.Contains(value, StringComparison.InvariantCultureIgnoreCase))
                 .Select(x => x.Id);
         }
 
@@ -133,7 +133,6 @@ namespace FirstCall.Client.Pages.Deliveries
 
             return $"{product.NameAr} - {product.ProductCategory.NameAr} - {product.Kind.NameAr} - {product.Code}";
         }
-
 
 
 
@@ -208,6 +207,7 @@ namespace FirstCall.Client.Pages.Deliveries
 
                  DeliveryOrderId = OrderId
             });
+            _LeaseCharge = new AddEditDeliveryOrderProductCommand();
             await ChargesChanged.InvokeAsync(Charges);
         }
 

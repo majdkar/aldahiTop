@@ -42,7 +42,8 @@ namespace FirstCall.Client.Pages.Deliveries
         public AddEditDeliveryOrderCommand AddEditDeliveryOrderModel { get; set; } = new();
 
         private FluentValidationValidator _fluentValidationValidator;
-        private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
+        //private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
+        public bool Validated => _fluentValidationValidator?.Validate(options => { options.IncludeAllRuleSets(); options.ThrowOnFailures(); }) ?? false;
 
 
         private List<GetAllPersonsResponse> _persons = new();

@@ -3,7 +3,7 @@
 @using FirstCall.Shared.Constants.Orders
 @inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditDeliveryOrder> _localizer
 
-<MudContainer MaxWidth="xl" Class="mt-6">
+<MudContainer MaxWidth="@MaxWidth.Large" Class="mt-6">
     <MudPaper Class="p-6" Elevation="2" Style="background-color:#fafafa; border-radius:16px;">
         <EditForm Model="@AddEditDeliveryOrderModel" OnValidSubmit="SaveAsync">
             <FluentValidationValidator @ref="_fluentValidationValidator" />
@@ -12,36 +12,7 @@
             <MudExpansionPanel IsExpanded="true" Text=@_localizer["Basic Information"] Dense="true">
                 <MudGrid Spacing="3">
                     
-                    <!-- Client Information -->
-                    <MudItem xs="12">
-                        <MudCard Elevation="2" Class="p-3">
-                            <MudCardHeader>
-                                <MudAvatar Color="Color.Secondary" Size="Size.Medium" Class="mr-2">
-                                    <MudIcon Icon="@Icons.Outlined.Person" />
-                                </MudAvatar>
-                                <MudText Typo="Typo.h6">@_localizer["ClientInformation"]</MudText>
-                            </MudCardHeader>
-                            <MudDivider />
-                            <MudCardContent>
-                                <MudGrid Spacing="3">
-                                    <MudItem xs="12" md="6">
-                                        @if(_persons != null)
-                                        {
-                                            <MudSelect @bind-Value="@AddEditDeliveryOrderModel.ClientId" T="int" Label="@_localizer["Persons"]" Variant="Variant.Outlined" Dense="true" FullWidth>
-                                                @foreach (var value in _persons)
-                                                {
-                                                    <MudSelectItem T="int" Value="@value.ClientId">
-                                                        @value.FullName
-                                                    </MudSelectItem>
-                                                }
-                                            </MudSelect>
-                                        }
-                                    </MudItem>
-                                </MudGrid>
-                            </MudCardContent>
-                        </MudCard>
-                    </MudItem>
-
+                
                     <!-- Order Information -->
                     <MudItem xs="12">
                         <MudCard Elevation="2" Class="p-3">
@@ -55,19 +26,32 @@
                             <MudCardContent>
                                 <MudGrid Spacing="3">
                                     <MudItem xs="12" md="6">
+                                        @if (_persons != null)
+                                        {
+                                            <MudSelect @bind-Value="@AddEditDeliveryOrderModel.ClientId" T="int" Label="@_localizer["Persons"]" Variant="Variant.Outlined" >
+                                                @foreach (var value in _persons)
+                                                {
+                                                    <MudSelectItem T="int" Value="@value.ClientId">
+                                                        @value.FullName
+                                                    </MudSelectItem>
+                                                }
+                                            </MudSelect>
+                                        }
+                                    </MudItem>
+                                    <MudItem xs="12" md="6">
                                         <MudDatePicker @bind-Date="AddEditDeliveryOrderModel.OrderDate"
                                                        Culture="System.Globalization.CultureInfo.InvariantCulture"
                                                        Label="@_localizer["Order Date"]"
                                                        DisableToolbar="true"
                                                        AutoClose="true"
                                                        InputVariant="Variant.Outlined"
-                                                       Dense="true"
-                                                       FullWidth />
+                                                        />
                                     </MudItem>
+
 
                                     @if (AddEditDeliveryOrderModel.Id != 0)
                                     {
-                                        <MudItem xs="12" md="4">
+                                        <MudItem xs="12" md="6">
                                             <MudTextField For="@(() => AddEditDeliveryOrderModel.OrderNumber)"
                                                           @bind-Value="AddEditDeliveryOrderModel.OrderNumber"
                                                           Label="@_localizer["OrderNumber"]"
@@ -75,7 +59,7 @@
                                                           ReadOnly Dense="true" FullWidth />
                                         </MudItem>
 
-                                        <MudItem xs="12" md="4">
+                                        <MudItem xs="12" md="6">
                                             <MudSelect @bind-Value="@AddEditDeliveryOrderModel.Status"
                                                        T="string"
                                                        Label="@_localizer["Status"]"
@@ -103,10 +87,15 @@
 
             <!-- Actions -->
             <MudDivider Class="my-4" />
-            <MudStack Direction="Row" Justify="FlexEnd" Spacing="2">
-                <MudButton DisableElevation Variant="Variant.Outlined" Color="Color.Error" OnClick="@(() => _navigationManager.NavigateTo("/HomeDeliveryOrders"))">
+               
+            
+            <MudCardActions Class="d-flex justify-end flex-grow-1 gap-4 mr-2">
+            <MudButton DisableElevation Variant="Variant.Outlined" Color="Color.Error" OnClick="@(() => _navigationManager.NavigateTo("/HomeDeliveryOrders"))">
                     @_localizer["Cancel"]
                 </MudButton>
+              
+                
+                
                 @if (AddEditDeliveryOrderModel.Id != 0)
                 {
                     <LoadingButton IsProcessing="@_isProcessing"
@@ -125,7 +114,7 @@
                                    ButtonType="ButtonType.Submit"
                                    Color="Color.Success" />
                 }
-            </MudStack>
+                </MudCardActions>
         </EditForm>
     </MudPaper>
 </MudContainer>

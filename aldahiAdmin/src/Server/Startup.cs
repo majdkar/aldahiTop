@@ -55,6 +55,7 @@ namespace FirstCall.Server
             services.AddIdentity();
             services.AddJwtAuthentication(services.GetApplicationSettings(_configuration));
             services.Configure<MailSettings>(_configuration.GetSection("MailSettings"));
+            services.Configure<OpenAIConfig>(_configuration.GetSection("OpenAI"));
            
             services.AddSingleton<ITelegramBotClient>(new TelegramBotClient("7054212198:AAEfZRk1oVEqI5DeMLmFyL5q1dD-MNbkn80"));
 

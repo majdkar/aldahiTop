@@ -63,8 +63,9 @@ namespace FirstCall.Application.Features.ContactUs.Commands.AddEdit
         private readonly MailSettings _mailSettings;
         private readonly ITelegramBotClient _botClient;
         private readonly HttpClient _httpClient;
+        private readonly OpenAIConfig _openAIConfig;
 
-        public SendTelegramAiBotByAICommandHandler(IUnitOfWork<int> unitOfWork, IMapper mapper, IUploadService uploadService, IOptions<MailSettings> mailSettings, ITelegramBotClient botClient, HttpClient httpClient)
+        public SendTelegramAiBotByAICommandHandler(IUnitOfWork<int> unitOfWork, IMapper mapper, IUploadService uploadService, IOptions<MailSettings> mailSettings, ITelegramBotClient botClient, HttpClient httpClient, IOptions<OpenAIConfig> openAIConfig)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -72,6 +73,7 @@ namespace FirstCall.Application.Features.ContactUs.Commands.AddEdit
             _mailSettings = mailSettings.Value;
             _botClient = botClient;
             _httpClient = httpClient;
+            _openAIConfig = openAIConfig.Value;
         }
 
 
@@ -182,6 +184,7 @@ namespace FirstCall.Application.Features.ContactUs.Commands.AddEdit
             var jsonRequest = JsonSerializer.Serialize(requestBody);
             var requestContent = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
 
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _openAIConfig.ApiKey);
 
             var response = await _httpClient.PostAsync("https://api.openai.com/v1/chat/completions", requestContent);
 
