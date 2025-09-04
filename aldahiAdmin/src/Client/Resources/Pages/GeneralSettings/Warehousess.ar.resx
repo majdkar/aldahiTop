@@ -123,8 +123,8 @@
   <data name="Bordered" xml:space="preserve">
     <value>محدد</value>
   </data>
-  <data name="Seasons" xml:space="preserve">
-    <value>المواسم</value>
+  <data name="Warehousess" xml:space="preserve">
+    <value>المستودعات</value>
   </data>
   <data name="ProductCategories exported" xml:space="preserve">
     <value>جرى التصدير</value>
@@ -168,8 +168,8 @@
   <data name="Code" xml:space="preserve">
     <value>الرمز</value>
   </data>
-  <data name="Manage Seasons." xml:space="preserve">
-    <value>إدارة المواسم</value>
+  <data name="Manage Warehousess." xml:space="preserve">
+    <value>إدارة المستودعات</value>
   </data>
   <data name="No Allowed Actions" xml:space="preserve">
     <value>خيارات غير مسموحة</value>
@@ -204,8 +204,8 @@
   <data name="NameEn" xml:space="preserve">
     <value>الاسم الانكليزي</value>
   </data>
-  <data name="Add Season" xml:space="preserve">
-    <value>إضافة موسم</value>
+  <data name="Add Warehousess" xml:space="preserve">
+    <value>إضافة مستودع</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>إلغاء</value>

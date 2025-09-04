@@ -246,4 +246,13 @@
   <data name="ParentCategory" xml:space="preserve">
     <value>ParentCategory</value>
   </data>
+  <data name="Qty" xml:space="preserve">
+    <value>Qty</value>
+  </data>
+  <data name="Kind" xml:space="preserve">
+    <value>Kind</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value />
+  </data>
 </root>

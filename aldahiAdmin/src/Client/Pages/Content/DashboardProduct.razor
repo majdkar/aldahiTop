@@ -1,0 +1,62 @@
+@page "/dashboardProduct"
+@attribute [Authorize(Policy = Permissions.Dashboards.View)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Dashboard> _localizer
+
+
+    <style>
+    .mud-card-content {
+        padding-top: 16px !important;
+        padding-right: 16px !important;
+        padding-left: 16px !important;
+        padding-bottom: 0px !important;
+    }
+
+    .sp img {
+        object-fit: cover;
+        width: 100%;
+        height: 330px;
+    }
+    </style>
+
+
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-4">
+    @if (_dataProducts is not null)
+    {
+    <MudGrid Spacing="3">
+            <MudVirtualize Items="@_dataProducts" Context="item">
+                    @if (item != null)
+                    {
+                        <MudItem xs="12" sm="6" md="4" lg="3">
+                            <MudCard Class="pt-3 ma-2" Style="height:600px; display:flex; flex-direction:column;">
+                        <MudCardMedia Class="ml-2 mr-2 rounded-lg sp" Image="@(item.ImageProduct.Replace('\\', '/'))" Height="330" />
+                                <MudCardContent Style="flex:1;">
+                                <MudText Typo="Typo.h6">@(IsArabic ? item.CategoryName : item.CategoryNameEn)</MudText>
+                            <MudText Typo="Typo.body2" Color="Color.Secondary">
+                                    @(IsArabic ? item.KindName : item.KindNameEn) / @(IsArabic ? item.GroupName : item.GroupNameEn) / @_localizer["Model"] > <p style="color:blue;display: inline-block;"><strong><b>@item.Code</b> </strong></p>
+                            </MudText>
+
+                            <MudDivider Class="my-2" />
+
+                            <MudText Typo="Typo.h3" Color="Color.Primary" Class="fw-bold">
+                                @item.Qty
+                            </MudText>
+                    
+                        </MudCardContent>
+                            <MudCardActions>
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" Link="@($"/product-details/{item.Id}")">
+                                    @_localizer["Details"]
+                                </MudButton>
+                            </MudCardActions>
+                    </MudCard>
+                </MudItem>
+                }
+        </MudVirtualize>
+        </MudGrid>
+      
+    }
+    else
+    {
+        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+    }
+</MudContainer>

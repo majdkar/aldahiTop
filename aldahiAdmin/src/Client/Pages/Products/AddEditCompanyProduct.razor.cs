@@ -27,6 +27,8 @@ using FirstCall.Application.Features.Kinds.Queries.GetAll;
 using FirstCall.Client.Infrastructure.Managers.GeneralSettings.ProductCategory;
 using FirstCall.Client.Infrastructure.Managers.GeneralSettings.Group;
 using FirstCall.Application.Features.Groups.Queries.GetAll;
+using FirstCall.Client.Infrastructure.Managers.GeneralSettings.Warehouses;
+using FirstCall.Application.Features.Warehousess.Queries.GetAll;
 
 namespace FirstCall.Client.Pages.Products
 {
@@ -37,6 +39,7 @@ namespace FirstCall.Client.Pages.Products
         [Inject] private ISeasonManager SeasonManager { get; set; }
         [Inject] private IGroupManager GroupManager { get; set; }
         [Inject] private IKindManager KindManager { get; set; }
+        [Inject] private IWarehousesManager WarehousesManager { get; set; }
 
         [Parameter] public int ProductId { get; set; } = 0;
 
@@ -48,6 +51,7 @@ namespace FirstCall.Client.Pages.Products
         private List<GetAllSeasonsResponse> _allCategories = new();
         private List<GetAllGroupsResponse> _groups = new();
         private List<GetAllKindsResponse> _allKinds = new();
+        private List<GetAllWarehousessResponse> _allWarehouses = new();
         private List<GetAllProductCategoriesResponse> _productCategors = new();
      
 
@@ -73,6 +77,7 @@ namespace FirstCall.Client.Pages.Products
           LoadAllProductCategories(),
           LoadAllSeasons(),
           LoadAllGroups(),
+          LoadAllWarehouses(),
           LoadProductDetails(),
           LoadAllProductKinds()
           );
@@ -103,6 +108,15 @@ namespace FirstCall.Client.Pages.Products
             if (data.Succeeded)
             {
                 _groups = data.Data;
+
+            }
+        }
+        private async Task LoadAllWarehouses()
+        {
+            var data = await WarehousesManager.GetAllAsync();
+            if (data.Succeeded)
+            {
+                _allWarehouses = data.Data;
 
             }
         }
@@ -148,7 +162,7 @@ namespace FirstCall.Client.Pages.Products
                         Colors = product.Colors,
                         Sizes = product.Sizes,
                         Qty = product.Qty,
-                        StorgePlace = product.StorgePlace,
+                        WarehousesId  = product.WarehousesId,
                         PackageNumber = product.PackageNumber,
                          ProductCategoryId = product.ProductCategoryId,
                           GroupId = product.GroupId,

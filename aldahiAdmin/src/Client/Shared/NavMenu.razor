@@ -25,7 +25,7 @@
     @*users management*@
     @if (_isAdmin)
     {
-        <MudNavGroup Title="@_localizer["Administrator"]">
+        <MudNavGroup Title="@_localizer["Administrator"]" Icon="@Icons.Material.Outlined.AdminPanelSettings">
             @if (_canViewUsers)
             {
                 <MudNavLink Href="/identity/users" Icon="@Icons.Material.Outlined.Person">
@@ -45,7 +45,7 @@
     @*general settings*@
     @if (_canViewSeasons || _canViewKinds)
     {
-        <MudNavGroup Title="@_localizer["GeneralSettings Management"]">
+        <MudNavGroup Title="@_localizer["GeneralSettings Management"]" Icon="@Icons.Material.Outlined.Settings">
 
 
             @if (_canViewSeasons)
@@ -75,7 +75,7 @@
                 </MudNavLink>
             }
 
-            <MudNavLink Href="/general-settings/Product-Categories">
+            <MudNavLink Href="/general-settings/Product-Categories" Icon="@Icons.Material.Outlined.CallToAction">
                 @_localizer["Product Categories"]
             </MudNavLink>
 
@@ -86,7 +86,7 @@
     @if (_canViewPersons)
     {
 
-        <MudNavGroup Title="@_localizer["Clients Management"]" >
+        <MudNavGroup Title="@_localizer["Clients Management"]" Icon="@Icons.Material.Outlined.Person">
             @if (_canViewPersons)
             {
                 <MudNavLink Href="/individuals">
@@ -99,7 +99,7 @@
 
     @if (_canViewProducts)
     {
-        <MudNavLink Href="/products">
+        <MudNavLink Href="/products" Icon="@Icons.Material.Outlined.CardMembership" >
             @_localizer["Products"]
     </MudNavLink>
       
@@ -109,16 +109,16 @@
     @if (_canViewOrder)
     {
 
-        <MudNavLink Href="/HomeDeliveryOrders">
+        <MudNavLink Href="/HomeDeliveryOrders" Icon="@Icons.Material.Outlined.ShoppingCart">
             @_localizer["Orders Management"]
         </MudNavLink>
     }
 
     @if (_canViewStocks)
     {
-        <MudNavLink Href="/general-settings/Stocks" >
+     @*    <MudNavLink Href="/general-settings/Stocks" >
             @_localizer["Stocks"]
-        </MudNavLink>
+        </MudNavLink> *@
     }
 
 </MudNavMenu>

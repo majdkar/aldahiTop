@@ -73,7 +73,8 @@ namespace FirstCall.Application.Features.Products.Queries.GetAllPaged
                 ProductImageUrl4 = e.ProductImageUrl4,
                 ProductCategoryId = e.ProductCategoryId,
                 PackageNumber = e.PackageNumber,
-                StorgePlace = e.StorgePlace,
+                Warehouses = e.Warehouses,
+                WarehousesId = e.WarehousesId,
                 Qty = e.Qty,
                 Kind = e.Kind,
                 ProductCategory = e.ProductCategory,
@@ -84,7 +85,8 @@ namespace FirstCall.Application.Features.Products.Queries.GetAllPaged
                 Season = e.Season,
                 GroupId = e.GroupId,
                 Group = e.Group,
-
+                KindNameAr = e.Kind.NameAr,
+                KindNameEn = e.Kind.NameEn,
             };
             var productFilterSpec = new ProductSearchFilterSpecification(request.SearchString,request.ProductName,request.FromPrice,request.ToPrice);
             if (request.OrderBy?.Any() != true)

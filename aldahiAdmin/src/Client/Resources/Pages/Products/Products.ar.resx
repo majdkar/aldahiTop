@@ -240,4 +240,13 @@
   <data name="ParentCategory" xml:space="preserve">
     <value>الفئة الرئيسية</value>
   </data>
+  <data name="Qty" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="Kind" xml:space="preserve">
+    <value>النوع</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>الكود</value>
+  </data>
 </root>

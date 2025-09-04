@@ -65,7 +65,7 @@ namespace FirstCall.Application.Features.Orders.Commands.AddEdit
                     var order = _mapper.Map<DeliveryOrder>(command);
                     Random generator = new Random();
 
-                    order.OrderNumber = generator.Next(0, 1000000).ToString("D6");
+                    //order.OrderNumber = generator.Next(0, 1000000).ToString("D6");
 
                     foreach (var item in command.ChargesCommand)
                     {

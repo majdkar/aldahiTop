@@ -48,30 +48,12 @@
                                                         />
                                     </MudItem>
 
-
-                                    @if (AddEditDeliveryOrderModel.Id != 0)
-                                    {
-                                        <MudItem xs="12" md="6">
-                                            <MudTextField For="@(() => AddEditDeliveryOrderModel.OrderNumber)"
-                                                          @bind-Value="AddEditDeliveryOrderModel.OrderNumber"
-                                                          Label="@_localizer["OrderNumber"]"
-                                                          Variant="Variant.Outlined"
-                                                          ReadOnly Dense="true" FullWidth />
-                                        </MudItem>
-
-                                        <MudItem xs="12" md="6">
-                                            <MudSelect @bind-Value="@AddEditDeliveryOrderModel.Status"
-                                                       T="string"
-                                                       Label="@_localizer["Status"]"
-                                                       Variant="Variant.Outlined"
-                                                       Dense="true" FullWidth>
-                                                @foreach (var value in OrderStatus.Values)
-                                                {
-                                                    <MudSelectItem T="string" Value="@value.Key">@_localizer[@value.Value]</MudSelectItem>
-                                                }
-                                            </MudSelect>
-                                        </MudItem>
-                                    }
+                                    <MudItem xs="12" md="6">
+                                        <MudTextField For="@(() => AddEditDeliveryOrderModel.OrderNumber)"
+                                                      @bind-Value="AddEditDeliveryOrderModel.OrderNumber"
+                                                      Label="@_localizer["OrderNumber"]"
+                                                      Variant="Variant.Outlined"/>
+                                    </MudItem>
                                 </MudGrid>
                             </MudCardContent>
                         </MudCard>

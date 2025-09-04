@@ -24,7 +24,6 @@ namespace FirstCall.Application.Features.Products.Commands.AddEdit
         public string NameAr { get; set; }
         public string NameEn { get; set; }
         public string? Code { get; set; }
-        public string? StorgePlace { get; set; }
         public string? PackageNumber { get; set; }
         public string? Colors { get; set; }
         public string? Sizes { get; set; }
@@ -48,7 +47,7 @@ namespace FirstCall.Application.Features.Products.Commands.AddEdit
         public UploadRequest UploadRequest3 { get; set; }
         public UploadRequest UploadRequest4 { get; set; }
 
-
+        public int? WarehousesId { get; set; }
     }
 
     internal class AddEditProductCommandHandler : IRequestHandler<AddEditCompanyProductCommand, Result<int>>
@@ -123,7 +122,7 @@ namespace FirstCall.Application.Features.Products.Commands.AddEdit
                     product.NameAr = command.NameAr ?? product.NameAr;
                     product.NameEn = command.NameEn ?? product.NameEn;
                     product.PackageNumber = command.PackageNumber ?? product.PackageNumber;
-                    product.StorgePlace = command.StorgePlace ?? product.StorgePlace;
+                    product.WarehousesId = command.WarehousesId;
                     product.Colors = command.Colors ?? product.Colors;
                     product.Sizes = command.Sizes ?? product.Sizes;
                     product.Sizes = command.Sizes ?? product.Sizes;

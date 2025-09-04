@@ -123,8 +123,8 @@
   <data name="Bordered" xml:space="preserve">
     <value>Bordered</value>
   </data>
-  <data name="Seasons" xml:space="preserve">
-    <value>Seasons</value>
+  <data name="Warehousess" xml:space="preserve">
+    <value>Warehousess</value>
   </data>
   <data name="ProductCategories exported" xml:space="preserve">
     <value>ProductCategories exported</value>
@@ -168,8 +168,8 @@
   <data name="Code" xml:space="preserve">
     <value>Code</value>
   </data>
-  <data name="Manage Seasons." xml:space="preserve">
-    <value>Manage Seasons.</value>
+  <data name="Manage Warehousess." xml:space="preserve">
+    <value>Manage Warehousess.</value>
   </data>
   <data name="No Allowed Actions" xml:space="preserve">
     <value>No Allowed Actions</value>
@@ -189,14 +189,14 @@
   <data name="Upload Image" xml:space="preserve">
     <value>Upload Image</value>
   </data>
-  <data name="Add Season" xml:space="preserve">
-    <value>Add Season</value>
+  <data name="Add Warehousess" xml:space="preserve">
+    <value>Add Warehousess</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="Update" xml:space="preserve">
-    <value>Update</value>
+  <data name="Update Warehousess" xml:space="preserve">
+    <value>Update </value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>

@@ -54,7 +54,6 @@ namespace FirstCall.Application.Features.Products.Queries.GetById
                 ProductImageUrl4 = e.ProductImageUrl4,
                 ProductCategoryId = e.ProductCategoryId,
                 PackageNumber = e.PackageNumber,
-                StorgePlace = e.StorgePlace,
                 Qty = e.Qty,
                 Kind = e.Kind,
                 ProductCategory = e.ProductCategory,
@@ -65,6 +64,9 @@ namespace FirstCall.Application.Features.Products.Queries.GetById
                 Season = e.Season,
                 Group = e.Group,
                 GroupId = e.GroupId,
+
+                 WarehousesId = e.WarehousesId,
+                 Warehouses = e.Warehouses,
             };
 
                 var product =await  _unitOfWork.Repository<Product>().Entities

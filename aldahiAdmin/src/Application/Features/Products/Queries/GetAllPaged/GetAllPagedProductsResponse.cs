@@ -13,7 +13,8 @@ namespace FirstCall.Application.Features.Products.Queries.GetAllPaged
         public string NameAr { get; set; }
         public string NameEn { get; set; }
         public string? Code { get; set; }
-        public string? StorgePlace { get; set; }
+        public int? WarehousesId { get; set; }
+        public virtual Warehouses Warehouses { get; set; }
         public string? PackageNumber { get; set; }
         public string? Colors { get; set; }
         public string? Sizes { get; set; }

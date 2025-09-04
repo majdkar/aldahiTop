@@ -255,4 +255,22 @@
   <data name="Weight" xml:space="preserve">
     <value>الوزن</value>
   </data>
+  <data name="Order Date" xml:space="preserve">
+    <value>تاريخ الطلبية</value>
+  </data>
+  <data name="Product Name" xml:space="preserve">
+    <value>أسم المنتج</value>
+  </data>
+  <data name="Qty" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>السعر</value>
+  </data>
+  <data name="Add Another Product" xml:space="preserve">
+    <value>إضافة منتج أخر</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>الأجمالي</value>
+  </data>
 </root>

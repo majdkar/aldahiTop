@@ -216,4 +216,10 @@
   <data name="Sep" xml:space="preserve">
     <value>Sep</value>
   </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Model</value>
+  </data>
 </root>

@@ -137,7 +137,16 @@ namespace FirstCall.Client.Pages.Deliveries
 
 
 
-
+        private void CalculateTotalPrice()
+        {
+            foreach (var item in Charges)
+            {
+                if (item.UnitPrice > 0 && item.Quantity > 0)
+                {
+                    item.TotalPrice = item.Quantity * item.UnitPrice;
+                }
+            }
+        }
 
 
 

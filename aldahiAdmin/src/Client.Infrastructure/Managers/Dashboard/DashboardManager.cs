@@ -3,6 +3,7 @@ using FirstCall.Shared.Wrapper;
 using System.Net.Http;
 using System.Threading.Tasks;
 using FirstCall.Application.Features.Dashboards.Queries.GetData;
+using System.Collections.Generic;
 
 namespace FirstCall.Client.Infrastructure.Managers.Dashboard
 {
@@ -19,6 +20,12 @@ namespace FirstCall.Client.Infrastructure.Managers.Dashboard
         {
             var response = await _httpClient.GetAsync(Routes.DashboardEndpoints.GetData);
             var data = await response.ToResult<DashboardDataResponse>();
+            return data;
+        }
+        public async Task<IResult<List<DashboardDataProductResponse>>> GetDataProductAsync()
+        {
+            var response = await _httpClient.GetAsync(Routes.DashboardEndpoints.GetDataProduct);
+            var data = await response.ToResult<List<DashboardDataProductResponse>>();
             return data;
         }
     }

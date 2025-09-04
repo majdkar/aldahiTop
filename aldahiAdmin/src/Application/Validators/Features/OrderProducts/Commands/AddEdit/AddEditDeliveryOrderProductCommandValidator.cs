@@ -7,7 +7,7 @@ namespace FirstCall.Application.Validators.Features.Products.Commands.AddEdit
 {
     public class AddEditDeliveryOrderProductCommandValidator : AbstractValidator<AddEditDeliveryOrderProductCommand>
     {
-        public AddEditDeliveryOrderProductCommandValidator(IStringLocalizer<AddEditDeliveryOrderProductCommand> localizer)
+        public AddEditDeliveryOrderProductCommandValidator(IStringLocalizer<AddEditDeliveryOrderProductCommandValidator> localizer)
         {
              RuleFor(request => request.UnitPrice)
                 .GreaterThanOrEqualTo(1).WithMessage(x => localizer["Price is required!"]);

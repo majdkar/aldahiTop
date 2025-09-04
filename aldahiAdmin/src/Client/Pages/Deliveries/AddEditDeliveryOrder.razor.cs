@@ -43,7 +43,7 @@ namespace FirstCall.Client.Pages.Deliveries
 
         private FluentValidationValidator _fluentValidationValidator;
         //private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
-        public bool Validated => _fluentValidationValidator?.Validate(options => { options.IncludeAllRuleSets(); options.ThrowOnFailures(); }) ?? false;
+        private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
 
 
         private List<GetAllPersonsResponse> _persons = new();

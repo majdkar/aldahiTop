@@ -15,9 +15,7 @@
             padding-inline-end: 0px !important;
     }
 
-    .mud-input-control > .mud-input-control-input-container > div.mud-input.mud-input-text{
-        margin-top: -7px !important;
-    }
+
 
     .mud-popover-custom {
         z-index: 5000 !important;
@@ -35,6 +33,10 @@
 }
 else
 {
+
+
+
+
 
 
     <MudTable Hover="true"
@@ -59,17 +61,17 @@ else
         <HeaderContent>
             <MudTh Style="text-align:center;color: black;font-weight: bold;">
                 <MudTableSortLabel SortBy="new Func<AddEditDeliveryOrderProductCommand, object>(x => x.ProductId)">
-                    @_localizer["ProductNameAr"]
+                    @_localizer["Product Name"]
                 </MudTableSortLabel>
             </MudTh>
             <MudTh Style="text-align:center;color: black;font-weight: bold;">
                 <MudTableSortLabel SortBy="new Func<AddEditDeliveryOrderProductCommand, object>(x => x.Quantity)">
-                    @_localizer["Quantity"]
+                    @_localizer["Qty"]
                 </MudTableSortLabel>
             </MudTh>
             <MudTh Style="text-align:center;color: black;font-weight: bold;">
                 <MudTableSortLabel SortBy="new Func<AddEditDeliveryOrderProductCommand, object>(x => x.UnitPrice)">
-                    @_localizer["UnitPrice"]
+                    @_localizer["Price"]
                 </MudTableSortLabel>
             </MudTh>
             <MudTh Style="text-align:center;color: black;font-weight: bold;">
@@ -83,8 +85,14 @@ else
         </HeaderContent>
 
         <RowTemplate>
-            <MudTd DataLabel="Product" Style="position:absolute; text-align:center;">
-                @context.ProductId
+            <MudTd DataLabel="Product" Style=" text-align:center;    width: 42%;
+    ">
+                <MudAutocomplete T="int"
+                                 @bind-Value="@context.ProductId"
+                                 ResetValueOnEmptyText="true"
+                                 SearchFunc="@SearchProducts"
+                                 ToStringFunc="ProductToString"
+                                 Class="w-100" />
             </MudTd>
             <MudTd DataLabel="Quantity" Style="text-align:center;">
                 @context.Quantity
@@ -108,22 +116,20 @@ else
         </RowTemplate>
 
         <RowEditingTemplate>
-            <MudTd DataLabel="Product" Style="position:absolute; text-align:center;">
+            <MudTd DataLabel="Product" Style="position:absolute; text-align:center;    width: 42%;
+    ">
                 <MudAutocomplete T="int"
-                                 Value="@context.ProductId"
+                                 @bind-Value="@context.ProductId"
                                  ResetValueOnEmptyText="true"
                                  SearchFunc="@SearchProducts"
                                  ToStringFunc="ProductToString"
-                                 Dense="true"
-                                 PopoverClass="mud-popover-custom"
+                         
                                  Class="w-100" />
             </MudTd>
 
             <MudTd DataLabel="Quantity" Style="text-align:center;">
                 <MudTextField @bind-Value="@context.Quantity"
-                              Dense="true"
-                              Format="F2"
-                              Culture="@CultureInfo.InvariantCulture"
+                             
                               Class="w-100"
                               Style="text-align:center;color: green;font-weight: bold;" />
             </MudTd>
@@ -150,16 +156,17 @@ else
                                @onclick="@(() => Delete(context))" />
             </MudTd>
         </RowEditingTemplate>
+        
 
         <FooterContent>
-            <MudTd ColSpan="5" Style="text-align:left;">
-                <MudButton Variant="Variant.Filled"
-                           Color="Color.Primary"
-                           DisableElevation="true"
-                           StartIcon="@Icons.Material.Filled.Add"
-                           @onclick="InvokeModal">
-                    @_localizer["Add Another Product"]
-                </MudButton>
+        
+
+
+            <MudTd colspan="2">
+                <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">@_localizer["Add Another Product"]</MudButton>
+            </MudTd>
+            <MudTd colspan="3" style="font-size: 20px;">
+                <strong> @_localizer["Total"] :  @Charges.Sum(x => x.TotalPrice).ToString("N2") </strong>
             </MudTd>
         </FooterContent>
     </MudTable>

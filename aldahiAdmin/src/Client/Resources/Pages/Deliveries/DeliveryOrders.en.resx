@@ -231,4 +231,22 @@
   <data name="Weight" xml:space="preserve">
     <value>Weight</value>
   </data>
+  <data name="Order Date" xml:space="preserve">
+    <value>Order Date</value>
+  </data>
+  <data name="Product Name" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
+  <data name="Qty" xml:space="preserve">
+    <value>Qty</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Add Another Product" xml:space="preserve">
+    <value>Add Another Product</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
 </root>

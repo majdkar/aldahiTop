@@ -57,7 +57,6 @@ namespace FirstCall.Application.Features.Products.Queries.Export
                 { _localizer["Kind"], item => item.Kind.NameAr },
                 { _localizer["Code"], item => item.Code },
                 { _localizer["Qty"], item => item.Qty },
-                { _localizer["Storge Place"], item => item.StorgePlace },
                 { _localizer["Package Number"], item => item.PackageNumber },
                 { _localizer["Price"], item => item.Price }
             }, sheetName: _localizer["Products"]);

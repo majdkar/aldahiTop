@@ -446,6 +446,12 @@
             </summary>
             <returns>Status 200 OK </returns>
         </member>
+        <member name="M:FirstCall.Server.Controllers.v1.DashboardController.GetDataProductAsync">
+            <summary>
+            Get Dashboard Data
+            </summary>
+            <returns>Status 200 OK </returns>
+        </member>
         <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrderProductsController.GetAll(System.Int32,System.Int32,System.Int32,System.String,System.String)">
             <summary>
             Get All DeliveryOrderProducts

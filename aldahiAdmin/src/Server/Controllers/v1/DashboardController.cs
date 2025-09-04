@@ -20,5 +20,18 @@ namespace FirstCall.Server.Controllers.v1
             var result = await _mediator.Send(new GetDashboardDataQuery());
             return Ok(result);
         }
+
+
+        /// <summary>
+        /// Get Dashboard Data
+        /// </summary>
+        /// <returns>Status 200 OK </returns>
+        [AllowAnonymous]
+        [HttpGet("GetDataProduct")]
+        public async Task<IActionResult> GetDataProductAsync()
+        {
+            var result = await _mediator.Send(new GetDashboardDataProductQuery());
+            return Ok(result);
+        }
     }
 }

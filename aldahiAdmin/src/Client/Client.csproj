@@ -66,6 +66,9 @@
     <Content Update="Pages\Catalog\ProductOffers.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
+    <Content Update="Pages\Content\DashboardProduct.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Pages\GeneralSettings\Warehousess.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

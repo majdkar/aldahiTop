@@ -345,4 +345,28 @@
   <data name="ParentCategory" xml:space="preserve">
     <value>الفئة الرئيسية</value>
   </data>
+  <data name="Season" xml:space="preserve">
+    <value>الموسم</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>المجموعة</value>
+  </data>
+  <data name="Kind" xml:space="preserve">
+    <value>النوع</value>
+  </data>
+  <data name="Qty" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="Storge Place" xml:space="preserve">
+    <value>مكان التخزين</value>
+  </data>
+  <data name="Package Number" xml:space="preserve">
+    <value>رقم البكج</value>
+  </data>
+  <data name="Warehouses" xml:space="preserve">
+    <value>المستودع</value>
+  </data>
+  <data name="Sizes" xml:space="preserve">
+    <value>القياسات</value>
+  </data>
 </root>

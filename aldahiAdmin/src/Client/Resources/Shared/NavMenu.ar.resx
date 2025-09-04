@@ -450,4 +450,16 @@
   <data name="Products Categoryies" xml:space="preserve">
     <value>أصناف المنتجات</value>
   </data>
+  <data name="Groups" xml:space="preserve">
+    <value>المجموعات</value>
+  </data>
+  <data name="Seasons" xml:space="preserve">
+    <value>المواسم</value>
+  </data>
+  <data name="Warehousess" xml:space="preserve">
+    <value>المستودعات</value>
+  </data>
+  <data name="Stocks" xml:space="preserve">
+    <value>المخازن</value>
+  </data>
 </root>

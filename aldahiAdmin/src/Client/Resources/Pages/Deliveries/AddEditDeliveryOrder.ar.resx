@@ -342,4 +342,7 @@
   <data name="Within a Day" xml:space="preserve">
     <value>خلال يوم</value>
   </data>
+  <data name="Order Date" xml:space="preserve">
+    <value>تاريخ الطلبية</value>
+  </data>
 </root>

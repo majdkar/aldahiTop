@@ -13,7 +13,6 @@ namespace FirstCall.Domain.Entities.Products
         public string NameAr { get; set; }
         public string NameEn { get; set; }
         public string? Code { get; set; }
-        public string? StorgePlace { get; set; }
         public string? PackageNumber { get; set; }
         public string? Colors { get; set; }
         public string? Sizes { get; set; }
@@ -45,6 +44,11 @@ namespace FirstCall.Domain.Entities.Products
         [ForeignKey("Group")]
         public int GroupId { get; set; }
         public virtual Group Group { get; set; }
+
+
+        [ForeignKey("Warehouses")]
+        public int? WarehousesId { get; set; }
+        public virtual Warehouses Warehouses { get; set; }
       
     }
 }

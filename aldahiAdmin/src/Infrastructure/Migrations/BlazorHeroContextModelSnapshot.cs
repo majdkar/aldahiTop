@@ -1822,8 +1822,8 @@ namespace FirstCall.Infrastructure.Migrations
                     b.Property<string>("Sizes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StorgePlace")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("WarehousesId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -1834,6 +1834,8 @@ namespace FirstCall.Infrastructure.Migrations
                     b.HasIndex("ProductCategoryId");
 
                     b.HasIndex("SeasonId");
+
+                    b.HasIndex("WarehousesId");
 
                     b.ToTable("Product");
                 });
@@ -2549,6 +2551,10 @@ namespace FirstCall.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FirstCall.Domain.Entities.GeneralSettings.Warehouses", "Warehouses")
+                        .WithMany()
+                        .HasForeignKey("WarehousesId");
+
                     b.Navigation("Group");
 
                     b.Navigation("Kind");
@@ -2556,6 +2562,8 @@ namespace FirstCall.Infrastructure.Migrations
                     b.Navigation("ProductCategory");
 
                     b.Navigation("Season");
+
+                    b.Navigation("Warehouses");
                 });
 
             modelBuilder.Entity("FirstCall.Domain.Entities.Products.ProductCom", b =>
