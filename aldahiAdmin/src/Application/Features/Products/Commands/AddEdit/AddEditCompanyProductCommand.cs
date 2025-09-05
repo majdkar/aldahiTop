@@ -35,6 +35,7 @@ namespace FirstCall.Application.Features.Products.Commands.AddEdit
         public string ProductImageUrl4 { get; set; }
         public int Qty { get; set; }
 
+        public string Type { get; set; }
 
         public int SeasonId { get; set; }
 
@@ -132,6 +133,7 @@ namespace FirstCall.Application.Features.Products.Commands.AddEdit
                     product.ProductCategoryId = command.ProductCategoryId;
                     product.SeasonId = command.SeasonId;
                     product.GroupId = command.GroupId;
+                    product.Type = command.Type;
 
                     product.Price = command.Price == 0 ? product.Price : command.Price;
 

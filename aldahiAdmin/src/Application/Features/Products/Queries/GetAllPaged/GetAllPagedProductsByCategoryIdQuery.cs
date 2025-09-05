@@ -81,6 +81,7 @@ namespace FirstCall.Application.Features.Products.Queries.GetAllPaged
                 Group = e.Group,
                  KindNameAr = e.Kind.NameAr,
                  KindNameEn = e.Kind.NameEn,
+                 Type = e.Type,
             };
             var productFilterSpec = new ProductByProductCategoryIdFilterSpecification(request.SearchString,request.ProductCategoryId,request.SubCategoryId);
             if (request.OrderBy?.Any() != true)

@@ -19,6 +19,9 @@ namespace FirstCall.Client.Pages.Deliveries
     {
         [Inject] private IDeliveryOrderManager DeliveryOrderManager { get; set; }
 
+
+       [Parameter] public string ProductType { get; set; }
+
         private IEnumerable<GetAllDeliveryOrdersResponse> _pagedData;
         private MudTable<GetAllDeliveryOrdersResponse> _table;
         private int _totalItems;
@@ -84,7 +87,7 @@ namespace FirstCall.Client.Pages.Deliveries
                 orderings = state.SortDirection != SortDirection.None ? new[] { $"{state.SortLabel} {state.SortDirection}" } : new[] { $"{state.SortLabel}" };
             }
 
-            var request = new GetAllPagedDeliveryOrdersRequest { PageSize = pageSize, PageNumber = pageNumber + 1, SearchString = _searchString, Orderby = orderings, Status = Status };
+            var request = new GetAllPagedDeliveryOrdersRequest { PageSize = pageSize, PageNumber = pageNumber + 1, SearchString = _searchString, Orderby = orderings, Status = Status , Type = ProductType};
             var response = await DeliveryOrderManager.GetAllByStatusAsync(request);
             if (response.Succeeded)
             {
@@ -249,7 +252,7 @@ namespace FirstCall.Client.Pages.Deliveries
 
         private async Task RedirectToAddEdit(int id)
         {
-            _navigationManager.NavigateTo($"/order-details/{id}");
+            _navigationManager.NavigateTo($"/order-details/{id}/{ProductType}");
             await _table.ReloadServerData();
 
         }

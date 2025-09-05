@@ -5,18 +5,18 @@ namespace FirstCall.Application.Specifications.Orders
 {
     public class DeliveryOrderFilterSpecification : HeroSpecification<DeliveryOrder>
     {
-        public DeliveryOrderFilterSpecification(string searchString)
+        public DeliveryOrderFilterSpecification(string searchString,string Type)
         {
             Includes.Add(p => p.Client);
             IncludeStrings.Add("Client.Person");
             if (!string.IsNullOrEmpty(searchString))
             {
                 Criteria = p => (p.OrderNumber.Contains(searchString))
-                                && !p.IsDeleted ;
+                                && !p.IsDeleted && p.Type == Type;
             }
             else
             {
-                Criteria = p => !p.IsDeleted;
+                Criteria = p => !p.IsDeleted && p.Type == Type;
             }
         }
     }

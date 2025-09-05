@@ -1,4 +1,4 @@
-﻿@page "/products"
+﻿@page "/products/{ProductType}"
 @using FirstCall.Application.Features.Products.Queries.GetAllPaged
 @attribute [Authorize(Policy = Permissions.Products.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Products> _localizer

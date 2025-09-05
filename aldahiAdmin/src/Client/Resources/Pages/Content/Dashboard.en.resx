@@ -222,4 +222,10 @@
   <data name="Model" xml:space="preserve">
     <value>Model</value>
   </data>
+  <data name="B2B" xml:space="preserve">
+    <value>B2B</value>
+  </data>
+  <data name="B2C" xml:space="preserve">
+    <value>B2C</value>
+  </data>
 </root>

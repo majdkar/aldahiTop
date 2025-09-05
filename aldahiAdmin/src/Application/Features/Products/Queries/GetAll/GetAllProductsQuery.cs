@@ -24,9 +24,10 @@ namespace FirstCall.Application.Features.Products.Queries.GetAll
 {
     public class GetAllProductsQuery : IRequest<Result<List<GetAllProductsResponse>>>
     {
+
+        public string ProductType { get; set; }
         public GetAllProductsQuery()
         {
-
         }
     }
     public class GetAllProductsCachedQueryHandler : IRequestHandler<GetAllProductsQuery, Result<List<GetAllProductsResponse>>>
@@ -44,7 +45,7 @@ namespace FirstCall.Application.Features.Products.Queries.GetAll
 
         public async Task<Result<List<GetAllProductsResponse>>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
-            var filter = new ProductFilterSpecification();
+            var filter = new ProductFilterSpecification(request.ProductType);
             Expression<Func<Product, GetAllProductsResponse>> expression =  e => new GetAllProductsResponse
             {
                 Id = e.Id,

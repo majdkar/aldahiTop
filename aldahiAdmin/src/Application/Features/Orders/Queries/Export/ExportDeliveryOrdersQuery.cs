@@ -43,7 +43,7 @@ namespace FirstCall.Application.Features.Orders.Queries.Export
 
         public async Task<Result<string>> Handle(ExportDeliveryOrdersQuery request, CancellationToken cancellationToken)
         {
-            var orderFilterSpec = new DeliveryOrderFilterSpecification(request.SearchString);
+            var orderFilterSpec = new DeliveryOrderFilterSpecification(request.SearchString,"B2B");
             var deliveryOrders = await _unitOfWork.Repository<DeliveryOrder>().Entities
                 .Specify(orderFilterSpec)
                 .ToListAsync(cancellationToken);

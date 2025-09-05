@@ -10,6 +10,7 @@ namespace FirstCall.Application.Requests.Deliveries.DeliveryOrders
     {
         public string SearchString { get; set; }
         public string Status { get; set; }
+        public string Type { get; set; }
 
     }
 }

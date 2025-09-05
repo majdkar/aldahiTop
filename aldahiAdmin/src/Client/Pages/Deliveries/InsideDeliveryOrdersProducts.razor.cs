@@ -46,6 +46,7 @@ namespace FirstCall.Client.Pages.Deliveries
     public partial class InsideDeliveryOrdersProducts
     {
         [Parameter] public int OrderId { get; set; } = 0;
+        [Parameter] public string ProductType { get; set; }
 
         [Parameter] public List<AddEditDeliveryOrderProductCommand> Charges { get; set; } = new();
         [Parameter] public EventCallback<List<AddEditDeliveryOrderProductCommand>> ChargesChanged { get; set; }
@@ -152,7 +153,7 @@ namespace FirstCall.Client.Pages.Deliveries
 
         public async Task LoadFees()
         {
-            var request = new GetAllPagedProductsRequest { PageNumber = 1, PageSize = 100000, Orderby = null, SearchString = null };
+            var request = new GetAllPagedProductsRequest { PageNumber = 1, PageSize = 100000, Orderby = null, SearchString = null, ProductType = ProductType };
             var resopnse = await ProductManager.GetAllPagedAsync(request);
             if (resopnse.Succeeded)
             {

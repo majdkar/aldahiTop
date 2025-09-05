@@ -10,7 +10,7 @@ namespace FirstCall.Application.Specifications.Orders
 {
     public class DeliveryOrderByStatusFilterSpecification : HeroSpecification<DeliveryOrder>
     {
-        public DeliveryOrderByStatusFilterSpecification(string status,string searchString)
+        public DeliveryOrderByStatusFilterSpecification(string status,string searchString ,string type)
         {
             Includes.Add(p => p.Client);
             IncludeStrings.Add("Client.Person");
@@ -19,11 +19,11 @@ namespace FirstCall.Application.Specifications.Orders
                 Criteria = p => (p.OrderNumber.Contains(searchString)) 
                                
                                 && p.Status == status
-                                 && !p.IsDeleted;
+                                 && !p.IsDeleted && p.Type == type;
             }
             else
             {
-                Criteria = p => p.Status == status && !p.IsDeleted;//&& p.IsConfirm == true;
+                Criteria = p => p.Status == status && p.Type == type &&!p.IsDeleted;//&& p.IsConfirm == true;
             }
         }
     }

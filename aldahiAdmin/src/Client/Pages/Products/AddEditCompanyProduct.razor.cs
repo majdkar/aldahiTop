@@ -29,6 +29,7 @@ using FirstCall.Client.Infrastructure.Managers.GeneralSettings.Group;
 using FirstCall.Application.Features.Groups.Queries.GetAll;
 using FirstCall.Client.Infrastructure.Managers.GeneralSettings.Warehouses;
 using FirstCall.Application.Features.Warehousess.Queries.GetAll;
+using FirstCall.Shared.Constants.Products;
 
 namespace FirstCall.Client.Pages.Products
 {
@@ -42,6 +43,7 @@ namespace FirstCall.Client.Pages.Products
         [Inject] private IWarehousesManager WarehousesManager { get; set; }
 
         [Parameter] public int ProductId { get; set; } = 0;
+        [Parameter] public string ProductType { get; set; }
 
         private AddEditCompanyProductCommand AddEditCompanyProductModel { get; set; } = new();
 
@@ -140,7 +142,7 @@ namespace FirstCall.Client.Pages.Products
         {
             if (ProductId != 0)
             {
-                var data = await ProductManager.GetByIdAsync(ProductId);
+                var data = await ProductManager.GetByIdAsync(ProductId,ProductType);
                 if (data.Succeeded)
                 {
                     var product = data.Data;
@@ -180,7 +182,7 @@ namespace FirstCall.Client.Pages.Products
 
         private async Task SaveAsync()
         {
-            
+            AddEditCompanyProductModel.Type = ProductType;
             var response = await ProductManager.SaveForCompanyProfileAsync(AddEditCompanyProductModel);
             if (response.Succeeded)
             {

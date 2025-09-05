@@ -35,7 +35,7 @@ namespace FirstCall.Domain.Entities.Products
         public virtual ProductCategory ProductCategory { get; set; }
 
 
-
+        public string Type { get; set; }
 
         [ForeignKey("Kind")]
         public int KindId { get; set; }

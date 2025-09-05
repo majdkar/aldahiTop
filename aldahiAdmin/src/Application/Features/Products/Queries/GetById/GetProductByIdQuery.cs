@@ -64,7 +64,7 @@ namespace FirstCall.Application.Features.Products.Queries.GetById
                 Season = e.Season,
                 Group = e.Group,
                 GroupId = e.GroupId,
-
+                 Type = e.Type,
                  WarehousesId = e.WarehousesId,
                  Warehouses = e.Warehouses,
             };

@@ -13,6 +13,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using FirstCall.Domain.Entities.GeneralSettings;
+using FirstCall.Shared.Constants.Products;
 
 namespace FirstCall.Application.Features.Products.Queries.GetAllPaged
 {
@@ -25,13 +26,13 @@ namespace FirstCall.Application.Features.Products.Queries.GetAllPaged
         public string[] OrderBy { get; set; }
 
         public string ProductName { get; set; }
+        public string ProductType { get; set; }
 
         public decimal FromPrice { get; set; }
-
         public decimal ToPrice { get; set; }
 
 
-        public GetAllPagedSearchProductsQuery(int pageNumber, int pageSize, string searchString, string orderBy,string productname,decimal fromprice,decimal toprice)
+        public GetAllPagedSearchProductsQuery(int pageNumber, int pageSize, string searchString, string orderBy,string productname,decimal fromprice,decimal toprice,string productType)
         {
             PageNumber = pageNumber;
             PageSize = pageSize;
@@ -43,6 +44,7 @@ namespace FirstCall.Application.Features.Products.Queries.GetAllPaged
             ProductName = productname;
             FromPrice = fromprice;
             ToPrice = toprice;
+            ProductType = productType;
         }
     }
 
@@ -87,8 +89,9 @@ namespace FirstCall.Application.Features.Products.Queries.GetAllPaged
                 Group = e.Group,
                 KindNameAr = e.Kind.NameAr,
                 KindNameEn = e.Kind.NameEn,
+                 Type = e.Type,
             };
-            var productFilterSpec = new ProductSearchFilterSpecification(request.SearchString,request.ProductName,request.FromPrice,request.ToPrice);
+            var productFilterSpec = new ProductSearchFilterSpecification(request.SearchString,request.ProductName,request.FromPrice,request.ToPrice,request.ProductType);
             if (request.OrderBy?.Any() != true)
             {
                 var data = await _unitOfWork.Repository<Product>().Entities

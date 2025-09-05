@@ -7,6 +7,7 @@ namespace FirstCall.Application.Features.Dashboards.Queries.GetData
         public int Id  { get; set; }
         public int Qty  { get; set; }
         public string Code  { get; set; }
+        public string Type  { get; set; }
         public string CategoryName  { get; set; }
         public string KindName  { get; set; }
         public string GroupName  { get; set; }

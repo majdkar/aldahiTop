@@ -46,7 +46,7 @@ namespace FirstCall.Application.Features.Products.Queries.Export
 
         public async Task<Result<string>> Handle(ExportCompanyProductsQuery request, CancellationToken cancellationToken)
         {
-            var productFilterSpec = new ProductByCompanyFilterSpecification(request.SearchString);
+            var productFilterSpec = new ProductByCompanyFilterSpecification(request.SearchString,"B2B");
             var products = await _unitOfWork.Repository<Product>().Entities
                 .Specify(productFilterSpec).OrderBy(x => x.Order)
                 .ToListAsync(cancellationToken);

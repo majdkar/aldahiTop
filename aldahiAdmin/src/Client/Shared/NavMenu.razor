@@ -99,19 +99,36 @@
 
     @if (_canViewProducts)
     {
-        <MudNavLink Href="/products" Icon="@Icons.Material.Outlined.CardMembership" >
-            @_localizer["Products"]
+        <MudNavGroup Title="@_localizer["Products"]" Expanded="true" Icon="@Icons.Material.Outlined.CardMembership">
+
+
+        <MudNavLink Href="/products/B2B" Icon="@Icons.Material.Outlined.CardMembership" >
+            @_localizer["B2B Products"]
     </MudNavLink>
       
+        <MudNavLink Href="/products/B2C" Icon="@Icons.Material.Outlined.CardMembership" >
+                @_localizer["B2C Products"]
+    </MudNavLink>
+
+        </MudNavGroup>
+
     
     }
 
     @if (_canViewOrder)
     {
+        <MudNavGroup Title="@_localizer["Orders Management"]" Expanded="true" Icon="@Icons.Material.Outlined.ShoppingCart">
 
         <MudNavLink Href="/HomeDeliveryOrders" Icon="@Icons.Material.Outlined.ShoppingCart">
-            @_localizer["Orders Management"]
+            @_localizer["B2B Orders"]
         </MudNavLink>
+
+        <MudNavLink Href="/HomeB2CDeliveryOrders" Icon="@Icons.Material.Outlined.ShoppingCart">
+            @_localizer["B2C Orders"]
+        </MudNavLink>
+
+        </MudNavGroup>
+
     }
 
     @if (_canViewStocks)

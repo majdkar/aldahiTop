@@ -54,6 +54,7 @@ namespace FirstCall.Application.Features.Dashboards.Queries.GetData
                 Qty = item.Qty,
                  Id = item.Id,
                   Code = item.Code,
+                   Type = item.Type,
             }).ToList();
             return await Result<List<DashboardDataProductResponse>>.SuccessAsync(response);
         }

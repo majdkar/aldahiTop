@@ -21,9 +21,9 @@ namespace FirstCall.Server.Controllers.v1.DeliveryManagment
         /// <returns>Status 200 OK</returns>
         //[Authorize(Policy = Permissions.DeliveryOrders.View)]
         [HttpGet]
-        public async Task<IActionResult> GetAll(int pageNumber, int pageSize, string searchString, string orderBy = null)
+        public async Task<IActionResult> GetAll(string Type,int pageNumber, int pageSize, string searchString, string orderBy = null)
         {
-            var deliveryOrders = await _mediator.Send(new GetAllDeliveryOrdersQuery(pageNumber, pageSize, searchString, orderBy));
+            var deliveryOrders = await _mediator.Send(new GetAllDeliveryOrdersQuery(pageNumber, pageSize, searchString, orderBy,Type));
             return Ok(deliveryOrders);
         }
 
@@ -34,9 +34,9 @@ namespace FirstCall.Server.Controllers.v1.DeliveryManagment
         // <returns>Status 200 OK</returns>
         //[Authorize(Policy = Permissions.DeliveryOrders.View)]
         [HttpGet("GetByStatus")]
-        public async Task<IActionResult> GetByStatus(string status, int pageNumber, int pageSize, string searchString, string orderBy = null)
+        public async Task<IActionResult> GetByStatus(string Type, string status, int pageNumber, int pageSize, string searchString, string orderBy = null)
         {
-            var deliveryOrders = await _mediator.Send(new GetDeliveryOrdersByStatusQuery(status, pageNumber, pageSize, searchString, orderBy));
+            var deliveryOrders = await _mediator.Send(new GetDeliveryOrdersByStatusQuery(status, pageNumber, pageSize, searchString, orderBy,Type));
             return Ok(deliveryOrders);
         }
 
@@ -87,9 +87,9 @@ namespace FirstCall.Server.Controllers.v1.DeliveryManagment
         /// <returns>Status 200 OK</returns>
         //[Authorize(Policy = Permissions.DeliveryOrders.View)]
         [HttpGet("GetPagedByClient")]
-        public async Task<IActionResult> GetPagedByClient(int clientId, int pageNumber, int pageSize, string searchString, string orderBy = null)
+        public async Task<IActionResult> GetPagedByClient(string type, int clientId, int pageNumber, int pageSize, string searchString, string orderBy = null)
         {
-            var deliveryOrders = await _mediator.Send(new GetAllPagedDeliveryOrdersByClientQuery(clientId, pageNumber, pageSize, searchString, orderBy));
+            var deliveryOrders = await _mediator.Send(new GetAllPagedDeliveryOrdersByClientQuery(clientId, pageNumber, pageSize, searchString, orderBy,type));
             return Ok(deliveryOrders);
         }
 

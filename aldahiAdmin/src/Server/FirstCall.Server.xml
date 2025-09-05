@@ -483,7 +483,7 @@
             <param name="id"></param>
             <returns>Status 200 OK response</returns>
         </member>
-        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrdersController.GetAll(System.Int32,System.Int32,System.String,System.String)">
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrdersController.GetAll(System.String,System.Int32,System.Int32,System.String,System.String)">
             <summary>
             Get All DeliveryOrders
             </summary>
@@ -496,7 +496,7 @@
             <param name="id"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrdersController.GetPagedByClient(System.Int32,System.Int32,System.Int32,System.String,System.String)">
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrdersController.GetPagedByClient(System.String,System.Int32,System.Int32,System.Int32,System.String,System.String)">
             <summary>
             Get Paged Delivery Orders By  Client Id
             </summary>
@@ -978,13 +978,13 @@
             <param name="id"></param>
             <returns>Status 200 OK response</returns>
         </member>
-        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetAll">
+        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetAll(System.String)">
             <summary>
             Get All Products
             </summary>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetAllPaged(System.Int32,System.Int32,System.String,System.String)">
+        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetAllPaged(System.String,System.Int32,System.Int32,System.String,System.String)">
             <summary>
             Get All Paged Products
             </summary>
@@ -992,6 +992,7 @@
             <param name="pageSize"></param>
             <param name="searchString"></param>
             <param name="orderBy"></param>
+            <param name="ProductType"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetAllPagedByCategoryId(System.Int32,System.Int32,System.Int32,System.Int32,System.String,System.String)">
@@ -1006,7 +1007,7 @@
             <param name="subcategoryId"></param>
             <returns>Status 200 OK</returns>
         </member>
-        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetAllPagedSearchProduct(System.String,System.Decimal,System.Decimal,System.Int32,System.Int32,System.String,System.String)">
+        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetAllPagedSearchProduct(System.String,System.String,System.Decimal,System.Decimal,System.Int32,System.Int32,System.String,System.String)">
             <summary>
             Get All Paged Search Products
             </summary>
@@ -1016,7 +1017,8 @@
             <param name="orderBy"></param>
             <param name="productname"></param>
             <param name="fromprice"></param> 
-            <param name="toprice"></param>        
+            <param name="toprice"></param>   
+            <param name="ProductType"></param>
             <returns>Status 200 OK</returns>
         </member>
         <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetById(System.Int32)">

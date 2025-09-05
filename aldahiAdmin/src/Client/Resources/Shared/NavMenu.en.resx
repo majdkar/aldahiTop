@@ -352,4 +352,16 @@
   <data name="Stocks" xml:space="preserve">
     <value>Stocks</value>
   </data>
+  <data name="B2B Products" xml:space="preserve">
+    <value>B2B Products</value>
+  </data>
+  <data name="B2C Products" xml:space="preserve">
+    <value>B2C Products</value>
+  </data>
+  <data name="B2B Orders" xml:space="preserve">
+    <value>B2B Orders</value>
+  </data>
+  <data name="B2C Orders" xml:space="preserve">
+    <value>B2C Orders</value>
+  </data>
 </root>

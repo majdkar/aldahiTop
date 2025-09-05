@@ -21,10 +21,11 @@ namespace FirstCall.Application.Features.Products.Queries.GetAllPaged
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public string SearchString { get; set; }
+        public string ProductType { get; set; }
         
         public string[] OrderBy { get; set; } // of the form fieldname [ascending|descending],fieldname [ascending|descending]...
 
-        public GetAllPagedProductsQuery(int pageNumber, int pageSize, string searchString, string orderBy)
+        public GetAllPagedProductsQuery(int pageNumber, int pageSize, string searchString, string orderBy,string productType)
         {
             PageNumber = pageNumber;
             PageSize = pageSize;
@@ -33,7 +34,7 @@ namespace FirstCall.Application.Features.Products.Queries.GetAllPaged
             {
                 OrderBy = orderBy.Split(',');
             }
-           
+            ProductType = productType;
         }
     }
 
@@ -78,8 +79,9 @@ namespace FirstCall.Application.Features.Products.Queries.GetAllPaged
                 Season = e.Season,
                 GroupId = e.GroupId,
                 Group = e.Group,
+                 Type = e.Type,
             };
-            var productFilterSpec = new ProductByCompanyFilterSpecification(request.SearchString);
+            var productFilterSpec = new ProductByCompanyFilterSpecification(request.SearchString,request.ProductType);
             if (request.OrderBy?.Any() != true)
             {
                 var data = await _unitOfWork.Repository<Product>().Entities

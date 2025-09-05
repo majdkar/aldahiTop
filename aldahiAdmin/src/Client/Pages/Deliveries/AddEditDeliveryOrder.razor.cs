@@ -26,6 +26,9 @@ namespace FirstCall.Client.Pages.Deliveries
         [Inject] private IDeliveryOrderManager DeliveryOrderManager { get; set; }
 
 
+        [Parameter]
+        public string ProductType { get; set; }
+
         private InsideDeliveryOrdersProducts _leaseCharges;
 
         [Inject] private IPrincedomManager PrincedomManager { get; set; }

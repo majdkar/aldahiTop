@@ -12,5 +12,8 @@ namespace FirstCall.Application.Features.Products.Queries.GetAll
         public string NameAr { get; set; }
         public string NameEn { get; set; }
         public string? Code { get; set; }
+
+        public string Type { get; set; }
+
     }
 }

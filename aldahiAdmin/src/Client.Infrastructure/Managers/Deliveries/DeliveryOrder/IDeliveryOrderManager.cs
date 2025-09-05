@@ -13,7 +13,7 @@ namespace FirstCall.Client.Infrastructure.Managers.Deliveries.DeliveryOrder
 {
     public interface IDeliveryOrderManager:IManager
     {
-        Task<IResult<List<GetAllDeliveryOrdersResponse>>> GetAllAsync();
+        Task<IResult<List<GetAllDeliveryOrdersResponse>>> GetAllAsync(string Type);
 
         Task<PaginatedResult<GetAllDeliveryOrdersResponse>> GetAllPagedAsync(GetAllPagedDeliveryOrdersRequest request);
 

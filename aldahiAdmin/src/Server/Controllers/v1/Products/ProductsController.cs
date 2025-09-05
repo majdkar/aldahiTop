@@ -19,9 +19,9 @@ namespace FirstCall.Server.Controllers.v1.Products
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Products.View)]
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(string ProductType)
         {
-            var products = await _mediator.Send(new GetAllProductsQuery());
+            var products = await _mediator.Send(new GetAllProductsQuery { ProductType = ProductType});
             return Ok(products);
         }
 
@@ -38,12 +38,13 @@ namespace FirstCall.Server.Controllers.v1.Products
         /// <param name="pageSize"></param>
         /// <param name="searchString"></param>
         /// <param name="orderBy"></param>
+        /// <param name="ProductType"></param>
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Products.View)]
         [HttpGet("GetAllPaged")]
-        public async Task<IActionResult> GetAllPaged(int pageNumber, int pageSize, string searchString, string orderBy = null)
+        public async Task<IActionResult> GetAllPaged(string ProductType, int pageNumber, int pageSize, string searchString, string orderBy = null)
         {
-            var products = await _mediator.Send(new GetAllPagedProductsQuery(pageNumber, pageSize, searchString, orderBy));
+            var products = await _mediator.Send(new GetAllPagedProductsQuery(pageNumber, pageSize, searchString, orderBy,ProductType));
             return Ok(products);
         }
 
@@ -75,13 +76,15 @@ namespace FirstCall.Server.Controllers.v1.Products
         /// <param name="orderBy"></param>
         /// <param name="productname"></param>
         /// <param name="fromprice"></param> 
-        /// <param name="toprice"></param>        
+        /// <param name="toprice"></param>   
+        /// <param name="ProductType"></param>
+
         /// <returns>Status 200 OK</returns>
         [Authorize(Policy = Permissions.Products.View)]
         [HttpGet("GetAllPagedSearchProduct")]
-        public async Task<IActionResult> GetAllPagedSearchProduct( string productname, decimal fromprice, decimal toprice,int pageNumber, int pageSize, string searchString, string orderBy = null)
+        public async Task<IActionResult> GetAllPagedSearchProduct( string ProductType, string productname, decimal fromprice, decimal toprice,int pageNumber, int pageSize, string searchString, string orderBy = null)
         {
-            var products = await _mediator.Send(new GetAllPagedSearchProductsQuery(  pageNumber, pageSize, searchString, orderBy, productname, fromprice, toprice));
+            var products = await _mediator.Send(new GetAllPagedSearchProductsQuery(  pageNumber, pageSize, searchString, orderBy, productname, fromprice, toprice,ProductType));
             return Ok(products);
         }
 

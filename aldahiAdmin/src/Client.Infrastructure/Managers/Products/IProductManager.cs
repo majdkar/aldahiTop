@@ -14,12 +14,12 @@ namespace FirstCall.Client.Infrastructure.Managers.Products
         Task<PaginatedResult<GetAllPagedProductsResponse>> GetAllPagedAsync(GetAllPagedProductsRequest request);
 
 
-        Task<PaginatedResult<GetAllPagedProductsResponse>> GetAllPagedSearchProductAsync(GetAllPagedProductsRequest request,string productname, decimal fromprice, decimal toprice);
+        Task<PaginatedResult<GetAllPagedProductsResponse>> GetAllPagedSearchProductAsync(GetAllPagedProductsRequest request,string productname, decimal fromprice, decimal toprice,string ProductType);
 
 
    
 
-        Task<IResult<GetProductByIdResponse>> GetByIdAsync(int productId);
+        Task<IResult<GetProductByIdResponse>> GetByIdAsync(int productId,string ProductType);
 
 
         Task<IResult<int>> SaveForCompanyProfileAsync(AddEditCompanyProductCommand request);
@@ -27,6 +27,6 @@ namespace FirstCall.Client.Infrastructure.Managers.Products
         Task<IResult<int>> DeleteAsync(int id);
 
         Task<IResult<string>> ExportToExcelAsync(string searchString = "");
-        Task<IResult<List<GetAllProductsResponse>>> GetAllAsync();
+        Task<IResult<List<GetAllProductsResponse>>> GetAllAsync(string ProductType);
     }
 }

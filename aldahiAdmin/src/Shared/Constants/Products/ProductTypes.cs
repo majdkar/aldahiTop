@@ -10,8 +10,8 @@ namespace FirstCall.Shared.Constants.Products
     {
         public static Dictionary<string, string> Values = new Dictionary<string, string>
         {
-            {"B2B", "B2B" },
-            {"B2C", "B2C" }
+            {"B2B", "B2B" }, //ورشة
+            {"B2C", "B2C" }   //محل
         };
     }
     public enum ProductTypesEnum

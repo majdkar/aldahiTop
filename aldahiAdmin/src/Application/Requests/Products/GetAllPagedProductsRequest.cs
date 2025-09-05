@@ -9,5 +9,6 @@ namespace FirstCall.Application.Requests.Products
     public class GetAllPagedProductsRequest : PagedRequest
     {
         public string SearchString { get; set; }
+        public string ProductType { get; set; }
     }
 }

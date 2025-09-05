@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿ using MediatR;
 using FirstCall.Application.Extensions;
 using FirstCall.Application.Interfaces.Repositories;
 using FirstCall.Shared.Wrapper;
@@ -20,10 +20,11 @@ namespace FirstCall.Application.Features.Orders.Queries.GetAll
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; } = 100;
+        public string Type { get; set; }
         public string SearchString { get; set; }
         public string[] OrderBy { get; set; } // of the form fieldname [ascending|descending],fieldname [ascending|descending]...
 
-        public GetAllDeliveryOrdersQuery(int pageNumber, int pageSize, string searchString, string orderBy)
+        public GetAllDeliveryOrdersQuery(int pageNumber, int pageSize, string searchString, string orderBy,string type)
         {
             PageNumber = pageNumber;
             PageSize = pageSize;
@@ -32,7 +33,7 @@ namespace FirstCall.Application.Features.Orders.Queries.GetAll
             {
                 OrderBy = orderBy.Split(',');
             }
-
+            Type = type;
 
         }
     }
@@ -64,7 +65,7 @@ namespace FirstCall.Application.Features.Orders.Queries.GetAll
                 Client = e.Client,
                  
             };
-            var DeliveryOrdersFilterSpec = new DeliveryOrderFilterSpecification(request.SearchString);
+            var DeliveryOrdersFilterSpec = new DeliveryOrderFilterSpecification(request.SearchString,request.Type);
             if (request.OrderBy?.Any() != true)
             {
                 var data = await _unitOfWork.Repository<DeliveryOrder>().Entities

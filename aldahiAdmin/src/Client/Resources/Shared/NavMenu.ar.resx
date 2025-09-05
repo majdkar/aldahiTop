@@ -462,4 +462,16 @@
   <data name="Stocks" xml:space="preserve">
     <value>المخازن</value>
   </data>
+  <data name="B2B Products" xml:space="preserve">
+    <value>منتجات الورشة</value>
+  </data>
+  <data name="B2C Products" xml:space="preserve">
+    <value>منتجات المحل</value>
+  </data>
+  <data name="B2B Orders" xml:space="preserve">
+    <value>طلبات الورشة</value>
+  </data>
+  <data name="B2C Orders" xml:space="preserve">
+    <value>طلبات المحل</value>
+  </data>
 </root>

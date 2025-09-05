@@ -23,6 +23,7 @@ namespace FirstCall.Domain.Entities.Orders
         public DateTime? OrderDate { get; set; }
 
         public string Status { get; set; }
+        public string Type { get; set; }
 
         public virtual List<DeliveryOrderProduct> Products { get; set; }
 

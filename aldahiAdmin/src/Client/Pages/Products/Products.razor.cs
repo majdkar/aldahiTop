@@ -22,7 +22,7 @@ namespace FirstCall.Client.Pages.Products
     {
         [Inject] private IProductManager ProductManager { get; set; }
 
-
+        [Parameter]  public string ProductType { get; set; }
         [CascadingParameter] private HubConnection HubConnection { get; set; }
 
         public string ProductName { get; set; }
@@ -68,9 +68,20 @@ namespace FirstCall.Client.Pages.Products
           
         }
 
+        protected override async Task OnParametersSetAsync()
+        {
+            if (_loaded && _table is not null)
+            {
+                ProductName = null;
+                FromPrice = 0;
+                ToPrice = 0;
+                _searchString = string.Empty;
+
+                await _table.ReloadServerData();
+            }
+        }
 
 
-      
 
         private async Task FilterData()
         {
@@ -98,7 +109,7 @@ namespace FirstCall.Client.Pages.Products
             var request = new GetAllPagedProductsRequest { PageSize = pageSize, PageNumber = pageNumber + 1, SearchString = _searchString, Orderby = orderings };
             
          
-            var response = await ProductManager.GetAllPagedSearchProductAsync(request,ProductName, FromPrice, ToPrice);
+            var response = await ProductManager.GetAllPagedSearchProductAsync(request,ProductName, FromPrice, ToPrice,ProductType);
             if (response.Succeeded)
             {
                 _totalItems = response.TotalCount;
@@ -150,7 +161,7 @@ namespace FirstCall.Client.Pages.Products
 
         private void RedirectToDetails(int ProductId)
         {
-            _navigationManager.NavigateTo($"/Product-details/{ProductId}");
+            _navigationManager.NavigateTo($"/Product-details/{ProductId}/{ProductType}");
         } 
         
         private void RedirectToComponents(int ProductId,string ProductName)

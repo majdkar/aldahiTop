@@ -26,13 +26,13 @@ namespace FirstCall.Client.Infrastructure.Managers.Products
 
         public async Task<PaginatedResult<GetAllPagedProductsResponse>> GetAllPagedAsync(GetAllPagedProductsRequest request)
         {
-            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetAllPaged(request.PageNumber, request.PageSize, request.SearchString, request.Orderby));
+            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetAllPaged(request.PageNumber, request.PageSize, request.SearchString, request.Orderby,request.ProductType));
             return await response.ToPaginatedResult<GetAllPagedProductsResponse>();
         }
 
-        public async Task<PaginatedResult<GetAllPagedProductsResponse>> GetAllPagedSearchProductAsync(GetAllPagedProductsRequest request, string productname, decimal fromprice, decimal toprice)
+        public async Task<PaginatedResult<GetAllPagedProductsResponse>> GetAllPagedSearchProductAsync(GetAllPagedProductsRequest request, string productname, decimal fromprice, decimal toprice,string ProductType)
         {
-            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetAllPagedSearchProduct(request.PageNumber, request.PageSize, request.SearchString, request.Orderby, productname,  fromprice,  toprice));
+            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetAllPagedSearchProduct(request.PageNumber, request.PageSize, request.SearchString, request.Orderby, productname,  fromprice,  toprice,ProductType));
             return await response.ToPaginatedResult<GetAllPagedProductsResponse>();
         }
 
@@ -41,9 +41,9 @@ namespace FirstCall.Client.Infrastructure.Managers.Products
 
 
 
-        public async Task<IResult<GetProductByIdResponse>> GetByIdAsync(int productId)
+        public async Task<IResult<GetProductByIdResponse>> GetByIdAsync(int productId,string ProductType)
         {
-            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetProductById(productId));
+            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetProductById(productId,ProductType));
             return await response.ToResult<GetProductByIdResponse>();
         }
 
@@ -65,9 +65,9 @@ namespace FirstCall.Client.Infrastructure.Managers.Products
             return await response.ToResult<string>();
         }
 
-        public async Task<IResult<List<GetAllProductsResponse>>> GetAllAsync()
+        public async Task<IResult<List<GetAllProductsResponse>>> GetAllAsync(string ProductType)
         {
-            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetAll);
+            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetAll(ProductType));
             return await response.ToResult<List<GetAllProductsResponse>>();
         }
 

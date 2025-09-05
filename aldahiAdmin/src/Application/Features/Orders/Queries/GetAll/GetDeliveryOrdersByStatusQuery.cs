@@ -17,12 +17,13 @@ namespace FirstCall.Application.Features.Orders.Queries.GetAll
     public class GetDeliveryOrdersByStatusQuery : IRequest<PaginatedResult<GetAllDeliveryOrdersResponse>>
     {
         public string status { get; set; }
+        public string Type { get; set; }
         public int PageNumber { get; set; }
         public int PageSize { get; set; } = 100;
         public string SearchString { get; set; }
         public string[] OrderBy { get; set; } // of the form fieldname [ascending|descending],fieldname [ascending|descending]...
 
-        public GetDeliveryOrdersByStatusQuery(string status, int pageNumber, int pageSize, string searchString, string orderBy)
+        public GetDeliveryOrdersByStatusQuery(string status, int pageNumber, int pageSize, string searchString, string orderBy,string type)
         {
             PageNumber = pageNumber;
             PageSize = pageSize;
@@ -33,6 +34,7 @@ namespace FirstCall.Application.Features.Orders.Queries.GetAll
             }
 
             this.status = status;
+            Type = type;
         }
     }
 
@@ -62,7 +64,7 @@ namespace FirstCall.Application.Features.Orders.Queries.GetAll
                  Products =e.Products,
 
             };
-            var DeliveryOrdersFilterSpec = new DeliveryOrderByStatusFilterSpecification(request.status, request.SearchString);
+            var DeliveryOrdersFilterSpec = new DeliveryOrderByStatusFilterSpecification(request.status, request.SearchString,request.Type);
             if (request.OrderBy?.Any() != true)
             {
                 var data = await _unitOfWork.Repository<DeliveryOrder>().Entities

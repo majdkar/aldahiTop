@@ -28,6 +28,7 @@ namespace FirstCall.Application.Features.Orders.Queries.GetAll
         public string ClientName{ get; set; }
 
 
+        public string Type { get; set; }
 
 
         public string ImageBillLadingUrl { get; set; }

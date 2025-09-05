@@ -37,6 +37,7 @@ namespace FirstCall.Application.Features.Orders.Commands.AddEdit
 
         public DateTime? OrderDate { get; set; }
 
+        public string Type { get; set; }
 
 
     }
@@ -128,6 +129,7 @@ namespace FirstCall.Application.Features.Orders.Commands.AddEdit
                     order.Status = command.Status;
                     order.OrderNumber = command.OrderNumber;
                     order.ClientId = command.ClientId;
+                    order.Type = command.Type;
 
 
                     await _unitOfWork.Repository<DeliveryOrder>().UpdateAsync(order);

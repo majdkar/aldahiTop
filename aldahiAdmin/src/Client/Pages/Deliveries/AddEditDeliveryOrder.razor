@@ -1,4 +1,4 @@
-﻿@page "/order-details/{OrderId:int}"
+﻿@page "/order-details/{OrderId:int}/{ProductType}"
 @using FirstCall.Shared.Constants.Clients
 @using FirstCall.Shared.Constants.Orders
 @inject Microsoft.Extensions.Localization.IStringLocalizer<AddEditDeliveryOrder> _localizer
@@ -61,7 +61,7 @@
 
                     <!-- Products -->
                     <MudItem xs="12">
-                        <InsideDeliveryOrdersProducts OrderId="@OrderId" @bind-Charges="AddEditDeliveryOrderModel.ChargesCommand" @ref="_leaseCharges" />
+                        <InsideDeliveryOrdersProducts ProductType="@ProductType" OrderId="@OrderId" @bind-Charges="AddEditDeliveryOrderModel.ChargesCommand" @ref="_leaseCharges" />
                     </MudItem>
 
                 </MudGrid>

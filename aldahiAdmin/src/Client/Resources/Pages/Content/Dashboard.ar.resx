@@ -219,4 +219,10 @@
   <data name="Model" xml:space="preserve">
     <value>رقم الموديل</value>
   </data>
+  <data name="B2B" xml:space="preserve">
+    <value>ورشة</value>
+  </data>
+  <data name="B2C" xml:space="preserve">
+    <value>محل</value>
+  </data>
 </root>

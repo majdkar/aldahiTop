@@ -1,4 +1,4 @@
-@page "/dashboardProduct"
+﻿@page "/dashboardProduct"
 @attribute [Authorize(Policy = Permissions.Dashboards.View)]
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Dashboard> _localizer
 
@@ -18,18 +18,68 @@
     }
     </style>
 
-
+      
 
 <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-4">
-    @if (_dataProducts is not null)
+   
+    
+    
+    <MudGrid Spacing="2" Class="mb-4">
+    <MudItem>
+        <MudCheckBox @bind-Checked="@selectedTypesDict["B2B"]" Label="@_localizer["B2B"]" Color="Color.Primary" />
+    </MudItem>
+    <MudItem>
+            <MudCheckBox @bind-Checked="@selectedTypesDict["B2C"]" Label="@_localizer["B2C"]" Color="Color.Secondary" />
+    </MudItem>
+    </MudGrid>
+
+
+    <MudGrid Spacing="2" Class="mb-4">
+        <MudItem>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => FilterByKind("ب ب"))">
+                @_localizer["B B"]
+            </MudButton>
+        </MudItem>
+        <MudItem>
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="@(() => FilterByKind("وسط"))">
+                @_localizer["Midlle"]
+            </MudButton>
+        </MudItem>
+        <MudItem>
+            <MudButton Variant="Variant.Filled" Color="Color.Tertiary" OnClick="@(() => FilterByKind("محير"))">
+                @_localizer["Moher"]
+            </MudButton>
+        </MudItem>
+        <MudItem>
+            <MudButton Variant="Variant.Outlined" Color="Color.Default" OnClick="@(() => FilterByKind(null))">
+                @_localizer["All"]
+            </MudButton>
+        </MudItem>
+    </MudGrid>
+
+    <!-- ✅ مربع البحث بالكود -->
+    <MudGrid Class="mb-4">
+        <MudItem xs="12" sm="6">
+            <MudTextField @bind-Value="searchCode" Label="Search by Code" Variant="Variant.Outlined" FullWidth="true" />
+        </MudItem>
+        <MudItem xs="12" sm="6" Class="d-flex align-items-center">
+            <MudSwitch @bind-Checked="isExactMatch" Color="Color.Primary" />
+            <MudText Class="ml-2">
+                @(isExactMatch ? "Exact Match" : "Partial Match")
+            </MudText>
+        </MudItem>
+    </MudGrid>
+
+
+    @if (filteredProducts is not null)
     {
     <MudGrid Spacing="3">
-            <MudVirtualize Items="@_dataProducts" Context="item">
+            <MudVirtualize Items="@filteredProducts" Context="item">
                     @if (item != null)
                     {
                         <MudItem xs="12" sm="6" md="4" lg="3">
-                            <MudCard Class="pt-3 ma-2" Style="height:600px; display:flex; flex-direction:column;">
-                        <MudCardMedia Class="ml-2 mr-2 rounded-lg sp" Image="@(item.ImageProduct.Replace('\\', '/'))" Height="330" />
+                            <MudCard Class="pt-3 ma-2" Style="height:490px; display:flex; flex-direction:column;">
+                            <MudCardMedia Class="ml-2 mr-2 rounded-lg sp" onclick="@(() => OpenImageDialog(item.ImageProduct))" Image="@(item.ImageProduct.Replace('\\', '/'))" Height="300" />
                                 <MudCardContent Style="flex:1;">
                                 <MudText Typo="Typo.h6">@(IsArabic ? item.CategoryName : item.CategoryNameEn)</MudText>
                             <MudText Typo="Typo.body2" Color="Color.Secondary">

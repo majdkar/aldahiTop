@@ -29,6 +29,7 @@ namespace FirstCall.Application.Features.Products.Queries.GetById
         public string ProductImageUrl2 { get; set; }
         public string ProductImageUrl3 { get; set; }
         public string ProductImageUrl4 { get; set; }
+        public string Type { get; set; }
 
         public int SeasonId { get; set; }
         public virtual Season Season { get; set; }

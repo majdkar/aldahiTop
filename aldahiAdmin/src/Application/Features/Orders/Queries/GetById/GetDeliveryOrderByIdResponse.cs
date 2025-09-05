@@ -28,6 +28,7 @@ namespace FirstCall.Application.Features.DeliveryOrders.Queries.GetById
 
 
         public string Status { get; set; }
+        public string Type { get; set; }
 
 
         public string ImageBillLadingUrl { get; set; }

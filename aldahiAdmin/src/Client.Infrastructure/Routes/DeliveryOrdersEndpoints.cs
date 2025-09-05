@@ -9,9 +9,9 @@ namespace FirstCall.Client.Infrastructure.Routes
     public static class DeliveryOrdersEndpoints
     {
 
-        public static string GetAllPaged(int pageNumber, int pageSize, string searchString, string[] orderBy)
+        public static string GetAllPaged(int pageNumber, int pageSize, string searchString, string[] orderBy,string Type)
         {
-            var url = $"api/v1/deliveryOrders?pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
+            var url = $"api/v1/deliveryOrders?Type={Type}&pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
             if (orderBy?.Any() == true)
             {
                 foreach (var orderByPart in orderBy)
@@ -24,9 +24,9 @@ namespace FirstCall.Client.Infrastructure.Routes
         }
 
 
-        public static string GetAllByStatus(int pageNumber, int pageSize, string searchString, string[] orderBy,string status)
+        public static string GetAllByStatus(int pageNumber, int pageSize, string searchString, string[] orderBy,string status,string Type)
         {
-            var url = $"api/v1/deliveryOrders/GetByStatus?status={status}&pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
+            var url = $"api/v1/deliveryOrders/GetByStatus?Type={Type}&status={status}&pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
             if (orderBy?.Any() == true)
             {
                 foreach (var orderByPart in orderBy)
@@ -40,9 +40,9 @@ namespace FirstCall.Client.Infrastructure.Routes
 
 
 
-        public static string GetAllPagedByClient(int pageNumber, int pageSize, string searchString, string[] orderBy,int clientId)
+        public static string GetAllPagedByClient(int pageNumber, int pageSize, string searchString, string[] orderBy,int clientId,string Type)
         {
-            var url = $"api/v1/deliveryOrders/GetPagedByClient?clientId={clientId}&pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
+            var url = $"api/v1/deliveryOrders/GetPagedByClient?Type={Type}?clientId={clientId}&pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
             if (orderBy?.Any() == true)
             {
                 foreach (var orderByPart in orderBy)
@@ -84,7 +84,13 @@ namespace FirstCall.Client.Infrastructure.Routes
 
         public static string Export = "api/v1/deliveryOrders/export";
 
-        public static string GetAll = "api/v1/deliveryOrders";
+
+
+        public static string GetAll(string Type)
+        {
+            return $"api/v1/deliveryOrders/{Type}";
+        }
+
         public static string Delete = "api/v1/deliveryOrders";
         public static string Save = "api/v1/deliveryOrders";
 
