@@ -21,6 +21,8 @@ namespace FirstCall.Domain.Entities.Orders
         public decimal UnitPrice { get; set; }
         public decimal TotalPrice { get; set; }
 
+
+        [JsonIgnore]
         [ForeignKey("DeliveryOrder")]
         public int DeliveryOrderId { get; set; }
         public virtual DeliveryOrder DeliveryOrder { get; set; }

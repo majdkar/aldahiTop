@@ -132,6 +132,9 @@
   <data name="ChampionshipsClassifications" xml:space="preserve">
     <value>تصنيف البطولات</value>
   </data>
+  <data name="Search by Code" xml:space="preserve">
+    <value>البحث برقم الموديل</value>
+  </data>
   <data name="ClubRequests" xml:space="preserve">
     <value>طلبات النوادي</value>
   </data>
@@ -224,5 +227,26 @@
   </data>
   <data name="B2C" xml:space="preserve">
     <value>محل</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>الفلترة (البحث المتقدم)</value>
+  </data>
+  <data name="B B" xml:space="preserve">
+    <value>ب ب</value>
+  </data>
+  <data name="Midlle" xml:space="preserve">
+    <value>وسط</value>
+  </data>
+  <data name="Moher" xml:space="preserve">
+    <value>محير</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>الكل</value>
+  </data>
+  <data name="Exact Match" xml:space="preserve">
+    <value>المطابقة التامة</value>
+  </data>
+  <data name="Partial Match" xml:space="preserve">
+    <value>المطابقة الجزئية</value>
   </data>
 </root>

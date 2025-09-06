@@ -13,9 +13,12 @@ else
         <MudTabPanel Text=@_localizer["Client Details"]>
             <PersonClientBasicInfo Model="PersonModel" />
         </MudTabPanel>
-@*         <MudTabPanel Text=@_localizer["My Orders"]>
-            <StudentMyFinalOrdinaryOrders ClientType="@ClientTypesEnum.Person.ToString()" ClientId="PersonModel.ClientId" />
-        </MudTabPanel> *@
+        <MudTabPanel Text=@_localizer["B2B My Orders"]>
+            <FirstCall.Client.Pages.Deliveries.HomeDeliveryOrdersClient  ClientId="PersonModel.ClientId" />
+        </MudTabPanel>    
+        <MudTabPanel Text=@_localizer["B2C My Orders"]>
+            <FirstCall.Client.Pages.Deliveries.HomeB2CDeliveryOrdersByClient  ClientId="PersonModel.ClientId" />
+        </MudTabPanel>
        @*  <MudTabPanel Text=@_localizer["RFQ"]>
             <PriceOffers ClientId="PersonModel.ClientId" />
         </MudTabPanel>

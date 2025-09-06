@@ -12,6 +12,7 @@ namespace FirstCall.Application.Features.OrderProducts.Queries.GetAllByOrder
         public int DeliveryOrderId { get; set; }
         public string DeliveryOrder { get; set; }
         public int ProductId { get; set; }
+        public string ImageUrl { get; set; }
       
 
 

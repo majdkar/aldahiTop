@@ -64,51 +64,31 @@ namespace FirstCall.Application.Features.Orders.Commands.AddEdit
                 try
                 {
                     var order = _mapper.Map<DeliveryOrder>(command);
-                    Random generator = new Random();
 
-                    //order.OrderNumber = generator.Next(0, 1000000).ToString("D6");
-
+                    // 1- تحقق من الكميات أولاً (بدون تعديل)
                     foreach (var item in command.ChargesCommand)
                     {
                         var product = await _unitOfWork.Repository<Product>().GetByIdAsync(item.ProductId);
 
                         if (product == null)
-                            throw new Exception("المنتج غير موجود");
+                            return await Result<int>.FailAsync($"المنتج برقم {item.Id} غير موجود");
 
                         if (product.Qty < item.Quantity)
-                            throw new Exception($"الكمية غير متوفرة للمنتج {product.NameAr}");
+                            return await Result<int>.FailAsync($"الكمية غير متوفرة للمنتج {product.NameAr} (المتوفر: {product.Qty})");
+                    }
 
-                        // خصم الكمية
+                    // 2- بعد التأكد: خصم الكميات فعليًا
+                    foreach (var item in command.ChargesCommand)
+                    {
+                        var product = await _unitOfWork.Repository<Product>().GetByIdAsync(item.ProductId);
                         product.Qty -= item.Quantity;
                         await _unitOfWork.Repository<Product>().UpdateAsync(product);
                     }
 
-
-
+                    // 3- حفظ الطلب
                     await _unitOfWork.Repository<DeliveryOrder>().AddAsync(order);
                     await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllDeliveryOrdersCacheKey);
-                    //if(order.Status == "Pending")
-                    //{
-                    //    int maxBillNo = 0;
-                    //    var bills = await _unitOfWork.Repository<Bill>().GetAllAsync();
-                    //    if (bills.Count > 0)
-                    //        maxBillNo = bills.Max(e => e.Number);
-                    //    var bill = new Bill
-                    //    {
-                    //        ClientId = order.ClientId,
-                    //        DeliveryOrderId = order.Id,
-                    //        //UnitPrice = event1.Price,
-                    //        ToltalPrice = order.TotalPrice,
-                    //        Number = maxBillNo + 1,
-                    //        BillNumber = "MC-" + (maxBillNo + 1),
-                    //        BillDate = DateTime.Now,
-                    //        //IsDeletedByClient = false,
-                    //        Status = "unpaid",
 
-                    //    };
-                    //    await _unitOfWork.Repository<Bill>().AddAsync(bill);
-                    //    await _unitOfWork.Commit(cancellationToken);
-                    //}
                     await transaction.CommitAsync();
 
                     return await Result<int>.SuccessAsync(order.Id, _localizer["DeliveryOrder Saved"]);
@@ -122,24 +102,85 @@ namespace FirstCall.Application.Features.Orders.Commands.AddEdit
             }
             else
             {
-                var order = await _unitOfWork.Repository<DeliveryOrder>().GetByIdAsync(command.Id);
-                if (order != null)
+                using var transaction = await _unitOfWork.BeginTransactionAsync(cancellationToken);
+                try
                 {
+                    var order = await _unitOfWork.Repository<DeliveryOrder>()
+                        .Entities.Include(x => x.Products)
+                        .FirstOrDefaultAsync(x => x.Id == command.Id);
+
+                    if (order == null)
+                        return await Result<int>.FailAsync(_localizer["DeliveryOrder Not Found!"]);
+
+                    // 1- تحقق من الكميات أولًا (بدون تعديل)
+                    foreach (var item in command.ChargesCommand)
+                    {
+                        var product = await _unitOfWork.Repository<Product>().GetByIdAsync(item.ProductId);
+                        var oldQty = order.Products.FirstOrDefault(p => p.ProductId == item.ProductId)?.Quantity ?? 0;
+
+                        if (product == null)
+                            return await Result<int>.FailAsync($"المنتج برقم {item.ProductId} غير موجود");
+
+                        if ((product.Qty + oldQty) < item.Quantity)
+                            return await Result<int>.FailAsync($"الكمية غير متوفرة للمنتج {product.NameAr} (المتوفر: {product.Qty})");
+                    }
+
+                    // 2- إرجاع الكميات القديمة
+                    foreach (var oldItem in order.Products)
+                    {
+                        var product = await _unitOfWork.Repository<Product>().GetByIdAsync(oldItem.ProductId);
+                        if (product != null)
+                        {
+                            product.Qty += oldItem.Quantity;
+                            await _unitOfWork.Repository<Product>().UpdateAsync(product);
+                        }
+                    }
+
+                    // 3- حذف التفاصيل القديمة
+                    await _unitOfWork.Repository<DeliveryOrderProduct>().DeleteRangeAsync(order.Products);
+
+                    // 4- إضافة التفاصيل الجديدة + خصم الكميات الجديدة
+                    var newCharges = new List<DeliveryOrderProduct>();
+                    foreach (var item in command.ChargesCommand)
+                    {
+                        var product = await _unitOfWork.Repository<Product>().GetByIdAsync(item.ProductId);
+
+                        product.Qty -= item.Quantity;
+                        await _unitOfWork.Repository<Product>().UpdateAsync(product);
+
+                        newCharges.Add(new DeliveryOrderProduct
+                        {
+                            DeliveryOrderId = order.Id,
+                            ProductId = item.ProductId,
+                            Quantity = item.Quantity,
+                            UnitPrice = item.UnitPrice,
+                           TotalPrice = item.TotalPrice,
+                            
+                        });
+                    }
+
+                    await _unitOfWork.Repository<DeliveryOrderProduct>().AddRangeAsync(newCharges);
+
+                    // 5- تحديث بيانات الطلب
                     order.TotalPrice = command.TotalPrice == 0 ? order.TotalPrice : command.TotalPrice;
                     order.Status = command.Status;
                     order.OrderNumber = command.OrderNumber;
                     order.ClientId = command.ClientId;
                     order.Type = command.Type;
 
-
                     await _unitOfWork.Repository<DeliveryOrder>().UpdateAsync(order);
                     await _unitOfWork.CommitAndRemoveCache(cancellationToken, ApplicationConstants.Cache.GetAllDeliveryOrdersCacheKey);
+
+                    await transaction.CommitAsync();
+
                     return await Result<int>.SuccessAsync(order.Id, _localizer["DeliveryOrder Updated"]);
                 }
-                else
+                catch
                 {
-                    return await Result<int>.FailAsync(_localizer["DeliveryOrder Not Found!"]);
+                    await transaction.RollbackAsync();
+                    throw;
                 }
+
             }
         }
     }

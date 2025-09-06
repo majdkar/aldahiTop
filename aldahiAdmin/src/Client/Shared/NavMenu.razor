@@ -13,28 +13,28 @@
 
 <UserCard />
 <MudNavMenu>
-    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Home">@_localizer["Home"]</MudNavLink>
+    <MudNavLink Href="/" IconColor="Color.Info" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Home">@_localizer["Home"]</MudNavLink>
 
    
 
 
-    <MudNavLink Href="/account">
+    <MudNavLink Href="/account" IconColor="Color.Info" Icon="@Icons.Material.Outlined.AccountBox">
         @_localizer["Account"]
     </MudNavLink>
  
     @*users management*@
     @if (_isAdmin)
     {
-        <MudNavGroup Title="@_localizer["Administrator"]" Icon="@Icons.Material.Outlined.AdminPanelSettings">
+        <MudNavGroup Title="@_localizer["Administrator"]" IconColor="Color.Info" Icon="@Icons.Material.Outlined.AdminPanelSettings">
             @if (_canViewUsers)
             {
-                <MudNavLink Href="/identity/users" Icon="@Icons.Material.Outlined.Person">
+                <MudNavLink Href="/identity/users" IconColor="Color.Info" Icon="@Icons.Material.Outlined.Person">
                     @_localizer["Users"]
                 </MudNavLink>
             }
             @if (_canViewRoles)
             {
-                <MudNavLink Href="/identity/roles" Icon="@Icons.Material.Outlined.Person">@_localizer["Roles"]</MudNavLink>
+                <MudNavLink Href="/identity/roles" IconColor="Color.Info" Icon="@Icons.Material.Outlined.Person">@_localizer["Roles"]</MudNavLink>
             }
         </MudNavGroup>
     }
@@ -45,37 +45,37 @@
     @*general settings*@
     @if (_canViewSeasons || _canViewKinds)
     {
-        <MudNavGroup Title="@_localizer["GeneralSettings Management"]" Icon="@Icons.Material.Outlined.Settings">
+        <MudNavGroup Title="@_localizer["GeneralSettings Management"]" IconColor="Color.Info" Icon="@Icons.Material.Outlined.Settings">
 
 
             @if (_canViewSeasons)
             {
-                <MudNavLink Href="/general-settings/Seasons" Icon="@Icons.Material.Outlined.CallToAction">
+                <MudNavLink Href="/general-settings/Seasons" IconColor="Color.Info" Icon="@Icons.Material.Outlined.CallToAction">
                     @_localizer["Seasons"]
                 </MudNavLink>
             }
             @if (_canViewKinds)
             {
-                <MudNavLink Href="/general-settings/Kinds" Icon="@Icons.Material.Outlined.CallToAction">
+                <MudNavLink Href="/general-settings/Kinds" IconColor="Color.Info" Icon="@Icons.Material.Outlined.CallToAction">
                     @_localizer["Products Kinds"]
                 </MudNavLink>
             }    
             
             @if (_canViewGroups)
             {
-                <MudNavLink Href="/general-settings/Groups" Icon="@Icons.Material.Outlined.CallToAction">
+                <MudNavLink Href="/general-settings/Groups" IconColor="Color.Info" Icon="@Icons.Material.Outlined.CallToAction">
                     @_localizer["Groups"]
                 </MudNavLink>
             }    
 
             @if (_canViewWarehousess)
             {
-                <MudNavLink Href="/general-settings/Warehousess" Icon="@Icons.Material.Outlined.CallToAction">
+                <MudNavLink Href="/general-settings/Warehousess" IconColor="Color.Info" Icon="@Icons.Material.Outlined.CallToAction">
                     @_localizer["Warehousess"]
                 </MudNavLink>
             }
 
-            <MudNavLink Href="/general-settings/Product-Categories" Icon="@Icons.Material.Outlined.CallToAction">
+            <MudNavLink Href="/general-settings/Product-Categories" IconColor="Color.Info" Icon="@Icons.Material.Outlined.CallToAction">
                 @_localizer["Product Categories"]
             </MudNavLink>
 
@@ -86,7 +86,7 @@
     @if (_canViewPersons)
     {
 
-        <MudNavGroup Title="@_localizer["Clients Management"]" Icon="@Icons.Material.Outlined.Person">
+        <MudNavGroup Title="@_localizer["Clients Management"]" IconColor="Color.Info" Icon="@Icons.Material.Outlined.Person">
             @if (_canViewPersons)
             {
                 <MudNavLink Href="/individuals">
@@ -99,14 +99,14 @@
 
     @if (_canViewProducts)
     {
-        <MudNavGroup Title="@_localizer["Products"]" Expanded="true" Icon="@Icons.Material.Outlined.CardMembership">
+        <MudNavGroup Title="@_localizer["Products"]" IconColor="Color.Info" Icon="@Icons.Material.Outlined.CardMembership">
 
 
-        <MudNavLink Href="/products/B2B" Icon="@Icons.Material.Outlined.CardMembership" >
+            <MudNavLink Href="/products/B2B" >
             @_localizer["B2B Products"]
     </MudNavLink>
       
-        <MudNavLink Href="/products/B2C" Icon="@Icons.Material.Outlined.CardMembership" >
+            <MudNavLink Href="/products/B2C" >
                 @_localizer["B2C Products"]
     </MudNavLink>
 
@@ -117,13 +117,13 @@
 
     @if (_canViewOrder)
     {
-        <MudNavGroup Title="@_localizer["Orders Management"]" Expanded="true" Icon="@Icons.Material.Outlined.ShoppingCart">
+        <MudNavGroup Title="@_localizer["Orders Management"]" IconColor="Color.Info" Icon="@Icons.Material.Outlined.ShoppingCart">
 
-        <MudNavLink Href="/HomeDeliveryOrders" Icon="@Icons.Material.Outlined.ShoppingCart">
+            <MudNavLink Href="/HomeDeliveryOrders">
             @_localizer["B2B Orders"]
         </MudNavLink>
 
-        <MudNavLink Href="/HomeB2CDeliveryOrders" Icon="@Icons.Material.Outlined.ShoppingCart">
+            <MudNavLink Href="/HomeB2CDeliveryOrders">
             @_localizer["B2C Orders"]
         </MudNavLink>
 

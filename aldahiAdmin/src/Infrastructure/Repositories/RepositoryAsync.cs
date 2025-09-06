@@ -33,6 +33,13 @@ namespace FirstCall.Infrastructure.Repositories
             await _dbContext.Set<T>().AddRangeAsync(entities);
         }
 
+
+        public async Task DeleteRangeAsync(IEnumerable<T> entities)
+        {
+            _dbContext.Set<T>().RemoveRange(entities);
+            await Task.CompletedTask;
+        }
+
         public Task DeleteAsync(T entity)
         {
             _dbContext.Set<T>().Remove(entity);

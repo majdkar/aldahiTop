@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FirstCall.Domain.Entities.Orders;
+using FirstCall.Application.Features.OrderProducts.Queries.GetAllByOrder;
 
 namespace FirstCall.Application.Features.DeliveryOrders.Queries.GetById
 {
@@ -32,7 +33,8 @@ namespace FirstCall.Application.Features.DeliveryOrders.Queries.GetById
 
 
         public string ImageBillLadingUrl { get; set; }
-        public virtual List<DeliveryOrderProduct> Products { get; set; }
+
+        public virtual List<GetAllDeliveryOrderProductsResponse> Products { get; set; }
 
 
     }

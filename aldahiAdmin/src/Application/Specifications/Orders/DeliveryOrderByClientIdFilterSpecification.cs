@@ -5,11 +5,11 @@ namespace FirstCall.Application.Specifications.Orders
 {
     public class DeliveryOrderByClientIdFilterSpecification : HeroSpecification<DeliveryOrder>
     {
-        public DeliveryOrderByClientIdFilterSpecification(string searchstring, int ClientId,string Type)
+        public DeliveryOrderByClientIdFilterSpecification(string searchstring, int ClientId,string Type,string status)
         {
             Includes.Add(p => p.Client);
 
-            Criteria = p => p.ClientId == ClientId && p.Type == Type && !p.IsDeleted;// && p.IsConfirm == true ;
+            Criteria = p => p.ClientId == ClientId && p.Type == Type&& p.Status == status && !p.IsDeleted;// && p.IsConfirm == true ;
         }
     }
 }

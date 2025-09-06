@@ -135,6 +135,7 @@ namespace FirstCall.Client.Pages.Deliveries
        
             if (string.IsNullOrEmpty(AddEditDeliveryOrderModel.Status))
                 AddEditDeliveryOrderModel.Status = OrderStatusEnum.Pending.ToString();
+                AddEditDeliveryOrderModel.Type = ProductType;
 
             AddEditDeliveryOrderModel.TotalPrice = _leaseCharges.Charges.Sum(x => x.TotalPrice);
 

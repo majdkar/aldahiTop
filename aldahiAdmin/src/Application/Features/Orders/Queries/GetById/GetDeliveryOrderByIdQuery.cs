@@ -9,6 +9,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FirstCall.Domain.Entities.Orders;
+using FirstCall.Application.Features.Orders.Queries.GetAll;
+using FirstCall.Application.Features.OrderProducts.Queries.GetAllByOrder;
+using FirstCall.Domain.Entities.Products;
 
 namespace FirstCall.Application.Features.DeliveryOrders.Queries.GetById
 {
@@ -35,7 +38,19 @@ namespace FirstCall.Application.Features.DeliveryOrders.Queries.GetById
                 .Specify(DeliveryOrdersFilterSpec)
                 .FirstOrDefaultAsync();
             var mappeddeliveryOrder = _mapper.Map<GetDeliveryOrderByIdResponse>(deliveryOrder);
-            
+
+            mappeddeliveryOrder.Products = await _unitOfWork.Repository<DeliveryOrderProduct>().Entities.Where(x => x.DeliveryOrderId == mappeddeliveryOrder.Id)
+                .Select(x => new GetAllDeliveryOrderProductsResponse
+                {
+                    Id = x.Id,
+                    Quantity = x.Quantity,
+                    UnitPrice = x.UnitPrice,
+                    TotalPrice = x.TotalPrice,
+                    ImageUrl = _unitOfWork.Repository<Product>().Entities.FirstOrDefault(w => w.Id == x.ProductId).ProductImageUrl
+
+
+                }).ToListAsync();
+
             return await Result<GetDeliveryOrderByIdResponse>.SuccessAsync(mappeddeliveryOrder);
         }
     }

@@ -18,6 +18,8 @@ using FirstCall.Core.Entities;
 using FirstCall.Shared.Constants.Clients;
 using FirstCall.Shared.Constants.Orders;
 using FirstCall.Application.Features.Clients.Persons.Queries.GetAll;
+using FirstCall.Application.Features.Orders.Queries.GetAll;
+using FirstCall.Application.Features.DeliveryOrders.Queries.GetById;
 
 namespace FirstCall.Client.Pages.Deliveries
 {
@@ -34,13 +36,14 @@ namespace FirstCall.Client.Pages.Deliveries
         private List<GetAllPrincedomsResponse> _princedoms = new();
 
 
-        public AddEditDeliveryOrderCommand AddEditDeliveryOrderModel { get; set; } = new();
+        //public AddEditDeliveryOrderCommand AddEditDeliveryOrderModel { get; set; } = new();
 
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
 
 
         private List<GetAllPersonsResponse> _persons = new();
+        private GetDeliveryOrderByIdResponse _Orders = new();
      
 
 
@@ -93,24 +96,10 @@ namespace FirstCall.Client.Pages.Deliveries
                 var data = await DeliveryOrderManager.GetByIdAsync(OrderId);
                 if (data.Succeeded)
                 {
-                    var order = data.Data;
-                    AddEditDeliveryOrderModel = new AddEditDeliveryOrderCommand
-                    {
-
-                        ClientId = order.ClientId,
-                        Id = order.Id,
-                        OrderNumber = order.OrderNumber,
-                        TotalPrice = order.TotalPrice,
-                        Status = order.Status,
-                        OrderDate  =order.OrderDate,
-                    };
-      
+                    _Orders = data.Data;
                 }
             }
-            else
-            {
-                AddEditDeliveryOrderModel.Id = 0;
-            }
+         
 
         }
 
@@ -126,31 +115,7 @@ namespace FirstCall.Client.Pages.Deliveries
 
 
 
-        private async Task SaveAsync()
-        {
-        
-           
-            AddEditDeliveryOrderModel.Status = OrderStatusEnum.Pending.ToString();
-
-            var response = await DeliveryOrderManager.SaveAsync(AddEditDeliveryOrderModel);
-            if (response.Succeeded)
-            {
-                _snackBar.Add(response.Messages[0], Severity.Success);
-                AddEditDeliveryOrderModel.Id = response.Data;
-                OrderId = response.Data;
-
-                await LoadOrderDetails();
-            }
-            else
-            {
-                foreach (var message in response.Messages)
-                {
-                    _snackBar.Add(message, Severity.Error);
-                }
-            }
-        }
-
-
+    
 
       
 

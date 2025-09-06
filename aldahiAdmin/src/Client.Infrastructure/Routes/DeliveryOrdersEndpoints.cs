@@ -40,9 +40,9 @@ namespace FirstCall.Client.Infrastructure.Routes
 
 
 
-        public static string GetAllPagedByClient(int pageNumber, int pageSize, string searchString, string[] orderBy,int clientId,string Type)
+        public static string GetAllPagedByClient(int pageNumber, int pageSize, string searchString, string[] orderBy,int clientId,string Type,string Status)
         {
-            var url = $"api/v1/deliveryOrders/GetPagedByClient?Type={Type}?clientId={clientId}&pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
+            var url = $"api/v1/deliveryOrders/GetPagedByClient?Type={Type}&clientId={clientId}&Status={Status}&pageNumber={pageNumber}&pageSize={pageSize}&searchString={searchString}&orderBy=";
             if (orderBy?.Any() == true)
             {
                 foreach (var orderByPart in orderBy)

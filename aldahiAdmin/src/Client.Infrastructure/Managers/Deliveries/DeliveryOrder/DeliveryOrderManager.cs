@@ -64,7 +64,7 @@ namespace FirstCall.Client.Infrastructure.Managers.Deliveries.DeliveryOrder
 
         public async Task<PaginatedResult<GetAllDeliveryOrdersResponse>> GetAllPagedByClientAsync(GetAllPagedDeliveryOrdersRequest request, int clientId)
         {
-            var response = await _httpClient.GetAsync(Routes.DeliveryOrdersEndpoints.GetAllPagedByClient(request.PageNumber, request.PageSize, request.SearchString, request.Orderby, clientId,request.Type));
+            var response = await _httpClient.GetAsync(Routes.DeliveryOrdersEndpoints.GetAllPagedByClient(request.PageNumber, request.PageSize, request.SearchString, request.Orderby, clientId,request.Type,request.Status));
             return await response.ToPaginatedResult<GetAllDeliveryOrdersResponse>();
         }
 

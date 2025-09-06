@@ -496,7 +496,7 @@
             <param name="id"></param>
             <returns>Status 200 Ok</returns>
         </member>
-        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrdersController.GetPagedByClient(System.String,System.Int32,System.Int32,System.Int32,System.String,System.String)">
+        <member name="M:FirstCall.Server.Controllers.v1.DeliveryManagment.DeliveryOrdersController.GetPagedByClient(System.String,System.String,System.Int32,System.Int32,System.Int32,System.String,System.String)">
             <summary>
             Get Paged Delivery Orders By  Client Id
             </summary>

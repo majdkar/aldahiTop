@@ -59,7 +59,7 @@ namespace FirstCall.Server.Controllers.v1.DeliveryManagment
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Status 200 Ok</returns>
-        //[Authorize(Policy = Permissions.DeliveryOrders.View)]
+       [Authorize(Policy = Permissions.DeliveryOrders.View)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -87,9 +87,9 @@ namespace FirstCall.Server.Controllers.v1.DeliveryManagment
         /// <returns>Status 200 OK</returns>
         //[Authorize(Policy = Permissions.DeliveryOrders.View)]
         [HttpGet("GetPagedByClient")]
-        public async Task<IActionResult> GetPagedByClient(string type, int clientId, int pageNumber, int pageSize, string searchString, string orderBy = null)
+        public async Task<IActionResult> GetPagedByClient(string type,string status, int clientId, int pageNumber, int pageSize, string searchString, string orderBy = null)
         {
-            var deliveryOrders = await _mediator.Send(new GetAllPagedDeliveryOrdersByClientQuery(clientId, pageNumber, pageSize, searchString, orderBy,type));
+            var deliveryOrders = await _mediator.Send(new GetAllPagedDeliveryOrdersByClientQuery(clientId, pageNumber, pageSize, searchString,status, orderBy,type));
             return Ok(deliveryOrders);
         }
 

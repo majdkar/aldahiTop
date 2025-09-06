@@ -132,8 +132,8 @@
   <data name="ChampionshipsClassifications" xml:space="preserve">
     <value>Championships Classifications</value>
   </data>
-  <data name="Charts comming soon ish..." xml:space="preserve">
-    <value>Charts comming soon ish...</value>
+  <data name="Search by Code" xml:space="preserve">
+    <value>Search by Code</value>
   </data>
   <data name="ClubRequests" xml:space="preserve">
     <value>Club Requests </value>
@@ -227,5 +227,26 @@
   </data>
   <data name="B2C" xml:space="preserve">
     <value>B2C</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="B B" xml:space="preserve">
+    <value>B B</value>
+  </data>
+  <data name="Midlle" xml:space="preserve">
+    <value>Midlle</value>
+  </data>
+  <data name="Moher" xml:space="preserve">
+    <value>Moher</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Exact Match" xml:space="preserve">
+    <value>Exact Match</value>
+  </data>
+  <data name="Partial Match" xml:space="preserve">
+    <value>Partial Match</value>
   </data>
 </root>

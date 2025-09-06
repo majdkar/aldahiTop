@@ -61,7 +61,12 @@ namespace FirstCall.Client.Pages.Content
             });
             await HubConnection.StartAsync();
         }
+        private bool showFilters = false;
 
+        private void ToggleFilters()
+        {
+            showFilters = !showFilters;
+        }
 
         private Dictionary<string, bool> selectedTypesDict = new()
             {

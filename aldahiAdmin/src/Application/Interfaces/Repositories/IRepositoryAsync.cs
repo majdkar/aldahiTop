@@ -22,7 +22,9 @@ namespace FirstCall.Application.Interfaces.Repositories
         Task<List<Dictionary<string, object>>> FromSqlRaw(string sql);
 
         Task<T> AddAsync(T entity);
+
         Task AddRangeAsync(IEnumerable<T> entities);
+        Task DeleteRangeAsync(IEnumerable<T> entities);
 
         Task UpdateAsync(T entity);
 

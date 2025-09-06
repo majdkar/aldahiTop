@@ -22,9 +22,10 @@ namespace FirstCall.Application.Features.DeliveryOrders.Queries.GetAllPaged
         public int PageSize { get; set; } = 100;
         public string SearchString { get; set; }
         public string Type { get; set; }
+        public string Status { get; set; }
         public string[] OrderBy { get; set; } // of the form fieldname [ascending|descending],fieldname [ascending|descending]...
 
-        public GetAllPagedDeliveryOrdersByClientQuery(int clientId, int pageNumber, int pageSize, string searchString, string orderBy,string type)
+        public GetAllPagedDeliveryOrdersByClientQuery(int clientId, int pageNumber, int pageSize, string searchString,string status, string orderBy,string type)
         {
             PageNumber = pageNumber;
             PageSize = pageSize;
@@ -35,6 +36,7 @@ namespace FirstCall.Application.Features.DeliveryOrders.Queries.GetAllPaged
             }
             ClientId = clientId;
             Type = type;
+            Status = status;
         }
     }
 
@@ -63,7 +65,7 @@ namespace FirstCall.Application.Features.DeliveryOrders.Queries.GetAllPaged
                 ImageBillLadingUrl = e.ImageBillLadingUrl,
                  Products =e.Products,
             };
-            var DeliveryOrdersFilterSpec = new DeliveryOrderByClientIdFilterSpecification(request.SearchString,request.ClientId,request.Type);
+            var DeliveryOrdersFilterSpec = new DeliveryOrderByClientIdFilterSpecification(request.SearchString,request.ClientId,request.Type,request.Status);
             if (request.OrderBy?.Any() != true)
             {
                 var data = await _unitOfWork.Repository<DeliveryOrder>().Entities
