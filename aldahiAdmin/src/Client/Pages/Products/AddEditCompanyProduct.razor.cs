@@ -142,7 +142,7 @@ namespace FirstCall.Client.Pages.Products
         {
             if (ProductId != 0)
             {
-                var data = await ProductManager.GetByIdAsync(ProductId,ProductType);
+                var data = await ProductManager.GetByIdAsync(ProductId);
                 if (data.Succeeded)
                 {
                     var product = data.Data;

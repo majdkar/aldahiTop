@@ -1,0 +1,21 @@
+﻿<!-- Pagination.razor -->
+<div class="pagination">
+    @for (int i = 1; i <= TotalPages; i++)
+    {
+        <button @onclick="() => OnPageChanged(i)">@i</button>
+    }
+</div>
+
+@code {
+    [Parameter] public int TotalCount { get; set; }
+    [Parameter] public int Selected { get; set; }
+    [Parameter] public EventCallback<int> SelectedChanged { get; set; }
+
+    private int TotalPages => (int)Math.Ceiling(TotalCount / 10.0);
+
+    private async Task OnPageChanged(int page)
+    {
+        Selected = page;
+        await SelectedChanged.InvokeAsync(page);
+    }
+}

@@ -1,0 +1,240 @@
+﻿@page "/productssReport"
+
+@attribute [Authorize(Policy = Permissions.Products.View)]
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Products> _localizer
+@inject IJSRuntime ijsRuntime
+@using System.Globalization
+@using FirstCall.Shared.Constants.Clients
+@using  FirstCall.Client.Pages.Products
+
+<h1>@_localizer["Products Report"]</h1>
+
+
+        <MudCard Elevation="4" Class="w-100" Style="max-width:1200px; margin:auto;">
+
+            <MudCardContent >
+                    <MudGrid>
+
+                  
+
+
+               
+                  
+                        <MudItem xs="12" md="4">
+                        <MudTextField For="@(() => Code)" @bind-Value="@Code" Label="@_localizer["Code"]" Variant="Variant.Outlined" />
+                        </MudItem>
+
+                        <MudItem xs="12" md="4">
+                        <MudTextField For="@(() => FromQty)" @bind-Value="@FromQty" Label="@_localizer["From Qty"]" Variant="Variant.Outlined" />
+                        </MudItem>
+
+                        <MudItem xs="12" md="4">
+                        <MudTextField For="@(() => ToQty)" @bind-Value="@ToQty" Label="@_localizer["To Qty"]" Variant="Variant.Outlined" />
+                        </MudItem>
+
+
+                            <MudItem xs="12" md="4">
+
+                        <MudSelect @bind-Value="@GroupId" T="int" Label="@_localizer["Group"]" AnchorOrigin="Origin.BottomCenter" Variant="Variant.Outlined">
+                                    <MudSelectItem T="int" Value="0">@_localizer["All"]</MudSelectItem>
+                                    @foreach (var value in _groups)
+                                    {
+                                        <MudSelectItem T="int" Value="@value.Id">@value.NameAr</MudSelectItem>
+                                    }
+                                </MudSelect>
+                            </MudItem>
+                            
+                            <MudItem xs="12" md="4">
+
+                <MudSelect @bind-Value="@KindId" T="int" Label="@_localizer["Kind"]" AnchorOrigin="Origin.BottomCenter" Variant="Variant.Outlined">
+                                    <MudSelectItem T="int" Value="0">@_localizer["All"]</MudSelectItem>
+                                    @foreach (var value in _Kinds)
+                                    {
+                                        <MudSelectItem T="int" Value="@value.Id">@value.NameAr</MudSelectItem>
+                                    }
+                                </MudSelect>
+                            </MudItem>
+                                               
+                            <MudItem xs="12" md="4">
+
+                <MudSelect @bind-Value="@ProductCategoryId" T="int" Label="@_localizer["Category"]" AnchorOrigin="Origin.BottomCenter" Variant="Variant.Outlined">
+                                    <MudSelectItem T="int" Value="0">@_localizer["All"]</MudSelectItem>
+                                    @foreach (var value in _productCategories)
+                                    {
+                                        <MudSelectItem T="int" Value="@value.Id">@value.NameAr</MudSelectItem>
+                                    }
+                                </MudSelect>
+                            </MudItem>
+
+                                        
+                            <MudItem xs="12" md="4">
+
+                <MudSelect @bind-Value="@SeasonId" T="int" Label="@_localizer["Season"]" AnchorOrigin="Origin.BottomCenter" Variant="Variant.Outlined">
+                                    <MudSelectItem T="int" Value="0">@_localizer["All"]</MudSelectItem>
+                                    @foreach (var value in _seasons)
+                                    {
+                                        <MudSelectItem T="int" Value="@value.Id">@value.NameAr</MudSelectItem>
+                                    }
+                                </MudSelect>
+                            </MudItem>
+
+   
+
+
+
+
+
+                        </MudGrid>
+            
+                    <MudSpacer />
+                <br />
+                <MudButton DisableElevation Variant="Variant.Filled" OnClick="(() => SearchAdvance())" ButtonType="ButtonType.Submit" Color="Color.Success">@_localizer["Search"]</MudButton>
+
+                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary" Style="margin: 3px">@_localizer["Reload"]</MudButton>
+                    <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin: 3px">@_localizer["Export"]</MudButton>
+                    <MudButton DisableElevation Variant="Variant.Filled" @onclick="this.PrintMe" StartIcon="@Icons.Material.Filled.Print" IconColor="Color.Surface" Color="Color.Tertiary">@_localizer["Export To Pdf"]</MudButton>
+                </MudCardContent>
+            </MudCard>
+    <MudSpacer />
+<MudSpacer />
+
+<br />
+
+
+<div id="myPrint" style="margin-top: 1rem">
+    <style>
+
+        h1 {
+            font-size: 30px;
+            text-transform: uppercase;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .tbl-header {
+            background-color: rgba(255,255,255,0.3);
+        }
+
+        .tbl-content {
+            overflow-x: auto;
+            margin-top: 0px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        th {
+            padding: 20px 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        td {
+            text-align: center;
+            vertical-align: middle;
+            font-weight: 300;
+            font-size: 14px;
+            border-bottom: solid 1px rgba(255,255,255,0.1);
+        }
+
+
+        /* demo styles */
+
+
+
+        body {
+            /* background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+                                                            background: linear-gradient(to right, #25c481, #25b7c4);*/
+            font-family: 'Roboto', sans-serif;
+        }
+
+        section {
+            margin: 20px;
+        }
+
+
+        /* follow me template */
+        .made-with-love {
+            margin-top: 40px;
+            padding: 10px;
+            clear: left;
+            text-align: center;
+            font-size: 10px;
+            font-family: arial;
+            color: #fff;
+        }
+
+            .made-with-love i {
+                font-style: normal;
+                color: #F50057;
+                font-size: 14px;
+                position: relative;
+                top: 2px;
+            }
+
+            .made-with-love a {
+                color: #fff;
+                text-decoration: none;
+            }
+
+                .made-with-love a:hover {
+                    text-decoration: underline;
+                }
+
+        thead {
+            background: linear-gradient(to right, #25c481, #04AA6F);
+        }
+        /* for custom scrollbar for webkit browser*/
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #BDBDBD;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        }
+    </style>
+        @if (!_loaded)
+    {
+        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+    }
+    else
+    {
+
+        <MudTable Dense="true" RowsPerPage="25" Items="_pagedData" ServerData="LoadServerData" Elevation="0">
+            <HeaderContent>
+                <MudTh>@_localizer["Product Name"]</MudTh>
+                <MudTh>@_localizer["Code"]</MudTh>
+                <MudTh>@_localizer["Qty"]</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="@_localizer["Product Name"]">
+                    @(IsArabic ? $"{context.ProductCategory.NameAr} {context.KindNameAr} {context.Season.NameAr} {context.Group.NameAr}"
+                : $"{context.ProductCategory.NameEn}  {context.Kind.NameEn}  {context.Group.NameEn}  {context.Season.NameEn}")
+                </MudTd>
+                <MudTd DataLabel="@_localizer["Code"]">@context.Code</MudTd>
+                <MudTd DataLabel="@_localizer["Qty"]">@context.Qty</MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <TablePager />
+            </PagerContent>
+        </MudTable>
+      
+
+    }
+</div>
+

@@ -1,4 +1,5 @@
-﻿using FirstCall.Application.Features.Products.Commands.AddEdit;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using FirstCall.Application.Features.Products.Commands.AddEdit;
 using FirstCall.Application.Features.Products.Queries.GetAll;
 using FirstCall.Application.Features.Products.Queries.GetAllPaged;
 using FirstCall.Application.Features.Products.Queries.GetById;
@@ -15,11 +16,12 @@ namespace FirstCall.Client.Infrastructure.Managers.Products
 
 
         Task<PaginatedResult<GetAllPagedProductsResponse>> GetAllPagedSearchProductAsync(GetAllPagedProductsRequest request,string productname, decimal fromprice, decimal toprice,string ProductType);
+        Task<PaginatedResult<GetAllPagedProductsResponse>> GetAllPagedSearchAdvancedProductAsync(int seasonId, int kindId, int groupId, int warehousesId, int productCategoryId, string code, int fromqty, int toqty,string ProductType);
 
 
    
 
-        Task<IResult<GetProductByIdResponse>> GetByIdAsync(int productId,string ProductType);
+        Task<IResult<GetProductByIdResponse>> GetByIdAsync(int productId);
 
 
         Task<IResult<int>> SaveForCompanyProfileAsync(AddEditCompanyProductCommand request);
@@ -28,5 +30,8 @@ namespace FirstCall.Client.Infrastructure.Managers.Products
 
         Task<IResult<string>> ExportToExcelAsync(string searchString = "");
         Task<IResult<List<GetAllProductsResponse>>> GetAllAsync(string ProductType);
+
+        Task<IResult<string>> GetAllByForDownloadReportAsync(int seasonId, int kindId, int groupId, int warehousesId, int productCategoryId, string code, int fromqty, int toqty, string ProductType);
+
     }
 }

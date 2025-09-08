@@ -8,6 +8,8 @@ using FirstCall.Application.Features.Products.Queries.GetAllPaged;
 using FirstCall.Application.Features.Products.Queries.GetById;
 using FirstCall.Shared.Constants.Permission;
 using System.Threading.Tasks;
+using DocumentFormat.OpenXml.Wordprocessing;
+using MailKit.Search;
 
 namespace FirstCall.Server.Controllers.v1.Products
 {
@@ -89,6 +91,34 @@ namespace FirstCall.Server.Controllers.v1.Products
         }
 
 
+
+        /// <summary>
+        /// Get All Paged Search Products
+        /// </summary>
+        /// <param name="pageNumber"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="searchString"></param>
+        /// <param name="orderBy"></param>
+        /// <param name="seasonId"></param>
+        /// <param name="kindId"></param> 
+        /// <param name="groupId"></param>   
+        /// <param name="productType"></param>
+        /// <param name="warehousesId"></param>
+        /// <param name="productCategoryId"></param>
+        /// <param name="code"></param>
+        /// <param name="fromqty"></param>
+        /// <param name="toqty"></param>
+
+        /// <returns>Status 200 OK</returns>
+        [Authorize(Policy = Permissions.Products.View)]
+        [HttpGet("GetAllPagedSearchAdvancedProduct")]
+        public async Task<IActionResult> GetAllPagedSearchAdvancedProduct(int seasonId, int kindId, int groupId, int warehousesId, int productCategoryId, string code, int fromqty, int toqty, string productType,int pageNumber, int pageSize, string searchString, string orderBy = null)
+        {
+            var products = await _mediator.Send(new GetAllPagedSearchAdvancedProductsQuery(  pageNumber, pageSize, searchString, orderBy, seasonId,kindId,groupId,warehousesId,productCategoryId,code,fromqty,toqty,productType));
+            return Ok(products);
+        }
+
+
         /// <summary>
         /// Get Product By Id
         /// </summary>
@@ -138,6 +168,33 @@ namespace FirstCall.Server.Controllers.v1.Products
         public async Task<IActionResult> Export(string searchString = "")
         {
             return Ok(await _mediator.Send(new ExportCompanyProductsQuery(searchString)));
+        }
+
+
+
+        /// <summary>
+        /// Get All Paged Search Products Pdf
+        /// </summary>
+  
+        /// <param name="seasonId"></param>
+        /// <param name="kindId"></param> 
+        /// <param name="groupId"></param>   
+        /// <param name="productType"></param>
+        /// <param name="warehousesId"></param>
+        /// <param name="productCategoryId"></param>
+        /// <param name="code"></param>
+        /// <param name="fromqty"></param>
+        /// <param name="toqty"></param>
+
+        [HttpGet("export-pdf")]
+        public async Task<IActionResult> ExportPdf(int seasonId, int kindId, int groupId, int warehousesId, int productCategoryId, string code, int fromqty, int toqty, string productType)
+        {
+            // نرسل الكويري للـ Handler
+            var result = await _mediator.Send(new GetAllProductsPdfQuery( seasonId, kindId, groupId, warehousesId, productCategoryId, code, fromqty, toqty, productType));
+
+            // النتيجة عبارة عن كائن فيه الرابط
+            return Ok(result);
+            // بيرجع { "pdfUrl": "/reports/ProductsReport_20250907160001.pdf" }
         }
 
     }

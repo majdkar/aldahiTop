@@ -1,5 +1,6 @@
 ﻿using FirstCall.Shared.Constants.Products;
 using System.Linq;
+using static FirstCall.Shared.Constants.Permission.Permissions;
 
 namespace FirstCall.Client.Infrastructure.Routes
 {
@@ -34,11 +35,25 @@ namespace FirstCall.Client.Infrastructure.Routes
             }
             return url;
         }
-
-
-        public static string GetProductById(int id,string ProductType)
+        public static string GetAllPagedSearchAdvancedProduct(int seasonId, int kindId, int groupId, int warehousesId, int productCategoryId, string code, int fromqty, int toqty, string productType)
         {
-            return $"api/v1/Products/{id}/{ProductType}";
+            var url = $"api/v1/products/GetAllPagedSearchAdvancedProduct?code={code}&fromqty={fromqty}&toqty={toqty}&seasonId={seasonId}&kindId={kindId}&groupId={groupId}&warehousesId={warehousesId}&productCategoryId={productCategoryId}&productType={productType}";
+            return url;
+        }
+
+
+
+        public static string GetAllByForDownloadReportAsync(int seasonId, int kindId, int groupId, int warehousesId, int productCategoryId, string code, int fromqty, int toqty, string ProductType)
+        {
+            var url = $"api/v1/products/export-pdf?code={code}&fromqty={fromqty}&toqty={toqty}&seasonId={seasonId}&kindId={kindId}&groupId={groupId}&warehousesId={warehousesId}&productCategoryId={productCategoryId}&productType={ProductType}";
+
+          
+            return url;
+        }
+
+        public static string GetProductById(int id)
+        {
+            return $"api/v1/Products/{id}";
         }
         public static string SaveForCompanyProfile = "api/v1/products/AddEditCompanyProduct";
         public static string DeleteProduct = "api/v1/products";

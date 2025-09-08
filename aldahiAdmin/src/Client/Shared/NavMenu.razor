@@ -137,6 +137,12 @@
             @_localizer["Stocks"]
         </MudNavLink> *@
     }
+    @if (_canViewProducts)
+    {
+        <MudNavLink Href="/productssReport" IconColor="Color.Info" Icon="@Icons.Material.Outlined.Report">
+            @_localizer["Report"]
+        </MudNavLink>
+    }
 
 </MudNavMenu>
 

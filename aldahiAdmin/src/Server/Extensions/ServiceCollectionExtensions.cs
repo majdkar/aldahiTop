@@ -258,6 +258,7 @@ namespace FirstCall.Server.Extensions
             services.AddScoped<IPagePhotoService, PagePhotoService>();
 
             services.AddScoped<ILanguageService, LanguageService>();
+            services.AddScoped<IGenericPdfService, GenericPdfService>();
             return services;
         }
 

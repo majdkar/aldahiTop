@@ -1021,6 +1021,25 @@
             <param name="ProductType"></param>
             <returns>Status 200 OK</returns>
         </member>
+        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetAllPagedSearchAdvancedProduct(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.String,System.Int32,System.Int32,System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get All Paged Search Products
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="searchString"></param>
+            <param name="orderBy"></param>
+            <param name="seasonId"></param>
+            <param name="kindId"></param> 
+            <param name="groupId"></param>   
+            <param name="productType"></param>
+            <param name="warehousesId"></param>
+            <param name="productCategoryId"></param>
+            <param name="code"></param>
+            <param name="fromqty"></param>
+            <param name="toqty"></param>
+            <returns>Status 200 OK</returns>
+        </member>
         <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.GetById(System.Int32)">
             <summary>
             Get Product By Id
@@ -1048,6 +1067,20 @@
             </summary>
             <param name="searchString"></param>
             <returns>Status 200 OK</returns>
+        </member>
+        <member name="M:FirstCall.Server.Controllers.v1.Products.ProductsController.ExportPdf(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            Get All Paged Search Products Pdf
+            </summary>
+            <param name="seasonId"></param>
+            <param name="kindId"></param> 
+            <param name="groupId"></param>   
+            <param name="productType"></param>
+            <param name="warehousesId"></param>
+            <param name="productCategoryId"></param>
+            <param name="code"></param>
+            <param name="fromqty"></param>
+            <param name="toqty"></param>
         </member>
         <member name="M:FirstCall.Api.Controllers.FileUploadController.CheckFileExtension(Microsoft.AspNetCore.Http.IFormFile,FirstCall.Shared.Enums.UploadType)">
             The file extension must be jpg/bmp/png for images and txt/docx/pdf for files

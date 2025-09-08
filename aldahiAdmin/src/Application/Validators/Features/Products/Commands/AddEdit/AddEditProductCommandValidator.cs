@@ -13,6 +13,20 @@ namespace FirstCall.Application.Validators.Features.Products.Commands.AddEdit
 
                 RuleFor(request => request.Code)
                 .Must(x => !string.IsNullOrWhiteSpace(x)).WithMessage(x => localizer["Code is required!"]);
+            
+            RuleFor(request => request.ProductCategoryId).NotNull().NotEmpty()
+            .WithMessage(x => localizer["Category is required!"]);
+
+
+
+
+            RuleFor(request => request.GroupId).NotNull().NotEmpty()
+            .WithMessage(x => localizer["Group is required!"]);
+            
+
+            RuleFor(request => request.SeasonId).NotNull().NotEmpty()
+            .WithMessage(x => localizer["Season is required!"]);
+            
 
             RuleFor(request => request.ProductCategoryId).NotNull().NotEmpty()
             .WithMessage(x => localizer["Category is required!"]);
@@ -20,6 +34,10 @@ namespace FirstCall.Application.Validators.Features.Products.Commands.AddEdit
 
             RuleFor(request => request.KindId).NotNull().NotEmpty()
             .WithMessage(x => localizer["Kind is required!"]);
+
+
+            RuleFor(request => request.WarehousesId).NotNull().NotEmpty()
+            .WithMessage(x => localizer["Warehouses is required!"]);
         }
     }
 }

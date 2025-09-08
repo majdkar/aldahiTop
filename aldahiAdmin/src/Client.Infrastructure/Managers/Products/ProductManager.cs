@@ -6,6 +6,7 @@ using FirstCall.Application.Features.Products.Queries.GetById;
 using FirstCall.Application.Requests.Products;
 using FirstCall.Client.Infrastructure.Extensions;
 using FirstCall.Shared.Wrapper;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,14 +37,18 @@ namespace FirstCall.Client.Infrastructure.Managers.Products
             return await response.ToPaginatedResult<GetAllPagedProductsResponse>();
         }
 
- 
 
 
-
-
-        public async Task<IResult<GetProductByIdResponse>> GetByIdAsync(int productId,string ProductType)
+        public async Task<IResult<string>> GetAllByForDownloadReportAsync(int seasonId, int kindId, int groupId, int warehousesId, int productCategoryId, string code, int fromqty, int toqty, string ProductType)
         {
-            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetProductById(productId,ProductType));
+            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetAllByForDownloadReportAsync(seasonId,kindId,groupId,warehousesId,productCategoryId,code,fromqty,toqty,ProductType ));
+            return await response.ToResult<string>();
+        }
+
+
+        public async Task<IResult<GetProductByIdResponse>> GetByIdAsync(int productId)
+        {
+            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetProductById(productId));
             return await response.ToResult<GetProductByIdResponse>();
         }
 
@@ -71,7 +76,10 @@ namespace FirstCall.Client.Infrastructure.Managers.Products
             return await response.ToResult<List<GetAllProductsResponse>>();
         }
 
-
-
+        public async Task<PaginatedResult<GetAllPagedProductsResponse>> GetAllPagedSearchAdvancedProductAsync( int seasonId, int kindId, int groupId, int warehousesId, int productCategoryId, string code, int fromqty, int toqty, string ProductType)
+        {
+            var response = await _httpClient.GetAsync(Routes.ProductsEndpoints.GetAllPagedSearchAdvancedProduct( seasonId,kindId,groupId,warehousesId,productCategoryId,code,fromqty,toqty, ProductType));
+            return await response.ToPaginatedResult<GetAllPagedProductsResponse>();
+        }
     }
 }
