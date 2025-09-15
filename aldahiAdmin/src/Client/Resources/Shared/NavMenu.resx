@@ -480,4 +480,7 @@
   <data name="B2C Orders" xml:space="preserve">
     <value>B2C Orders</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
+  </data>
 </root>

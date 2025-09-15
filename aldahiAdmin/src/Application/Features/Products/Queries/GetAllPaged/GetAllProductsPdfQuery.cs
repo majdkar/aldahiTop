@@ -99,14 +99,20 @@ namespace FirstCall.Application.Features.Products.Queries.GetAllPaged
             // إعداد الأعمدة
             var columns = new List<PdfColumn<GetAllPagedProductsResponse>>
         {
-            new() { Header = "Code", Selector = p => p.Code },
-            new() { Header = "Name", Selector = p =>   $"{p.ProductCategory.NameAr} {p.KindNameAr} {p.Season.NameAr} {p.Group.NameAr}" },
-            new() { Header = "Qty", Selector = p => p.Qty }
+            new() { Header = "رقم المودل", Selector = p => p.Code },
+            new() { Header = "وصف المنتج", Selector = p =>   $"{p.ProductCategory.NameAr} {p.KindNameAr} {p.Season.NameAr} {p.Group.NameAr}" },
+            new() { Header = "الكمية", Selector = p => p.Qty }
         };
 
-            // توليد PDF
-            var pdfBytes = _GenericPdfService.GeneratePdf(data, columns, "Products Report");
+            var first = data.FirstOrDefault();
 
+            string title = "تقرير المنتجات";
+            if (first != null)
+            {
+                title += $" {first.ProductCategory.NameAr} {first.Season.NameAr}";
+            }
+
+            var pdfBytes = _GenericPdfService.GeneratePdf(data, columns, title);
             // حفظ الملف في wwwroot
             var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "Files", "Reports");
             if (!Directory.Exists(folderPath))

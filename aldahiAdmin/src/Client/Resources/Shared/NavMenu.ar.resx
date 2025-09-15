@@ -474,4 +474,7 @@
   <data name="B2C Orders" xml:space="preserve">
     <value>طلبات المحل</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>التقرير </value>
+  </data>
 </root>

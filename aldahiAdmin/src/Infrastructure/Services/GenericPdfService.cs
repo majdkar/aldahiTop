@@ -9,7 +9,6 @@ public class GenericPdfService : IGenericPdfService
 {
     public byte[] GeneratePdf<T>(IEnumerable<T> items, List<PdfColumn<T>> columns, string title = "Report")
     {
-
         QuestPDF.Settings.License = LicenseType.Community;
 
         var document = Document.Create(container =>
@@ -22,8 +21,8 @@ public class GenericPdfService : IGenericPdfService
                 page.Header().PaddingBottom(5)
                     .Text(title)
                     .FontSize(20)
-                    .SemiBold().FontColor(Colors.Blue.Darken1) // لون النص أزرق
-                    .AlignCenter() ;
+                    .SemiBold().FontColor(Colors.Blue.Darken1)
+                    .AlignCenter();
 
                 // Content (Table)
                 page.Content()
@@ -36,25 +35,46 @@ public class GenericPdfService : IGenericPdfService
                                 cols.RelativeColumn();
                         });
 
-                        // الهيدر مع لون وخلفية
+                        // الهيدر
                         table.Header(header =>
                         {
                             foreach (var col in columns)
                             {
                                 header.Cell()
-                                      .Background(Colors.Grey.Lighten2) // لون الخلفية للهيدر
-                                      .Border(1)                        // حدود الخلية
+                                      .Background(Colors.Grey.Lighten2)
+                                      .Border(1)
                                       .BorderColor(Colors.Black)
                                       .Padding(5)
                                       .Text(col.Header)
-                                      .SemiBold().FontColor(Colors.Blue.Darken1) // لون نص الهيدر أزرق
+                                      .SemiBold().FontColor(Colors.Blue.Darken1)
                                       .AlignCenter();
                             }
                         });
 
-                        // الصفوف
+                        // الصفوف مع صف فاصل عند تغيير الكود
+                        string lastCode = null;
+
                         foreach (var item in items)
                         {
+                            // الحصول على الكود الحالي
+                            var currentCode = item?.GetType().GetProperty("Code")?.GetValue(item, null)?.ToString();
+
+                            // إذا الكود تغيّر → أضف صف فاصل
+                            if (lastCode != null && currentCode != lastCode)
+                            {
+                                foreach (var col in columns)
+                                {
+                                    table.Cell()
+                                         .Background(Colors.Grey.Lighten3)   // لون الصف الفاصل
+                                         .Border(1)
+                                         .BorderColor(Colors.Black)
+                                         .Padding(5)
+                                         .Text("")                           // خلية فارغة
+                                         .AlignCenter();
+                                }
+                            }
+
+                            // الصف العادي
                             foreach (var col in columns)
                             {
                                 table.Cell()
@@ -64,6 +84,8 @@ public class GenericPdfService : IGenericPdfService
                                      .Text(col.Selector(item)?.ToString() ?? "")
                                      .AlignCenter();
                             }
+
+                            lastCode = currentCode;
                         }
                     });
 

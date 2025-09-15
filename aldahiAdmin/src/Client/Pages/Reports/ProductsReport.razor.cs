@@ -268,18 +268,18 @@ namespace FirstCall.Client.Pages.Reports
             ToQty = 0;
             Code = null;
             _searchString = text;
-            //await LoadData();
+            await _table.ReloadServerData();
         }
 
         private async Task SearchAdvance()
         {
             IsSearchAdvanced = true;
             StateHasChanged();
-           // await LoadData();
+            await _table.ReloadServerData();
         }
 
 
-    
+
 
 
         private async Task ExportToExcel()

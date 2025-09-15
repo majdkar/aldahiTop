@@ -92,7 +92,7 @@
 
                     <MudButton DisableElevation Variant="Variant.Filled" OnClick="@(() => OnSearch(""))" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary" Style="margin: 3px">@_localizer["Reload"]</MudButton>
                     <MudButton DisableElevation Variant="Variant.Filled" OnClick="ExportToExcel" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin: 3px">@_localizer["Export"]</MudButton>
-                    <MudButton DisableElevation Variant="Variant.Filled" @onclick="this.PrintMe" StartIcon="@Icons.Material.Filled.Print" IconColor="Color.Surface" Color="Color.Tertiary">@_localizer["Export To Pdf"]</MudButton>
+                    <MudButton DisableElevation Variant="Variant.Filled" @onclick="this.PrintMe" StartIcon="@Icons.Material.Filled.Print" IconColor="Color.Surface" Color="Color.Dark">@_localizer["Export To Pdf"]</MudButton>
                 </MudCardContent>
             </MudCard>
     <MudSpacer />
@@ -118,7 +118,7 @@
         }
 
         .tbl-header {
-            background-color: rgba(255,255,255,0.3);
+            background-color: #1E88E5;
         }
 
         .tbl-content {
@@ -148,11 +148,7 @@
 
 
 
-        body {
-            /* background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-                                                            background: linear-gradient(to right, #25c481, #25b7c4);*/
-            font-family: 'Roboto', sans-serif;
-        }
+ 
 
         section {
             margin: 20px;
@@ -188,9 +184,17 @@
                 }
 
         thead {
-            background: linear-gradient(to right, #25c481, #04AA6F);
+            background: linear-gradient(to right, #1E88E5, #1E88E5);
         }
         /* for custom scrollbar for webkit browser*/
+
+
+
+        .mud-table-cell{
+            font-weight: bold;
+            text-align: center;
+        }
+
 
         ::-webkit-scrollbar {
             width: 6px;
@@ -215,9 +219,9 @@
     else
     {
 
-        <MudTable Dense="true" RowsPerPage="25" Items="_pagedData" ServerData="LoadServerData" Elevation="0">
+        <MudTable Dense="true" RowsPerPage="25" @ref="_table" Items="_pagedData" ServerData="LoadServerData" Elevation="0">
             <HeaderContent>
-                <MudTh>@_localizer["Product Name"]</MudTh>
+                <MudTh>@_localizer["Product Description"]</MudTh>
                 <MudTh>@_localizer["Code"]</MudTh>
                 <MudTh>@_localizer["Qty"]</MudTh>
             </HeaderContent>

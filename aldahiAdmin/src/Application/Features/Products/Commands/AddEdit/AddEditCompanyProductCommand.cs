@@ -134,6 +134,7 @@ namespace FirstCall.Application.Features.Products.Commands.AddEdit
                     product.SeasonId = command.SeasonId;
                     product.GroupId = command.GroupId;
                     product.Type = command.Type;
+                    product.KindId = command.KindId;
 
                     product.Price = command.Price == 0 ? product.Price : command.Price;
 

@@ -225,4 +225,22 @@
   <data name="Code" xml:space="preserve">
     <value>Code</value>
   </data>
+  <data name="Products Report" xml:space="preserve">
+    <value>Products Report</value>
+  </data>
+  <data name="From Qty" xml:space="preserve">
+    <value>From Qty</value>
+  </data>
+  <data name="To Qty" xml:space="preserve">
+    <value>To Qty</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="Season" xml:space="preserve">
+    <value>Season</value>
+  </data>
+  <data name="Product Description" xml:space="preserve">
+    <value>Product Description</value>
+  </data>
 </root>
