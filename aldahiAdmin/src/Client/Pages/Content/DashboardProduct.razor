@@ -91,10 +91,20 @@
                             <MudCard Class="pt-3 ma-2" Style="height:490px; display:flex; flex-direction:column;">
                             <MudCardMedia Class="ml-2 mr-2 rounded-lg sp" onclick="@(() => OpenImageDialog(item.ImageProduct))" Image="@(item.ImageProduct.Replace('\\', '/'))" Height="300" />
                                 <MudCardContent Style="flex:1;">
-                                <MudText Typo="Typo.h6">@(IsArabic ? item.CategoryName : item.CategoryNameEn)</MudText>
-                            <MudText Typo="Typo.body2" Color="Color.Secondary">
-                                    @(IsArabic ? item.KindName : item.KindNameEn) / @(IsArabic ? item.GroupName : item.GroupNameEn) / @_localizer["Model"] > <p style="color:blue;display: inline-block;"><strong><b>@item.Code</b> </strong></p>
-                            </MudText>
+                                <MudText Typo="Typo.h6">@(IsArabic? item.CategoryName: item.CategoryNameEn)   @(IsArabic? item.GroupName: item.GroupNameEn)</MudText>
+
+                                <MudText Typo="Typo.body2" Color="Color.Dark">
+                                    @(IsArabic ? ((MarkupString)item.KindName) : ((MarkupString)item.KindNameEn))
+                                </MudText>
+
+
+                                <MudText Typo="Typo.body2" Color="Color.Dark">
+                                    @_localizer["Model"] >  <p style="color:blue;display: inline-block;font-size:26px"><strong><b>@item.Code</b> </strong></p>
+                                </MudText>
+
+
+                                
+                             
 
                             <MudDivider Class="my-2" />
 

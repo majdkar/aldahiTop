@@ -1,25 +1,27 @@
 ﻿using Blazored.FluentValidation;
-using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
-using MudBlazor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FirstCall.Application.Features.Clients.Persons.Queries.GetAll;
 using FirstCall.Application.Features.Clients.Persons.Queries.GetAllPaged;
+using FirstCall.Application.Features.DeliveryOrders.Queries.GetById;
 using FirstCall.Application.Features.Orders.Commands.AddEdit;
+using FirstCall.Application.Features.Orders.Queries.GetAll;
 using FirstCall.Application.Features.Princedoms.Queries.GetAll;
 using FirstCall.Application.Models.Chat;
 using FirstCall.Client;
 using FirstCall.Client.Infrastructure.Managers.Clients.Persons;
 using FirstCall.Client.Infrastructure.Managers.Deliveries.DeliveryOrder;
 using FirstCall.Client.Infrastructure.Managers.GeneralSettings.Princedom;
+using FirstCall.Client.Shared.Dialogs;
 using FirstCall.Core.Entities;
 using FirstCall.Shared.Constants.Clients;
 using FirstCall.Shared.Constants.Orders;
-using FirstCall.Application.Features.Clients.Persons.Queries.GetAll;
-using FirstCall.Application.Features.Orders.Queries.GetAll;
-using FirstCall.Application.Features.DeliveryOrders.Queries.GetById;
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using MudBlazor;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FirstCall.Client.Pages.Deliveries
 {
@@ -31,6 +33,7 @@ namespace FirstCall.Client.Pages.Deliveries
 
         [Inject] private IPersonManager PersonManager { get; set; }
 
+        private static bool IsArabic => CultureInfo.CurrentCulture.Name.Contains("ar");
 
         [Parameter] public int OrderId { get; set; } = 0;
         private List<GetAllPrincedomsResponse> _princedoms = new();
@@ -70,13 +73,17 @@ namespace FirstCall.Client.Pages.Deliveries
 
 
 
-   
-
-    
 
 
+        private void OpenImageDialog(string imageUrl)
+        {
+            var options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+            _dialogService.Show<ImageDialog>("Image Preview", new DialogParameters { ["ImagePath"] = imageUrl }, options);
+        }
 
-     
+
+
+
 
         private async Task LoadPersonsAsync()
         {

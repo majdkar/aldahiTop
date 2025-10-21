@@ -95,7 +95,7 @@ namespace FirstCall.Application.Features.Products.Queries.GetAllPaged
             if (request.OrderBy?.Any() != true)
             {
                 var data = await _unitOfWork.Repository<Product>().Entities
-                   .Specify(productFilterSpec).OrderBy(x => x.Order)
+                   .Specify(productFilterSpec).OrderByDescending(x => x.LastModifiedOn)
                    .Select(expression)
                    .ToPaginatedListAsync(request.PageNumber, request.PageSize);
                 return data;
@@ -104,7 +104,7 @@ namespace FirstCall.Application.Features.Products.Queries.GetAllPaged
             {
                 var ordering = string.Join(",", request.OrderBy); // of the form fieldname [ascending|descending], ...
                 var data = await _unitOfWork.Repository<Product>().Entities
-                   .Specify(productFilterSpec)
+                   .Specify(productFilterSpec).OrderByDescending(x => x.LastModifiedOn)
                    .OrderBy(ordering) // require system.linq.dynamic.core
                    .Select(expression)
                    .ToPaginatedListAsync(request.PageNumber, request.PageSize);

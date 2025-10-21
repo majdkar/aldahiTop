@@ -36,14 +36,24 @@
                                         {
                                             @foreach (var item in _Orders.Products)
                                             {
-                                                <MudItem xs="12" sm="6" md="4">
-                                                    <MudCard Class="pa-4" Style="background-color:#f9f9f9; border:1px solid #ccc;">
+                                                <MudItem xs="12" sm="6" md="2">
+                                                    <MudCard Style="background-color:#f9f9f9; border:1px solid #ccc;">
                                                         <MudCardContent>
 
 
                                                             <!-- صورة المنتج -->
-                                                            <img src="@item.ImageUrl" style="width:100%; height: 400px; object-fit:contain; margin-bottom:10px;" />
+                                                            <img src="@item.ImageUrl" onclick="@(() => OpenImageDialog(item.ImageUrl))" style="width:100%; height:200px; object-fit:contain; margin-bottom:10px;" />
+                                        
 
+                                                            <p>
+                                                                <MudIcon Icon="@Icons.Material.Filled.ShoppingCart" Color="Color.Info" />
+                                                                <b>@_localizer["Kind"]:</b> @(IsArabic? item.KindNameAr: item.KindNameEn)
+                                                            </p>
+
+                                                            <p>
+                                                                <MudIcon Icon="@Icons.Material.Filled.ShoppingCart" Color="Color.Info" />
+                                                                <b>@_localizer["Code"]:</b> @item.Code
+                                                            </p>
 
                                                             <p>
                                                                 <MudIcon Icon="@Icons.Material.Filled.ShoppingCart" Color="Color.Info" />
@@ -75,7 +85,7 @@
                                         <MudCard Class="pa-4 mt-4" Style="background-color:#eee;">
                                             <MudCardContent>
                                                 <MudText Typo="Typo.h5" Align="Align.Right" Color="Color.Secondary">
-                                                    @_localizer["Grand Total"] :
+                                                    @_localizer["Invoice Total"] :
                                                     @((_Orders?.Products?.Sum(x => x.TotalPrice) ?? 0m).ToString("N2"))
                                                 </MudText>
                                             </MudCardContent>

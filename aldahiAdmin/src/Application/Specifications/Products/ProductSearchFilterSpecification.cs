@@ -17,8 +17,8 @@ namespace FirstCall.Application.Specifications.Catalog
                                 (fromprice == 0 ? p.Price > 0 : p.Price >= fromprice) &&
                                 (toprice == 0 ? p.Price > 0 : p.Price <= toprice) &&
                                 (p.NameAr.Contains(searchString) && 
-                                p.NameEn.Contains(searchString) ||
-                                p.Code.Contains(searchString));
+                                p.NameEn.Contains(searchString)) ||
+                                p.Code.Contains(searchString);
             }
             else
             {

@@ -168,6 +168,7 @@ namespace FirstCall.Client.Pages.Products
                         PackageNumber = product.PackageNumber,
                          ProductCategoryId = product.ProductCategoryId,
                           GroupId = product.GroupId,
+                           Type = product.Type,
                     };
                  
                 }

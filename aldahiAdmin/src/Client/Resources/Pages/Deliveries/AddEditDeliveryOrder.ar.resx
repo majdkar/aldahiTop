@@ -174,8 +174,8 @@
   <data name="CompmnySupplierInformation" xml:space="preserve">
     <value>معلومات الشركة الموردة</value>
   </data>
-  <data name="Confirm Order" xml:space="preserve">
-    <value>تأكيد الطلب</value>
+  <data name="Quantity" xml:space="preserve">
+    <value>الكمية</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>البلد</value>
@@ -222,8 +222,8 @@
   <data name="Immediate" xml:space="preserve">
     <value>فوري</value>
   </data>
-  <data name="Immediately" xml:space="preserve">
-    <value>فوري</value>
+  <data name="Invoice Total" xml:space="preserve">
+    <value>إجمالي الفاتورة</value>
   </data>
   <data name="Location" xml:space="preserve">
     <value>الموقع</value>
@@ -277,7 +277,7 @@
     <value>هاتف السائق</value>
   </data>
   <data name="Price" xml:space="preserve">
-    <value>سعر الشركة المختارة</value>
+    <value>سعر </value>
   </data>
   <data name="Product Details" xml:space="preserve">
     <value>تفاصيل الطلب</value>
@@ -342,7 +342,16 @@
   <data name="Within a Day" xml:space="preserve">
     <value>خلال يوم</value>
   </data>
+  <data name="Total" xml:space="preserve">
+    <value>الإجمالي</value>
+  </data>
   <data name="Order Date" xml:space="preserve">
     <value>تاريخ الطلبية</value>
+  </data>
+  <data name="Kind" xml:space="preserve">
+    <value>النوع</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>رقم المودل</value>
   </data>
 </root>

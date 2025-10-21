@@ -39,11 +39,14 @@ namespace FirstCall.Application.Features.DeliveryOrders.Queries.GetById
                 .FirstOrDefaultAsync();
             var mappeddeliveryOrder = _mapper.Map<GetDeliveryOrderByIdResponse>(deliveryOrder);
 
-            mappeddeliveryOrder.Products = await _unitOfWork.Repository<DeliveryOrderProduct>().Entities.Where(x => x.DeliveryOrderId == mappeddeliveryOrder.Id)
+            mappeddeliveryOrder.Products = await _unitOfWork.Repository<DeliveryOrderProduct>().Entities.Include(x => x.Product).ThenInclude(x => x.Kind).Where(x => x.DeliveryOrderId == mappeddeliveryOrder.Id)
                 .Select(x => new GetAllDeliveryOrderProductsResponse
                 {
                     Id = x.Id,
                     Quantity = x.Quantity,
+                     Code = x.Product.Code,
+                     KindNameAr = x.Product.Kind.NameAr,
+                     KindNameEn = x.Product.Kind.NameEn,
                     UnitPrice = x.UnitPrice,
                     TotalPrice = x.TotalPrice,
                     ImageUrl = _unitOfWork.Repository<Product>().Entities.FirstOrDefault(w => w.Id == x.ProductId).ProductImageUrl

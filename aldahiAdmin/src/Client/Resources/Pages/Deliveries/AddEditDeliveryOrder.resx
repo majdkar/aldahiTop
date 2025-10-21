@@ -174,7 +174,7 @@
   <data name="CompmnySupplierInformation" xml:space="preserve">
     <value />
   </data>
-  <data name="Confirm Order" xml:space="preserve">
+  <data name="Quantity" xml:space="preserve">
     <value />
   </data>
   <data name="Country" xml:space="preserve">
@@ -222,7 +222,7 @@
   <data name="Immediate" xml:space="preserve">
     <value />
   </data>
-  <data name="Immediately" xml:space="preserve">
+  <data name="Invoice Total" xml:space="preserve">
     <value />
   </data>
   <data name="Location" xml:space="preserve">
@@ -342,10 +342,16 @@
   <data name="Within a Day" xml:space="preserve">
     <value />
   </data>
-  <data name="Delivery Date1" xml:space="preserve">
+  <data name="Total" xml:space="preserve">
     <value />
   </data>
   <data name="Order Date" xml:space="preserve">
     <value>Order Date</value>
+  </data>
+  <data name="Kind" xml:space="preserve">
+    <value>Kind</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
   </data>
 </root>

@@ -52,7 +52,7 @@
 }
 else
 {
-        <MudTable Elevation="25" ServerData="@(new Func<TableState, Task<TableData<GetAllPagedProductsResponse>>>(ServerReload))" Hover="true" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" @ref="_table">
+    <MudTable Elevation="25" ServerData="@(new Func<TableState, Task<TableData<GetAllPagedProductsResponse>>>(ServerReload))"  Hover="true" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" @ref="_table">
             <ToolBarContent>
                 <div class="justify-center mud-text-align-center">
                 @if (_canCreateProduct)
@@ -80,7 +80,7 @@ else
             }
             </ToolBarContent>
             <HeaderContent>
-            <MudTh Style="width:150px"><MudTableSortLabel T="GetAllPagedProductsResponse" SortLabel="Order">@_localizer["Order"]</MudTableSortLabel></MudTh>
+            <MudTh Style="width:150px"><MudTableSortLabel T="GetAllPagedProductsResponse"  SortLabel="Order">@_localizer["Order"]</MudTableSortLabel></MudTh>
 
                 <MudTh><MudTableSortLabel T="GetAllPagedProductsResponse" SortLabel="NameAr">@_localizer["NameAr"]</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel T="GetAllPagedProductsResponse" SortLabel="Category">@_localizer["Category"]</MudTableSortLabel></MudTh>
@@ -118,9 +118,12 @@ else
                                     
                     </MudTd>   
                     <MudTd DataLabel="Code">
-                      <MudHighlighter Text="@context.Qty.ToString()" HighlightedText="@_searchString" />
-                                    
-                    </MudTd>   
+                <MudTextField @bind-Value="context.Qty"
+                              Variant="Variant.Outlined"
+                               
+                              Immediate="true"
+                              OnKeyDown="@(async e => await OnCodeKeyDown(e, context))" />
+            </MudTd>   
                     <MudTd DataLabel="Price">
                       <MudHighlighter Text="@context.Price.ToString()" HighlightedText="@_searchString" />
                                     

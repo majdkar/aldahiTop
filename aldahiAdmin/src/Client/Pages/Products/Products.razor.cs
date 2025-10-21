@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.JSInterop;
-using MudBlazor;
+﻿using FirstCall.Application.Features.Countries.Queries.GetAll;
+using FirstCall.Application.Features.Products.Commands.AddEdit;
 using FirstCall.Application.Features.Products.Queries.GetAllPaged;
 using FirstCall.Application.Requests.Products;
 using FirstCall.Client.Extensions;
@@ -10,11 +7,17 @@ using FirstCall.Client.Infrastructure.Managers.Products;
 using FirstCall.Domain.Entities.Products;
 using FirstCall.Shared.Constants.Application;
 using FirstCall.Shared.Constants.Permission;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.JSInterop;
+using MudBlazor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace FirstCall.Client.Pages.Products
 {
@@ -125,15 +128,71 @@ namespace FirstCall.Client.Pages.Products
             }
         }
 
-        private void OnSearch(string text)
+        private async Task OnSearch(string text)
         {
             ProductName = null;
         FromPrice = 0;
 
          ToPrice = 0;
         _searchString = text;
-            _table.ReloadServerData();
+         await _table.ReloadServerData();
         }
+
+
+        private async Task OnCodeKeyDown(KeyboardEventArgs e, GetAllPagedProductsResponse product)
+        {
+            // إذا ضغط Enter
+            if (e.Key == "Enter")
+            {
+                await UpdateProductCodeAsync(product);
+            }
+        }
+
+
+        private async Task UpdateProductCodeAsync(GetAllPagedProductsResponse product)
+        {
+
+
+            AddEditCompanyProductCommand AddEditCompanyProductModel = new AddEditCompanyProductCommand
+            {
+                Id = product.Id,
+                NameAr = product.NameAr,
+                NameEn = product.NameEn,
+
+                Code = product.Code,
+                Price = product.Price,
+                Order = product.Order,
+                ProductImageUrl = product.ProductImageUrl,
+                ProductImageUrl2 = product.ProductImageUrl2,
+                ProductImageUrl3 = product.ProductImageUrl3,
+                ProductImageUrl4 = product.ProductImageUrl4,
+                SeasonId = product.SeasonId,
+                KindId = product.KindId,
+                Colors = product.Colors,
+                Sizes = product.Sizes,
+                Qty = product.Qty,
+                WarehousesId = product.WarehousesId,
+                PackageNumber = product.PackageNumber,
+                ProductCategoryId = product.ProductCategoryId,
+                GroupId = product.GroupId,
+                 Type  = product.Type,
+            };
+
+
+            var response = await ProductManager.SaveForCompanyProfileAsync(AddEditCompanyProductModel);
+
+            if (response.Succeeded)
+            {
+                _snackBar.Add(_localizer["Code updated successfully"], Severity.Success);
+                await _table.ReloadServerData(); // إعادة تحميل الجدول
+            }
+            else
+            {
+                foreach (var msg in response.Messages)
+                    _snackBar.Add(msg, Severity.Error);
+            }
+        }
+
 
         private async Task ExportToExcel()
         {
@@ -173,6 +232,12 @@ namespace FirstCall.Client.Pages.Products
         {
            return $"/view-details/{ProductId}";
         }
+
+
+ 
+
+
+
 
         private async Task Delete(int id)
         {

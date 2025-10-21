@@ -7,6 +7,9 @@ namespace FirstCall.Application.Features.OrderProducts.Queries.GetAllByOrder
     {
         public int Id { get; set; }
         public int Quantity { get; set; }
+        public string Code { get; set; }
+        public string KindNameAr { get; set; }
+        public string KindNameEn { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal TotalPrice { get; set; }
         public int DeliveryOrderId { get; set; }

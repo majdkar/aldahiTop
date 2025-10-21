@@ -135,7 +135,9 @@ namespace FirstCall.Application.Features.Products.Commands.AddEdit
                     product.GroupId = command.GroupId;
                     product.Type = command.Type;
                     product.KindId = command.KindId;
-
+                    product.LastModifiedBy = product.LastModifiedBy;
+                    product.LastModifiedOn = System.DateTime.Now;
+                    
                     product.Price = command.Price == 0 ? product.Price : command.Price;
 
                     if (uploadRequest != null)
